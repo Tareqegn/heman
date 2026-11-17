@@ -1,0 +1,847 @@
+<!DOCTYPE html><!-- Handled by Exflow.site --><html data-wf-page="617a5a1e54be7a5880f85e7a" data-wf-site="61763adbd355d966baeee045"><head><meta charset="utf-8"/><title>Heman Sound - About Us</title><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="../css/about-us-css.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" /><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Syncopate:regular,700","Archivo:regular,700"]  }});</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]--><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="../images/favicon.png" rel="shortcut icon" type="image/x-icon"/><link href="../images/app-icon.png" rel="apple-touch-icon"/>
+
+<style>
+/* PREVENT HORIZONTAL OVERFLOW & SMOOTH TRANSITIONS */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+/* 3-AND-3 BALANCED NAVBAR STYLE WITH YELLOW HOVER */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+}
+.nav-group-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+}
+.nav-group-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+  flex: 1;
+}
+.navbar-brand-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* COMPACT INTERACTIVE NAV LINKS */
+.nav-link {
+  font-family: 'Archivo', sans-serif !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: lowercase !important;
+  text-decoration: none !important;
+  color: #111111 !important;
+  transition: color 0.3s ease !important;
+}
+.nav-link:hover, .nav-link.active {
+  color: #f59e0b !important;
+}
+
+/* SYNCHRONIZED FLUID 5-STRIP GALLERY CONTAINER */
+.heman-video-grid {
+  margin-top: 30px; 
+  margin-bottom: 60px; 
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px; 
+  width: 100%;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.heman-video-grid .video-card-small {
+  width: 75px !important;
+  flex: 0 0 75px !important;
+  will-change: width, transform;
+  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), flex 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.heman-video-grid .video-content {
+  height: 280px !important;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0b0f17;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.heman-video-grid .video-card-small.middle {
+  transform: translateY(25px);
+}
+
+.heman-video-grid .video-card-small.bottom {
+  transform: translateY(50px);
+}
+
+.heman-video-grid .video-card-small:hover,
+.heman-video-grid .video-card-small.is-active {
+  width: 220px !important;
+  flex: 0 0 220px !important;
+  z-index: 10;
+}
+
+.heman-video-grid .video-card-small:hover.middle,
+.heman-video-grid .video-card-small.is-active.middle {
+  transform: translateY(18px) scale(1.02);
+}
+
+.heman-video-grid .video-card-small:hover.bottom,
+.heman-video-grid .video-card-small.is-active.bottom {
+  transform: translateY(42px) scale(1.02);
+}
+
+.heman-video-grid .video-card-small:hover:not(.middle):not(.bottom),
+.heman-video-grid .video-card-small.is-active:not(.middle):not(.bottom) {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.heman-video-grid:hover .video-card-small:not(:hover) {
+  flex: 0 0 65px !important;
+  width: 65px !important;
+}
+
+.heman-video-grid .video-card-small:hover .video-image-hover,
+.heman-video-grid .video-card-small.is-active .video-image-hover {
+  opacity: 0 !important;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 991px) {
+  .heman-video-grid {
+    flex-wrap: wrap;
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .heman-video-grid {
+    gap: 8px;
+    padding: 0 5px;
+  }
+  .heman-video-grid .video-card-small {
+    width: 60px !important;
+    flex: 0 0 60px !important;
+  }
+  .heman-video-grid .video-content {
+    height: 220px !important;
+  }
+  .heman-video-grid .video-card-small:hover,
+  .heman-video-grid .video-card-small.is-active {
+    width: 140px !important;
+    flex: 0 0 140px !important;
+  }
+}
+
+/* SECTION 1 STATIC IMAGE HERO BANNER */
+.hero-image-banner {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0b0f17;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.hero-image-banner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-image-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11,15,23,0.4) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* CLEAN NON-OVERLAPPING EDITORIAL MEMBER LAYOUT WITH LARGER PHOTOS */
+.editorial-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.editorial-profile-grid.reverse {
+  direction: rtl;
+}
+.editorial-profile-grid.reverse > * {
+  direction: ltr;
+}
+
+.profile-media-container {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0b0f17;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.profile-media-container video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.profile-media-container img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease;
+}
+
+.profile-media-container:hover img {
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+/* NORMALIZED PARAGRAPH STYLE FOR MEMBER DESCRIPTIONS */
+.member-desc {
+  font-family: 'Archivo', sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  text-align: left;
+  margin: 0;
+  color: #111111;
+}
+
+@media screen and (max-width: 900px) {
+  .editorial-profile-grid, .editorial-profile-grid.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+    gap: 30px;
+  }
+  .profile-media-container {
+    height: 350px;
+  }
+  .hero-image-banner {
+    height: 300px;
+  }
+}
+
+/* FULLY CLICKABLE HIGH-END EDITORIAL CTA BUTTONS */
+.cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 36px;
+  border-radius: 40px;
+  background: #111111;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #ffffff !important;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cta-primary-btn:hover {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: #0b0f17 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+}
+
+.cta-solid-yellow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 36px;
+  border-radius: 40px;
+  background: #f59e0b;
+  color: #0b0f17 !important;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
+}
+
+.cta-solid-yellow:hover {
+  background: #ffffff;
+  color: #111111 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.cta-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 36px;
+  border-radius: 40px;
+  background: transparent;
+  border: 1px solid rgba(17, 17, 17, 0.25);
+  color: #111111 !important;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 10;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-outline-dark:hover {
+  background: #111111;
+  border-color: #111111;
+  color: #ffffff !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* PROFESSIONAL FOOTER WITH YELLOW HOVER INTERACTIONS */
+.heman-footer {
+  padding: 80px 8vw 40px 8vw;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+}
+.footer-top-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+  margin-bottom: 40px;
+}
+@media screen and (max-width: 900px) {
+  .footer-top-row {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+.footer-col-brand h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #111111;
+  font-family: 'Syncopate', sans-serif;
+}
+.footer-col-brand p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 25px;
+  max-width: 320px;
+}
+.footer-col-links h5 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  color: #111111;
+  font-family: 'Syncopate', sans-serif;
+}
+.footer-col-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-col-links a {
+  text-decoration: none;
+  color: #111111;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+  display: inline-block;
+  font-family: 'Archivo', sans-serif;
+}
+.footer-col-links a:hover {
+  color: #f59e0b !important;
+  opacity: 1;
+  transform: translateX(4px);
+}
+.footer-middle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+  padding-top: 30px;
+  font-family: 'Archivo', sans-serif;
+}
+.back-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(17, 17, 17, 0.05);
+  border: 1px solid rgba(17, 17, 17, 0.15);
+  padding: 14px 30px;
+  border-radius: 40px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #111111;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.back-to-top-btn:hover {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+</style>
+</head><body><div class="noise"></div><div class="loading-animation"><div class="loading-noise"></div><div class="overflow-hidden perspective"><div class="loading-perspective"><h3 class="loading-1st-row _1st">l</h3><h3 class="loading-1st-row _2nd">o</h3><h3 class="loading-1st-row _3rd">a</h3><h3 class="loading-1st-row _4th">d</h3><h3 class="loading-1st-row _5th">i</h3><h3 class="loading-1st-row _6th">n</h3><h3 class="loading-1st-row _7th">g</h3></div><div class="loading-perspective absolute"><h3 class="loading-2nd-row _1st">L</h3><h3 class="loading-2nd-row _2nd">o</h3><h3 class="loading-2nd-row _3rd">a</h3><h3 class="loading-2nd-row _4th">d</h3><h3 class="loading-2nd-row _5th">i</h3><h3 class="loading-2nd-row _6th">n</h3><h3 class="loading-2nd-row _7th">g</h3></div></div></div>
+
+<!-- 3-AND-3 BALANCED NAVBAR WITH INTERACTIVE LINKS -->
+<div class="navbar">
+  <div class="nav-group-left">
+    <a href="../music and discography/homepage/music-5.html" class="nav-link">music</a>
+    <a href="../about us/homepage/homepage-3.html" class="nav-link active" style="color: #f59e0b;">about</a>
+    <a href="../mix & produce workflow/homepage/mixing-1.html" class="nav-link">mixing</a>
+  </div>
+
+  <a href="../about us/homepage/homepage-3.html" class="navbar-brand-center w-inline-block"><h3 class="h3-title center" style="margin: 0;">Heman Sound</h3></a>
+
+  <div class="nav-group-right">
+    <a href="../studio sessions and production/homepage/homepage-9.html" class="nav-link">sessions</a>
+    <a href="../sonicdrive-music/homepage/contact-2.html" class="nav-link">contact</a>
+  </div>
+</div>
+
+<!-- SECTION 1: CINEMATIC HERO SHOWCASE WITH STATIC GROUP PHOTO -->
+<div class="section" style="padding-top: 140px;">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px;">
+      <h2 class="h2-title" style="margin: 0;">gospel ministry<br/>&amp; studio</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">addis ababa</h2>
+    </div>
+
+    <!-- Static Image Hero Showcase Banner using HemanBand.png -->
+    <div class="hero-image-banner">
+      <img src="../images/hemanband.jpg" alt="Heman Sound Collective Group Photo" loading="eager" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"/>
+    </div>
+
+    <h4 class="h4-title center" style="margin-top: 35px;">
+      <span class="all-caps-text">(FOUNDED BY KALEB BIRHANU)</span> COMMITTED TO GLORIFYING GOD THROUGH GOSPEL/ WORSHIP MUSIC, SERVING THE BODY OF CHRIST ACROSS THE WORLD WITH EXCELLENCE AND SPIRITUAL DEPTH.<span class="all-caps-text"><br/>DUAL PILLAR: </span>LIVE PERFORMANCE BAND &amp; PROFESSIONAL AUDIO PRODUCTION STUDIO OPERATING FROM ADDIS ABABA.
+    </h4>
+  </div>
+</div>
+
+<!-- SECTION 1.5: STUDIO INFRASTRUCTURE & ACOUSTIC EXCELLENCE -->
+<div class="section">
+  <div class="grid">
+    <h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b22-80f85e7a" class="h2-title">audio engineering<br/>&amp; production</h2>
+    <h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b26-80f85e7a" class="h2-title text-right">addis studio</h2>
+    <h4 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b2c-80f85e7a" class="h4-title center">
+      <span class="all-caps-text">(STATE-OF-THE-ART CAPABILITIES)</span> EQUIPPED FOR MULTI-TRACK LIVE RECORDING, VINTAGE &amp; MODERN REARRANGEMENT, MIXING, AND MASTERING. CRAFTING TIMELESS ETHIOPIAN GOSPEL SOUNDS WITH UNCOMPROMISING SONIC CLARITY.
+    </h4>
+  </div>
+</div>
+
+<!-- SECTION 2: ENSEMBLE GALLERY (SYNCHRONIZED SLIDING GRID) -->
+<div class="section"><div class="grid"><h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b37-80f85e7a" class="h2-title">the collective<br/>ensemble gallery</h2><h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b3b-80f85e7a" class="h2-title text-right">heman sound</h2></div>
+<div style="display: flex; justify-content: center; width: 100%;">
+<div class="heman-video-grid">
+  
+  <!-- Strip 1: Alazar -->
+  <a href="#" class="video-card-small w-inline-block">
+    <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
+      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <source src="../images/alazarai.webm" type="video/webm"/>
+        <source src="../images/alazarai.mp4" type="video/mp4"/>
+      </video>
+      <img src="../images/Alazar.jpg" loading="lazy" alt="Alazar Yibeltal" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+    </div>
+  </a>
+
+  <!-- Strip 2: Milky -->
+  <a href="#" class="video-card-small middle w-inline-block">
+    <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
+      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <source src="../images/milkyai.webm" type="video/webm"/>
+        <source src="../images/milkyai.mp4" type="video/mp4"/>
+      </video>
+      <img src="../images/Milky.jpg" loading="lazy" alt="Milky Asefa" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+    </div>
+  </a>
+
+  <!-- Strip 3: Kaleb -->
+  <a href="#" class="video-card-small bottom w-inline-block">
+    <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
+      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <source src="../images/kalebai.webm" type="video/webm"/>
+        <source src="../images/kalebai.mp4" type="video/mp4"/>
+      </video>
+      <img src="../images/Kaleb.jpg" loading="lazy" alt="Kaleb Birhanu" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+    </div>
+  </a>
+
+  <!-- Strip 4: Elto -->
+  <a href="#" class="video-card-small middle w-inline-block">
+    <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
+      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <source src="../images/eltoai.webm" type="video/webm"/>
+        <source src="../images/eltoai.mp4" type="video/mp4"/>
+      </video>
+      <img src="../images/Elto.jpg" loading="lazy" alt="Elto Kassahun" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+    </div>
+  </a>
+
+  <!-- Strip 5: Redi -->
+  <a href="#" class="video-card-small w-inline-block">
+    <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
+      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+        <source src="../images/rediai.webm" type="video/webm"/>
+        <source src="../images/rediai.mp4" type="video/mp4"/>
+      </video>
+      <img src="../images/redi.jpg" loading="lazy" alt="Rediet Alesa" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+    </div>
+  </a>
+
+</div>
+</div>
+<div class="grid"><h4 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b47-80f85e7a" class="h4-title center"><span class="all-caps-text">(THE FIVE MEMBERS) </span>ALAZAR, MILKY, KALEB, ELTO, AND REDIET — UNITED IN PURPOSE AND WORSHIP FROM ADDIS ABABA, ETHIOPIA.<span class="all-caps-text"><br/>STAGE CONFIGURATION: </span>LIVE &amp; STUDIO ENSEMBLE</h4></div></div>
+
+<!-- MID-PAGE PRIMARY CTA: LISTEN TO OUR MUSIC -->
+<div style="display: flex; justify-content: center; margin: 40px 0 80px 0;">
+  <a href="../music and discography/homepage/music-5.html" class="cta-primary-btn">
+    LISTEN TO OUR MUSIC <span style="margin-left: 10px; color: #f59e0b;">↗</span>
+  </a>
+</div>
+
+<!-- SECTION 3: KALEB BIRHANU (FOUNDER & DRUMS) - EDITORIAL ZIG-ZAG -->
+<div class="section">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+      <h2 class="h2-title" style="margin: 0;">kaleb birhanu<br/>founder &amp; drums</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">01</h2>
+    </div>
+    
+    <div class="editorial-profile-grid">
+      <div class="profile-media-container">
+        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
+          <source src="../images/kalebai.webm" type="video/webm"/>
+          <source src="../images/kalebai.mp4" type="video/mp4"/>
+        </video>
+        <img src="../images/Kaleb.jpg" loading="lazy" alt="Kaleb Birhanu Portrait"/>
+      </div>
+      <div>
+        <p class="member-desc">
+          <span class="all-caps-text" style="display: block; margin-bottom: 12px; font-weight: 700;">(FOUNDER &amp; DRUMMER)</span>
+          FOUNDER OF HEMAN SOUND, ANCHORING THE RHYTHM SECTION WITH ABSOLUTE PRECISION AND GUIDING THE MINISTRY'S OVERALL VISION. BEYOND HIS LEADERSHIP AND EXECUTIVE PRODUCTION, KALEB BRINGS AN UNMATCHED ENERGY TO THE KIT—ESPECIALLY WHEN HE STEPS INTO PERCUSSION, WHERE HIS STYLE BECOMES TRULY ELECTRIFYING AND POWERFUL ACROSS OVERALL DRUMMING.<br/><br/>
+          <span class="all-caps-text" style="font-weight: 700;">ROLE:</span> FOUNDER, DRUMS, AND EXECUTIVE PRODUCTION
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: ELTO KASSAHUN (ARRANGER & KEYS) - REVERSE ZIG-ZAG -->
+<div class="section">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+      <h2 class="h2-title" style="margin: 0;">elto kassahun<br/>arranger &amp; keys</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">02</h2>
+    </div>
+    
+    <div class="editorial-profile-grid reverse">
+      <div class="profile-media-container">
+        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
+          <source src="../images/eltoai.webm" type="video/webm"/>
+          <source src="../images/eltoai.mp4" type="video/mp4"/>
+        </video>
+        <img src="../images/Elto.jpg" loading="lazy" alt="Elto Kassahun Portrait"/>
+      </div>
+      <div>
+        <p class="member-desc">
+          <span class="all-caps-text" style="display: block; margin-bottom: 12px; font-weight: 700;">(MAIN ARRANGER &amp; KEYS)</span>
+          THE MASTERMIND BEHIND THE MUSICAL ARRANGEMENTS FOR HEMAN SOUND. ELTO CAREFULLY CRAFTS AND REARRANGES THE GROUP'S COVER AND ORIGINAL SONGS, SHAPING THE RICH HARMONIC TEXTURES OF THE ENSEMBLE. DURING LIVE PERFORMANCES, HE EXPERTLY DELIVERS THE SIGNATURE MELODY PARTS THAT BRING EACH SONG TO LIFE.<br/><br/>
+          <span class="all-caps-text" style="font-weight: 700;">ROLE:</span> MAIN ARRANGER AND KEYBOARDIST
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: MILKY ASEFA (BASS) - EDITORIAL ZIG-ZAG -->
+<div class="section">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+      <h2 class="h2-title" style="margin: 0;">milky asefa<br/>bass guitar</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">03</h2>
+    </div>
+    
+    <div class="editorial-profile-grid">
+      <div class="profile-media-container">
+        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
+          <source src="../images/milkyai.webm" type="video/webm"/>
+          <source src="../images/milkyai.mp4" type="video/mp4"/>
+        </video>
+        <img src="../images/Milky.jpg" loading="lazy" alt="Milky Asefa Portrait"/>
+      </div>
+      <div>
+        <p class="member-desc">
+          <span class="all-caps-text" style="display: block; margin-bottom: 12px; font-weight: 700;">(BASS GUITARIST)</span>
+          AN INCREDIBLE TALENT,TRULY SPECIAL PRESENCE ON THE BASS, WIDELY WELL-RESPECTED ACROSS THE CITY FOR HIS UNIQUE TOUCH, AMAZING GROOVE, AND CREATIVE PHRASING. MILKY PROVIDES THE DEEP BOTTOM-END FOUNDATION THAT DRIVES HEMAN SOUND'S RHYTHM, SEAMLESSLY BRIDGING CONTEMPORARY GOSPEL GROOVES WITH THE PRECISION NEEDED FOR BOTH LIVE STAGES AND STUDIO SESSIONS.<br/><br/>
+          <span class="all-caps-text" style="font-weight: 700;">ROLE:</span> BASS GUITARIST
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: ALAZAR YIBELTAL (GUITAR) - REVERSE ZIG-ZAG -->
+<div class="section">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+      <h2 class="h2-title" style="margin: 0;">alazar yibeltal<br/>lead guitar</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">04</h2>
+    </div>
+    
+    <div class="editorial-profile-grid reverse">
+      <div class="profile-media-container">
+        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
+          <source src="../images/alazarai.webm" type="video/webm"/>
+          <source src="../images/alazarai.mp4" type="video/mp4"/>
+        </video>
+        <img src="../images/Alazar.jpg" loading="lazy" alt="Alazar Yibeltal Portrait"/>
+      </div>
+      <div>
+        <p class="member-desc">
+          <span class="all-caps-text" style="display: block; margin-bottom: 12px; font-weight: 700;">(LEAD GUITARIST)</span>
+          A MUSICIAN WITH MASSIVE TALENT KNOWN FOR MASTERING THE DISTINCT, HARD-FUSED HEMAN STYLE OF INTRICATE ETHIOPIAN GOSPEL GUITAR PARTS. ALAZAR BLENDS COMPLEX TRADITIONAL SCALES WITH SOULFUL, CONTEMPORARY MELODIC RIFFS, BRINGING DEEP EXPRESSION AND SONIC CHARACTER TO BOTH COVER ARRANGEMENTS AND ORIGINAL RELEASES.<br/><br/>
+          <span class="all-caps-text" style="font-weight: 700;">ROLE:</span> LEAD GUITARIST
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: REDIET ALESA (KEYS & CHORDS) - EDITORIAL ZIG-ZAG -->
+<div class="section">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+      <h2 class="h2-title" style="margin: 0;">rediet alesa<br/>keys &amp; chords</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">05</h2>
+    </div>
+    
+    <div class="editorial-profile-grid">
+      <div class="profile-media-container">
+        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
+          <source src="../images/rediai.webm" type="video/webm"/>
+          <source src="../images/rediai.mp4" type="video/mp4"/>
+        </video>
+        <img src="../images/redi.jpg" loading="lazy" alt="Rediet Alesa Portrait"/>
+      </div>
+      <div>
+        <p class="member-desc">
+          <span class="all-caps-text" style="display: block; margin-bottom: 12px; font-weight: 700;">(KEYS &amp; CHORDS)</span>
+          AN EXCEPTIONALLY TALENTED MUSICIAN WHO BRINGS DEPTH AND WARMTH TO THE ENSEMBLE. REDIET ANCHORS THE SOUND WITH HIS MASTERFUL COMMAND OF CHORDS AND PADS, WORKING SEAMLESSLY ALONGSIDE ELTO TO CREATE THE FULL, IMMERSIVE ATMOSPHERE THAT DEFINES HEMAN SOUND'S LIVE AND RECORDED PRODUCTIONS.<br/><br/>
+          <span class="all-caps-text" style="font-weight: 700;">ROLE:</span> KEYBOARDIST AND CHORDS SPECIALIST
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM-PAGE CONVERSION CTA -->
+<div class="section" style="padding: 90px 20px 30px 20px; border-top: 1px solid rgba(255,255,255,0.08);">
+  <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; align-items: center; gap: 40px;">
+    
+    <div>
+      <h2 class="h2-title" style="margin: 0; line-height: 0.9;">ready to<br/>create<br/>with us?</h2>
+    </div>
+
+    <div>
+      <div style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.7; margin-bottom: 8px;" class="all-caps-text">(RECORDING • MIXING • LIVE BOOKINGS)</div>
+      <p style="font-size: 0.95rem; line-height: 1.5; margin: 0; font-family: 'Archivo', sans-serif;">
+        Work with Heman Sound at our Addis Ababa production studio for your next gospel project.
+      </p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <a href="../studio sessions and production/homepage/homepage-9.html" class="cta-solid-yellow">BOOK A SESSION</a>
+      <a href="../sonicdrive-music/homepage/contact-2.html" class="cta-outline-dark">CONTACT MINISTRY</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- PROFESSIONAL MATCHING FOOTER -->
+<footer class="heman-footer">
+  <div class="footer-top-row">
+    <div class="footer-col-brand">
+      <h3>HEMAN SOUND</h3>
+      <p>A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA, ETHIOPIA.</p>
+    </div>
+    <div class="footer-col-links">
+      <h5>PAGES</h5>
+      <ul>
+        <li><a href="../about us/homepage/homepage-3.html">HOME</a></li>
+        <li><a href="../music and discography/homepage/music-5.html">MUSIC</a></li>
+        <li><a href="../music and discography/homepage/music-5.html">NEWS</a></li>
+        <li><a href="../sonicdrive-music/homepage/contact-2.html">CONTACT</a></li>
+        <li><a href="../sonicdrive-music/homepage/contact-2.html">STORE</a></li>
+      </ul>
+    </div>
+    <div class="footer-col-links">
+      <h5>MINISTRY</h5>
+      <ul>
+        <li><a href="https://www.youtube.com/@heman_sound" target="_blank">YOUTUBE CHANNEL</a></li>
+        <li><a href="../studio sessions and production/homepage/homepage-9.html">LIVE EVENTS</a></li>
+        <li><a href="../sonicdrive-music/homepage/contact-2.html">BOOKINGS</a></li>
+      </ul>
+    </div>
+    <div class="footer-col-links">
+      <h5>OTHERS</h5>
+      <ul>
+        <li><a href="../about us/homepage/homepage-3.html">JESUS SAVES</a></li>
+        <li><a href="../about us/homepage/homepage-3.html">STYLE GUIDE</a></li>
+        <li><a href="../sonicdrive-music/homepage/contact-2.html">LICENSING</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-middle-row">
+    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="back-to-top-btn">BACK TO TOP ↑</a>
+    <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; opacity: 0.6; letter-spacing: 0.1em;">● STUDIO ACTIVE — ADDIS ABABA</div>
+  </div>
+
+  <div class="footer-bottom-bar">
+    <div>© 2026 - HEMAN SOUND</div>
+    <div>DESIGNED AND DEVELOPED FOR HEMAN SOUND — ADDIS ABABA, ETHIOPIA</div>
+  </div>
+</footer>
+
+<script src="../js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="../js/webflow-script.js" type="text/javascript"></script>
+
+<!-- PERFORMANCE-OPTIMIZED VIDEO SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const videoCards = document.querySelectorAll('.video-card-small');
+  
+  videoCards.forEach(card => {
+    const video = card.querySelector('video');
+    
+    // PC Hover Play / Pause Control
+    card.addEventListener('mouseenter', function() {
+      if (video) {
+        video.currentTime = 0;
+        video.play().catch(e => {});
+      }
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      if (video) {
+        video.pause();
+      }
+    });
+
+    // Mobile Touch Toggle Control
+    card.addEventListener('click', function(e) {
+      if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+        e.preventDefault();
+        const isActive = this.classList.contains('is-active');
+        
+        videoCards.forEach(c => {
+          c.classList.remove('is-active');
+          const v = c.querySelector('video');
+          if (v) v.pause();
+        });
+      
+        if (!isActive) {
+          this.classList.add('is-active');
+          if (video) {
+            video.currentTime = 0;
+            video.play().catch(e => {});
+          }
+        }
+      }
+    });
+  });
+});
+</script>
+
+<!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]--></body></html>
