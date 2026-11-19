@@ -1,0 +1,997 @@
+<!DOCTYPE html><!-- Handled by Exflow.site --><html data-wf-page="617a5a1e54be7a17b5f85e83" data-wf-site="61763adbd355d966baeee045"><head><meta charset="utf-8"/><title>Heman Sound - Studio Sessions</title><meta content="Studio Sessions" property="og:title"/><meta content="Studio Sessions" property="twitter:title"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="css/studio.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" /><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Syncopate:regular,700","Archivo:regular,700"]  }});</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]--><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"/><link href="images/app-icon.png" rel="apple-touch-icon"/>
+
+<style>
+/* BASE CONFIGURATION */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #bcbcbc;
+  color: #111111;
+  font-family: 'Archivo', sans-serif !important;
+  scroll-behavior: smooth;
+  text-transform: uppercase !important;
+  transition: background-color 0.3s ease;
+}
+
+/* SUBTLE PAGE NOISE BEHIND CONTENT (VIDEOS STAY CLEAN) */
+.noise {
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
+  background-repeat: repeat;
+  opacity: 0.08;
+  pointer-events: none !important;
+  z-index: 1;
+}
+
+.section,
+.studio-sections-wrap,
+.console-cta-section,
+.sonic-footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* SLIGHTLY REDUCED NOISE INSIDE THE LOADING SCREEN OVERLAY */
+.loading-animation {
+  position: relative;
+  pointer-events: none !important;
+}
+
+.loading-noise {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
+  background-repeat: repeat;
+  opacity: 0.11;
+  pointer-events: none !important;
+  z-index: 1;
+}
+
+.loading-animation > :not(.loading-noise) {
+  position: relative;
+  z-index: 2;
+}
+
+/* TYPOGRAPHY HIERARCHY */
+h1, h2, h3, .h2-title, .h3-title, .h5-title {
+  font-family: 'Syncopate', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+}
+
+h4, p, div, span, a, .h4-title, .paragraph {
+  font-family: 'Archivo', sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+}
+
+.all-caps-text {
+  font-family: 'Syncopate', sans-serif !important;
+  letter-spacing: 0.12em !important;
+  font-weight: 700 !important;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+}
+.nav-group-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+}
+.nav-group-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+  flex: 1;
+}
+.navbar-brand-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar .all-caps-text {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.2em !important;
+  text-decoration: none !important;
+  color: #111111;
+  transition: color 0.3s ease;
+}
+.navbar .all-caps-text:hover,
+.navbar .all-caps-text.active {
+  color: #f59e0b !important;
+}
+
+/* ANIMATED MOBILE HAMBURGER TOGGLE & TOP-RIGHT POPOUT MENU */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  padding: 0;
+  z-index: 102;
+}
+.mobile-menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #111111;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.mobile-dropdown-menu {
+  display: flex;
+  position: fixed;
+  top: 68px;
+  right: 16px;
+  left: auto;
+  width: min(270px, calc(100vw - 32px));
+  background-color: #ffffff;
+  flex-direction: column;
+  padding: 0 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  z-index: 101;
+  gap: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: max-height 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-dropdown-menu.open {
+  max-height: 360px;
+  opacity: 1;
+  padding: 20px 22px;
+  gap: 12px;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.mobile-dropdown-menu a {
+  font-family: 'Syncopate', sans-serif !important;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111111;
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  text-transform: uppercase;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+.mobile-dropdown-menu a:last-child {
+  border-bottom: none;
+}
+.mobile-dropdown-menu a:hover {
+  color: #f59e0b;
+  transform: translateX(4px);
+}
+
+@media screen and (max-width: 900px) {
+  .navbar {
+    padding: 18px 20px;
+  }
+  .nav-group-left, .nav-group-right {
+    display: none !important;
+  }
+  .navbar-brand-center {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .mobile-menu-toggle {
+    display: flex !important;
+    margin-left: auto !important;
+  }
+}
+
+/* SCROLL REVEAL ANIMATION */
+.reveal-section {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SECTION WRAPPERS */
+.studio-sections-wrap {
+  padding: 100px 8vw;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* INTERACTIVE ROOM EXPLORER & AUDIO EQUALIZER */
+.room-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 40px 0 25px 0;
+}
+.room-tabs-header {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.room-tab {
+  background: rgba(17, 17, 17, 0.04);
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-family: 'Syncopate', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 20;
+  pointer-events: auto !important;
+}
+.room-tab:hover {
+  background: rgba(17, 17, 17, 0.12);
+  transform: translateY(-2px);
+}
+.room-tab.active-room {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* LIVE ACOUSTIC VISUALIZER BARS */
+.acoustic-visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 36px;
+  padding: 8px 16px;
+  background: rgba(17, 17, 17, 0.06);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.eq-bar {
+  width: 4px;
+  background: #f59e0b;
+  border-radius: 2px;
+  animation: eqPulse 1.1s ease-in-out infinite alternate;
+}
+.eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.eq-bar:nth-child(2) { height: 85%; animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { height: 60%; animation-delay: 0.0s; }
+.eq-bar:nth-child(4) { height: 100%; animation-delay: 0.4s; }
+.eq-bar:nth-child(5) { height: 50%; animation-delay: 0.2s; }
+.eq-bar:nth-child(6) { height: 75%; animation-delay: 0.5s; }
+.eq-bar:nth-child(7) { height: 35%; animation-delay: 0.15s; }
+
+@keyframes eqPulse {
+  0% { transform: scaleY(0.25); }
+  100% { transform: scaleY(1); }
+}
+
+.room-panel {
+  display: none;
+  background: rgba(17, 17, 17, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+.room-panel.active-panel {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  align-items: center;
+  animation: slidePanelIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slidePanelIn {
+  from { opacity: 0; transform: translateX(18px) scale(0.99); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@media screen and (max-width: 900px) {
+  .room-panel.active-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* INTERACTIVE PRODUCTION TIERS STYLES */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+}
+.tier-card {
+  background: rgba(17, 17, 17, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 40px 30px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 20;
+  overflow: hidden;
+}
+.tier-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.6s ease;
+}
+.tier-card:hover::before {
+  left: 100%;
+}
+.tier-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+  background: rgba(17, 17, 17, 0.055);
+}
+.tier-card.selected-tier {
+  background: rgba(17, 17, 17, 0.08);
+  border: 2px solid #f59e0b;
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(245, 158, 11, 0.15);
+}
+.tier-card.selected-tier::after {
+  content: '✓ ACTIVE SELECTION';
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 0.6rem;
+  background: #f59e0b;
+  color: #111;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  animation: popBadge 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes popBadge {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@media screen and (max-width: 900px) {
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* INTERACTIVE ENGINEER SPOTLIGHT WITH FADER METER */
+.engineers-container {
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.engineer-card {
+  background: rgba(17, 17, 17, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 35px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+  position: relative;
+}
+.engineer-card:hover {
+  background: rgba(17, 17, 17, 0.065);
+  border-color: #111;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+}
+.fader-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  margin: 18px 0;
+  position: relative;
+  overflow: hidden;
+}
+.fader-level {
+  height: 100%;
+  width: 35%;
+  background: #f59e0b;
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.engineer-card:hover .fader-level {
+  width: 92%;
+}
+@media screen and (max-width: 900px) {
+  .engineers-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* STUDIO CONSOLE SPOTLIGHT CTA */
+.console-cta-section {
+  padding: 100px 8vw;
+  background-color: rgba(0, 0, 0, 0.06);
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.console-cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+  padding: 60px 20px;
+}
+.selected-package-pill {
+  background: rgba(17, 17, 17, 0.08);
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+.console-cta-btn {
+  background: #f59e0b;
+  color: #111111;
+  border: none;
+  padding: 18px 44px;
+  border-radius: 40px;
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+}
+.console-cta-btn:hover {
+  background: #d97706;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.45);
+}
+
+/* CLEAN PROFESSIONAL FOOTER (NO CLIPPED TEXT) */
+.sonic-footer {
+  padding: 80px 8vw 40px 8vw;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+}
+.sonic-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+}
+@media screen and (max-width: 900px) {
+  .sonic-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+.sonic-footer-link {
+  text-decoration: none;
+  color: #111111;
+  font-size: 0.75rem;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  transition: color 0.25s ease, transform 0.25s ease;
+  display: inline-block;
+}
+.sonic-footer-link:hover {
+  color: #f59e0b !important;
+  transform: translateX(4px);
+}
+
+/* BACK TO TOP BUTTON */
+.back-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(17, 17, 17, 0.05);
+  border: 1px solid rgba(17, 17, 17, 0.15);
+  padding: 14px 30px;
+  border-radius: 40px;
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #111111;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.back-to-top-btn:hover {
+  background: #111111;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+</style>
+</head><body><div class="noise"></div><div class="loading-animation"><div class="loading-noise"></div><div class="overflow-hidden perspective"><div class="loading-perspective"><h3 class="loading-1st-row _1st">l</h3><h3 class="loading-1st-row _2nd">o</h3><h3 class="loading-1st-row _3rd">a</h3><h3 class="loading-1st-row _4th">d</h3><h3 class="loading-1st-row _5th">i</h3><h3 class="loading-1st-row _6th">n</h3><h3 class="loading-1st-row _7th">g</h3></div><div class="loading-perspective absolute"><h3 class="loading-2nd-row _1st">L</h3><h3 class="loading-2nd-row _2nd">o</h3><h3 class="loading-2nd-row _3rd">a</h3><h3 class="loading-2nd-row _4th">d</h3><h3 class="loading-2nd-row _5th">i</h3><h3 class="loading-2nd-row _6th">n</h3><h3 class="loading-2nd-row _7th">g</h3></div></div></div>
+
+<!-- BALANCED NAVBAR WITH TOP-RIGHT MOBILE MENU -->
+<div class="navbar">
+  <div class="nav-group-left">
+    <a href="../music-scroll/music.html" class="all-caps-text">music</a>
+    <a href="studio.html" class="all-caps-text active" style="color: #f59e0b;">sessions</a>
+    <a href="../mix-produce-workflow/mix.html" class="all-caps-text">mixing</a>
+  </div>
+
+  <a href="../index.html" class="navbar-brand-center w-inline-block"><h3 class="h3-title center" style="margin: 0;">Heman Sound</h3></a>
+
+  <div class="nav-group-right">
+    <a href="../about us/about.html" class="all-caps-text hide-on-portrait">about</a>
+    <a href="../contact/contact.html" class="all-caps-text hide-on-portrait">contact</a>
+  </div>
+
+  <!-- Animated Mobile Hamburger Button -->
+  <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Top-Right Mobile Popout Menu -->
+  <div class="mobile-dropdown-menu" id="mobileDropdown">
+    <a href="../music-scroll/music.html">music</a>
+    <a href="studio.html" style="color: #f59e0b;">sessions</a>
+    <a href="../mix-produce-workflow/mix.html">mixing</a>
+    <a href="../about us/about.html">about</a>
+    <a href="../contact/contact.html">contact</a>
+  </div>
+</div>
+
+<!-- SECTION 1: INTRO HEADER -->
+<div class="section" style="padding-top: 140px;">
+  <div class="grid">
+    <h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b22-80f85e7a" class="h2-title">studio sessions<br/>&amp; production</h2>
+    <h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b26-80f85e7a" class="h2-title text-right">addis ababa</h2>
+    <h4 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b2c-80f85e7a" class="h4-title center" style="max-width: 850px; margin: 30px auto 0 auto; line-height: 1.6; font-size: 0.95rem;">
+      <span class="all-caps-text">(THE STUDIO WORKSPACE)</span> PROFESSIONAL MULTI-TRACK RECORDING, CUSTOM ARRANGEMENTS, AND LIVE ENSEMBLE PRODUCTION. BOOK A SESSION OR EXPLORE OUR TRACKS.
+    </h4>
+  </div>
+</div>
+
+<!-- SECTION 2: IMMERSIVE 3-CARD INTERACTIVE GRID -->
+<div class="section full-screen">
+  
+  <!-- CARD 1: LIVE SESSION -->
+  <div data-w-id="5ab064f0-924a-60fc-d5a2-d2e0405a3a63" class="video-card left">
+    <div class="video-content">
+      <div data-poster-url="images/live-session-poster.jpg" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="absolute-video w-background-video w-background-video-atom">
+        <video id="live-video" autoplay="" loop="" style="background-image:url(&quot;images/live-session-poster.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+          <source src="images/live-session-video.mp4" data-wf-ignore="true"/>
+          <source src="images/live-session-video.webm" data-wf-ignore="true"/>
+        </video>
+      </div>
+    </div>
+    <div class="video-link">
+      <h5 class="h5-title _0-5vw-margin">explore session</h5>
+      <a href="../music-scroll/music.html" class="menu-link-wrap white-text w-inline-block">
+        <div class="perspective-link">
+          <h2 class="_1st-row _1st">l</h2><h2 class="_1st-row _2nd">i</h2><h2 class="_1st-row _3rd">v</h2><h2 class="_1st-row _4th">e</h2>
+        </div>
+        <div class="perspective-link absolute">
+          <h2 class="_2nd-row _1st">l</h2><h2 class="_2nd-row _2nd">i</h2><h2 class="_2nd-row _3rd">v</h2><h2 class="_2nd-row _4th">e</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- CARD 2: MIX PRODUCTION -->
+  <div class="video-card middle">
+    <div class="video-content">
+      <div data-poster-url="images/mix-production-poster.jpg" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="absolute-video w-background-video w-background-video-atom">
+        <video id="mix-video" autoplay="" loop="" style="background-image:url(&quot;images/mix-production-poster.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+          <source src="images/mix-production-video.mp4" data-wf-ignore="true"/>
+          <source src="images/mix-production-video.webm" data-wf-ignore="true"/>
+        </video>
+      </div>
+    </div>
+    <div class="video-link">
+      <h5 class="h5-title _0-5vw-margin">book studio</h5>
+      <a href="../mix-produce-workflow/mix.html" class="menu-link-wrap white-text w-inline-block">
+        <div class="perspective-link">
+          <h2 class="_1st-row _1st">m</h2><h2 class="_1st-row _2nd">i</h2><h2 class="_1st-row _3rd">x</h2>
+        </div>
+        <div class="perspective-link absolute">
+          <h2 class="_2nd-row _1st">m</h2><h2 class="_2nd-row _2nd">i</h2><h2 class="_2nd-row _3rd">x</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- CARD 3: SOUND MASTER -->
+  <div class="video-card right">
+    <div class="video-content">
+      <div data-poster-url="images/sound-master-poster.jpg" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="absolute-video w-background-video w-background-video-atom">
+        <video id="sound-video" autoplay="" loop="" style="background-image:url(&quot;images/sound-master-poster.jpg&quot;)" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+          <source src="images/sound-master-video.mp4" data-wf-ignore="true"/>
+          <source src="images/sound-master-video.webm" data-wf-ignore="true"/>
+        </video>
+      </div>
+    </div>
+    <div class="video-link">
+      <h5 class="h5-title _0-5vw-margin">listen audio</h5>
+      <a href="../music-scroll/music.html" class="menu-link-wrap white-text w-inline-block">
+        <div class="perspective-link">
+          <h2 class="_1st-row _1st">s</h2><h2 class="_1st-row _2nd">o</h2><h2 class="_1st-row _3rd">u</h2><h2 class="_1st-row _4th">n</h2><h2 class="_1st-row _5th">d</h2>
+        </div>
+        <div class="perspective-link absolute">
+          <h2 class="_2nd-row _1st">s</h2><h2 class="_2nd-row _2nd">o</h2><h2 class="_2nd-row _3rd">u</h2><h2 class="_2nd-row _4th">n</h2><h2 class="_2nd-row _5th">d</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- SECTION 3: INTERACTIVE ROOM EXPLORER + LIVE ACOUSTIC VISUALIZER -->
+<div class="studio-sections-wrap reveal-section">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="all-caps-text" style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 8px;">ACOUSTIC ENVIRONMENTS</p>
+    <h3 class="h3-title" style="margin: 0; font-size: clamp(2rem, 3vw, 2.8rem);">THE TRACKING SPACES</h3>
+    
+    <div class="room-controls-bar">
+      <div class="room-tabs-header" style="margin: 0;">
+        <button class="room-tab active-room" id="tab-1" data-speed="1.1s">01. MAIN TRACKING ROOM</button>
+        <button class="room-tab" id="tab-2" data-speed="0.65s">02. VOCAL BOOTH</button>
+        <button class="room-tab" id="tab-3" data-speed="1.5s">03. CONTROL ROOM</button>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span id="eq-label" style="font-family: monospace; font-size: 0.75rem; font-weight: bold; opacity: 0.75;">ACOUSTIC PROFILE: WARM DIFFUSION</span>
+        <div class="acoustic-visualizer" id="acoustic-eq">
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+          <div class="eq-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="room-panel active-panel" id="panel-1">
+      <div>
+        <h5 class="h5-title" style="margin-bottom: 15px; color: #111;">LIVE ENSEMBLE LIVE ROOM</h5>
+        <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.85; margin-bottom: 20px;">Optimized natural warmth and diffusion designed specifically for live band arrangements, grand pianos, and acoustic instrument ensembles in Addis Ababa.</p>
+        <span style="font-family: monospace; font-size: 0.85rem; font-weight: bold; background: rgba(0,0,0,0.08); padding: 6px 14px; border-radius: 6px;">CAPACITY: UP TO 12 MUSICIANS</span>
+      </div>
+      <div style="background: rgba(0,0,0,0.05); padding: 30px; border-radius: 12px; border-left: 3px solid #f59e0b;">
+        <p style="font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.1em;">KEY ACOUSTIC SPECS</p>
+        <p style="font-size: 0.85rem; line-height: 1.5; opacity: 0.8; margin: 0;">Variable wooden diffusors, floating decoupled hardwood floors, and optimal RT60 decay time for gospel choir arrangements.</p>
+      </div>
+    </div>
+
+    <div class="room-panel" id="panel-2">
+      <div>
+        <h5 class="h5-title" style="margin-bottom: 15px; color: #111;">VOCAL &amp; SPEECH BOOTH</h5>
+        <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.85; margin-bottom: 20px;">Acoustically deadened environment calibrated for pristine lead vocals, spoken word narration, and crisp choir harmonic isolation without reflection artifacts.</p>
+        <span style="font-family: monospace; font-size: 0.85rem; font-weight: bold; background: rgba(0,0,0,0.08); padding: 6px 14px; border-radius: 6px;">ISOLATION RATING: -55dB</span>
+      </div>
+      <div style="background: rgba(0,0,0,0.05); padding: 30px; border-radius: 12px; border-left: 3px solid #f59e0b;">
+        <p style="font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.1em;">MIC LOCKER HIGHLIGHTS</p>
+        <p style="font-size: 0.85rem; line-height: 1.5; opacity: 0.8; margin: 0;">Equipped with high-end tube condensers and custom ribbon microphones tailored for warm vocal presence.</p>
+      </div>
+    </div>
+
+    <div class="room-panel" id="panel-3">
+      <div>
+        <h5 class="h5-title" style="margin-bottom: 15px; color: #111;">MASTER CONTROL SUITE</h5>
+        <p style="font-size: 0.95rem; line-height: 1.7; opacity: 0.85; margin-bottom: 20px;">Precision monitoring environment equipped with high-end digital mixing architecture, analog summing gear, and calibrated reference monitors.</p>
+        <span style="font-family: monospace; font-size: 0.85rem; font-weight: bold; background: rgba(0,0,0,0.08); padding: 6px 14px; border-radius: 6px;">MONITORING: GENELEC / YAMAHA</span>
+      </div>
+      <div style="background: rgba(0,0,0,0.05); padding: 30px; border-radius: 12px; border-left: 3px solid #f59e0b;">
+        <p style="font-size: 0.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 0.1em;">WORKFLOW INTEGRATION</p>
+        <p style="font-size: 0.85rem; line-height: 1.5; opacity: 0.8; margin: 0;">Seamless multi-track DAW routing and real-time client feedback stations for stem mixing and review.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: INTERACTIVE PRODUCTION TIERS -->
+<div class="studio-sections-wrap reveal-section" style="background-color: rgba(0, 0, 0, 0.02);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="all-caps-text" style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 8px;">FLEXIBLE SCHEDULING</p>
+    <h3 class="h3-title" style="margin: 0; font-size: clamp(2rem, 3vw, 2.8rem);">PRODUCTION TIERS</h3>
+    <p style="font-size: 0.85rem; opacity: 0.75; margin-top: 8px;">Click any package below to pre-load it into your studio booking inquiry.</p>
+    
+    <div class="tiers-grid">
+      <div class="tier-card" onclick="selectTier(this, 'THE ARTIST BLOCK')" id="tier-artist">
+        <h5 class="h5-title" style="margin-bottom: 15px;">THE ARTIST BLOCK</h5>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin-bottom: 20px;">Ideal for single-track recordings, vocal overdubs, and solo instrument tracking with an in-house audio engineer.</p>
+        <span style="font-family: monospace; font-size: 0.85rem; font-weight: bold;">HOURLY &amp; HALF-DAY RATES</span>
+      </div>
+
+      <div class="tier-card selected-tier" onclick="selectTier(this, 'FULL ALBUM PROJECT')" id="tier-album">
+        <h5 class="h5-title" style="margin-bottom: 15px;">FULL ALBUM PROJECT</h5>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin-bottom: 20px;">Comprehensive tracking, multi-track mixing, and analog mastering suites for 11+ track gospel albums and records.</p>
+        <span style="font-family: monospace; font-size: 0.85rem; font-weight: bold; color: #d97706;">★ FULL SUITE PACKAGE</span>
+      </div>
+
+      <div class="tier-card" onclick="selectTier(this, 'CHOIR & ENSEMBLE')" id="tier-choir">
+        <h5 class="h5-title" style="margin-bottom: 15px;">CHOIR &amp; ENSEMBLE</h5>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin-bottom: 20px;">Specialized multi-microphone configurations designed to capture large vocal groups and live church choirs seamlessly.</p>
+        <span style="font-family: monospace; font-size: 0.85rem; font-weight: bold;">CUSTOM QUOTATION</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: IN-HOUSE ENGINEERS -->
+<div class="studio-sections-wrap reveal-section">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <p class="all-caps-text" style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 8px;">THE CREATIVE TEAM</p>
+    <h3 class="h3-title" style="margin: 0; font-size: clamp(2rem, 3vw, 2.8rem);">IN-HOUSE ENGINEERS</h3>
+    
+    <div class="engineers-container">
+      <div class="engineer-card">
+        <h5 class="h5-title" style="margin-bottom: 8px;">Tarekegn K.</h5>
+        <p style="font-size: 0.75rem; color: #555; margin-bottom: 10px; font-weight: 700;">LEAD PRODUCER &amp; ARCHITECT</p>
+        <div class="fader-track"><div class="fader-level"></div></div>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin: 0;">Directing overall sound identity, digital workflow integrations, and full-scale modern mix production.</p>
+      </div>
+
+      <div class="engineer-card">
+        <h5 class="h5-title" style="margin-bottom: 8px;">Heman Collective</h5>
+        <p style="font-size: 0.75rem; color: #555; margin-bottom: 10px; font-weight: 700;">SESSION MUSICIANS</p>
+        <div class="fader-track"><div class="fader-level"></div></div>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin: 0;">Specialized instrumentalists and vocal directors bringing contemporary and traditional gospel arrangements to life.</p>
+      </div>
+
+      <div class="engineer-card">
+        <h5 class="h5-title" style="margin-bottom: 8px;">Acoustic Crew</h5>
+        <p style="font-size: 0.75rem; color: #555; margin-bottom: 10px; font-weight: 700;">TRACKING &amp; MASTERING</p>
+        <div class="fader-track"><div class="fader-level"></div></div>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.85; margin: 0;">Ensuring broadcast-quality clarity, dynamic balance, and streaming platform optimization.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: STUDIO CONSOLE SPOTLIGHT CTA -->
+<div class="console-cta-section reveal-section">
+  <div class="console-cta-content">
+    <p class="all-caps-text" style="font-size: 0.8rem; opacity: 0.7; letter-spacing: 0.2em; margin: 0;">SECURE YOUR DATE</p>
+    <h2 class="h2-title" style="margin: 0; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.1;">RESERVE YOUR STUDIO SESSION</h2>
+    <div class="selected-package-pill" id="selected-tier-display">SELECTED PACKAGE: FULL ALBUM PROJECT</div>
+    <p style="font-size: 1rem; opacity: 0.8; max-width: 600px; margin: 0; line-height: 1.6;">Transform your live arrangement into a professional record. Book your time slot at Heman Sound today.</p>
+    <a href="mailto:booking@hemansound.com?subject=Studio%20Session%20Booking%20-%20FULL%20ALBUM%20PROJECT" id="dynamic-book-btn" class="console-cta-btn">INQUIRE &amp; BOOK</a>
+  </div>
+</div>
+
+<!-- SECTION 7: BOOKING & STUDIO CONTACT SECTION -->
+<div class="section reveal-section" style="position: relative; overflow: hidden; padding: 100px 10vw; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+  <div class="desktop-contact-container" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; gap: 80px;">
+    
+    <div style="flex: 1.2; min-width: 0;">
+      <h3 class="fixed-contact-title" style="font-size: clamp(2.2rem, 3.5vw, 3.8rem); line-height: 1.15; margin: 0; letter-spacing: -0.02em;">BOOK A<br/>STUDIO SESSION</h3>
+    </div>
+
+    <div style="flex: 1; min-width: 0;">
+      <div class="align-left vertically _3vw-margin" style="margin-bottom: 40px;">
+        <p class="all-caps-text _0-5vw-margin" style="margin-bottom: 6px; font-size: 0.85rem; opacity: 0.7;">Studio &amp; Mixing Inquiries</p>
+        <a href="mailto:studio@hemansound.com?subject=Inquiry" class="link-block w-inline-block" style="text-decoration: none; color: inherit;">
+          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0; white-space: nowrap;">studio@hemansound.com</p>
+          <div class="underline"></div>
+        </a>
+      </div>
+      <div class="align-left vertically _3vw-margin" style="margin-bottom: 40px;">
+        <p class="all-caps-text _0-5vw-margin" style="margin-bottom: 6px; font-size: 0.85rem; opacity: 0.7;">Management &amp; Booking</p>
+        <a href="mailto:booking@hemansound.com?subject=Booking" class="link-block w-inline-block" style="text-decoration: none; color: inherit;">
+          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0; white-space: nowrap;">booking@hemansound.com</p>
+          <div class="underline"></div>
+        </a>
+      </div>
+      <div class="align-left vertically">
+        <p class="all-caps-text _0-5vw-margin" style="margin-bottom: 6px; font-size: 0.85rem; opacity: 0.7;">Stream Channels</p>
+        <a href="http://youtube.com/@heman_sound" target="_blank" class="link-block w-inline-block" style="text-decoration: none; color: inherit;">
+          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0; white-space: nowrap;">YouTube</p>
+          <div class="underline"></div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CLEAN PROFESSIONAL FOOTER (GIANT CLIPPED TEXT REMOVED) -->
+<footer class="sonic-footer">
+  <div class="sonic-footer-grid">
+    <div>
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px;">HEMAN SOUND</h3>
+      <p style="font-size: 0.8rem; line-height: 1.6; opacity: 0.7; margin-bottom: 25px; max-width: 320px;">A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA, ETHIOPIA.</p>
+    </div>
+    <div>
+      <h5 style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px;">PAGES</h5>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <li><a href="../index.html" class="sonic-footer-link">HOME</a></li>
+        <li><a href="../music-scroll/music.html" class="sonic-footer-link">MUSIC</a></li>
+        <li><a href="../music-discography/discography.html" class="sonic-footer-link">DISCOGRAPHY</a></li>
+        <li><a href="../contact/contact.html" class="sonic-footer-link">CONTACT</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px;">MINISTRY</h5>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <li><a href="https://www.youtube.com/@heman_sound" target="_blank" class="sonic-footer-link">YOUTUBE CHANNEL</a></li>
+        <li><a href="studio.html" class="sonic-footer-link">LIVE EVENTS</a></li>
+        <li><a href="../contact/contact.html" class="sonic-footer-link">BOOKINGS</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px;">OTHERS</h5>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <li><a href="../jesus/jesus.html" class="sonic-footer-link">JESUS SAVES</a></li>
+        <li><a href="../about us/about.html" class="sonic-footer-link">STYLE GUIDE</a></li>
+        <li><a href="../contact/contact.html" class="sonic-footer-link">LICENSING</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 40px 0 20px 0; flex-wrap: wrap; gap: 20px;">
+    <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="back-to-top-btn">BACK TO TOP ↑</a>
+    <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; opacity: 0.6; letter-spacing: 0.1em;">● STUDIO ACTIVE — ADDIS ABABA</div>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; margin-top: 30px; flex-wrap: wrap; gap: 10px; border-top: 1px solid rgba(17,17,17,0.1); padding-top: 30px;">
+    <div>© 2026 - HEMAN SOUND</div>
+    <div>DESIGNED AND DEVELOPED FOR HEMAN SOUND — ADDIS ABABA, ETHIOPIA</div>
+  </div>
+</footer>
+
+<!-- INTERACTIVE SCRIPTS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const mobileDropdown = document.getElementById('mobileDropdown');
+
+  if (mobileBtn && mobileDropdown) {
+    mobileBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileBtn.classList.toggle('active');
+      mobileDropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mobileDropdown.contains(e.target) && !mobileBtn.contains(e.target)) {
+        mobileDropdown.classList.remove('open');
+        mobileBtn.classList.remove('active');
+      }
+    });
+  }
+
+  const tabs = document.querySelectorAll('.room-tab');
+  const panels = document.querySelectorAll('.room-panel');
+  const eqBars = document.querySelectorAll('.eq-bar');
+  const eqLabel = document.getElementById('eq-label');
+  const profiles = [
+    "ACOUSTIC PROFILE: WARM DIFFUSION",
+    "ACOUSTIC PROFILE: DEADENED VOCAL ISOLATION",
+    "ACOUSTIC PROFILE: FLAT REFERENCE MONITORING"
+  ];
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      tabs.forEach(t => t.classList.remove('active-room'));
+      panels.forEach(p => p.classList.remove('active-panel'));
+
+      this.classList.add('active-room');
+      if (panels[index]) {
+        panels[index].classList.add('active-panel');
+      }
+
+      const speed = this.getAttribute('data-speed') || '1s';
+      eqBars.forEach(bar => {
+        bar.style.animationDuration = speed;
+      });
+      if (eqLabel && profiles[index]) {
+        eqLabel.textContent = profiles[index];
+      }
+    });
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal-section').forEach(section => {
+    revealObserver.observe(section);
+  });
+});
+
+function selectTier(element, tierName) {
+  document.querySelectorAll('.tier-card').forEach(card => {
+    card.classList.remove('selected-tier');
+  });
+  element.classList.add('selected-tier');
+
+  const displayPill = document.getElementById('selected-tier-display');
+  const bookBtn = document.getElementById('dynamic-book-btn');
+
+  if (displayPill) {
+    displayPill.textContent = 'SELECTED PACKAGE: ' + tierName;
+    displayPill.style.background = '#f59e0b';
+    displayPill.style.color = '#111';
+    setTimeout(() => {
+      displayPill.style.background = 'rgba(17, 17, 17, 0.08)';
+    }, 450);
+  }
+
+  if (bookBtn) {
+    bookBtn.href = 'mailto:booking@hemansound.com?subject=' + encodeURIComponent('Studio Session Booking - ' + tierName);
+    bookBtn.textContent = 'BOOK ' + tierName;
+  }
+}
+</script>
+
+<script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script><!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]--></body></html>

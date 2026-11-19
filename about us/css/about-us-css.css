@@ -113,7 +113,7 @@ blockquote {
   top: 0%;
   right: 0%;
   bottom: 0%;
-  background-image: url("../images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
+  background-image: url("/images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
   background-position: 0px 0px;
   background-size: 480px;
   opacity: 0.07;
@@ -857,7 +857,7 @@ blockquote {
   bottom: auto;
   width: 100%;
   height: 25vw;
-  background-image: url("../images/album_two.jpg");
+  background-image: url("/images/album_two.jpg");
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -1372,7 +1372,7 @@ blockquote {
   right: 0px;
   bottom: 0px;
   z-index: 20;
-  background-image: url("../images/test.png");
+  background-image: url("/images/test.png");
   background-position: 57vw 100%;
   background-size: 40%;
   background-repeat: no-repeat;
@@ -1581,7 +1581,7 @@ blockquote {
   width: 25vw;
   height: 25vw;
   border-radius: 2px;
-  background-image: url("../images/fashion-2.jpg");
+  background-image: url("/images/fashion-2.jpg");
   background-position: 50% 50%;
   background-size: cover;
   box-shadow: 0 1px 8px 0 rgba(39, 39, 39, 0.4);
@@ -1591,15 +1591,15 @@ blockquote {
 }
 
 .album.bottom {
-  background-image: url("../images/album_three.jpg");
+  background-image: url("/images/album_three.jpg");
 }
 
 .album.top {
-  background-image: url("../images/album_two-1.jpg");
+  background-image: url("/images/album_two-1.jpg");
 }
 
 .album.middle {
-  background-image: url("../images/album_one.jpg");
+  background-image: url("/images/album_one.jpg");
 }
 
 .center-vertically {
@@ -2222,7 +2222,7 @@ blockquote {
   top: 0%;
   right: 0%;
   bottom: 0%;
-  background-image: url("../images/pexels-ron-lach-8102697.jpg");
+  background-image: url("/images/pexels-ron-lach-8102697.jpg");
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2357,7 +2357,7 @@ blockquote {
   top: 0%;
   right: 0%;
   bottom: 0%;
-  background-image: url("../images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
+  background-image: url("/images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
   background-position: 0px 0px;
   background-size: 480px;
   opacity: 0.07;
@@ -2900,7 +2900,7 @@ blockquote {
   display: inline-block;
   width: 10vw;
   height: 5.76vw;
-  background-image: url("../images/pexels-ron-lach-8102697.jpg");
+  background-image: url("/images/pexels-ron-lach-8102697.jpg");
   background-position: 0px 0px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2910,7 +2910,7 @@ blockquote {
   display: inline-block;
   width: 10vw;
   height: 5.76vw;
-  background-image: url("../images/pexels-ron-lach-8102696.jpg");
+  background-image: url("/images/pexels-ron-lach-8102696.jpg");
   background-position: 50% 24%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2920,7 +2920,7 @@ blockquote {
   display: inline-block;
   width: 10vw;
   height: 5.76vw;
-  background-image: url("../images/pexels-cottonbro-7971877.jpg");
+  background-image: url("/images/pexels-cottonbro-7971877.jpg");
   background-position: 50% 40%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2930,7 +2930,7 @@ blockquote {
   display: inline-block;
   width: 10vw;
   height: 5.76vw;
-  background-image: url("../images/pexels-ron-lach-8089655.jpg");
+  background-image: url("/images/pexels-ron-lach-8089655.jpg");
   background-position: 0px 0px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2940,7 +2940,7 @@ blockquote {
   display: inline-block;
   width: 10vw;
   height: 5.76vw;
-  background-image: url("../images/pexels-cottonbro-7974878.jpg");
+  background-image: url("/images/pexels-cottonbro-7974878.jpg");
   background-position: 50% 0%;
   background-size: cover;
   background-repeat: no-repeat;

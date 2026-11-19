@@ -67,24 +67,6 @@
     z-index: 2;
   }
 
-  /* FORCE HORIZONTAL LAYOUT FOR ABOUT SECTION IMAGE */
-  .about-content {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 40px !important;
-  }
-  .about .image-wrapper {
-    aspect-ratio: 16 / 9 !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-  }
-  .about .image-wrapper img.wrapped-image {
-    object-fit: cover !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-
   /* HERO VIDEO STYLING */
   .hero-video {
     position: absolute;
@@ -97,7 +79,7 @@
     transform: scale(1.2);
   }
 
-  /* NAVBAR STYLING WITH ENLARGED BRANDING */
+  /* NAVBAR STYLING WITH ENLARGED BRANDING & ANIMATED HAMBURGER */
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -143,6 +125,74 @@
   }
   .all-caps-text:hover {
     opacity: 0.6;
+  }
+
+  /* Animated Mobile Hamburger Toggle Button */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    padding: 0;
+    z-index: 102;
+  }
+  .mobile-menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #111111;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger to 'X' Transformation States */
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Mobile Dropdown Drawer with Smooth Slide & Fade */
+  .mobile-dropdown-menu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    right: 15px;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 0 24px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    z-index: 101;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
+  }
+  .mobile-dropdown-menu.open {
+    max-height: 350px;
+    opacity: 1;
+    padding: 24px;
+    gap: 16px;
+  }
+  .mobile-dropdown-menu a {
+    font-family: 'Syncopate', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111111;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
   }
 
   /* ACCENT & CTA BUTTON MATCHING */
@@ -443,16 +493,26 @@
   }
 
   /* Ensure all sections inherit background cleanly */
-  .hero, .introduction, .scrolling-text, .about, .sticky-store-title, .store, .news, .newsletter, .home-galery, .live {
+  .hero, .introduction, .hero-photo-showcase, .scrolling-text, .about, .sticky-store-title, .store, .news, .newsletter, .home-galery, .live {
     background-color: transparent !important;
   }
 
-  @media screen and (max-width: 991px) {
+  /* MOBILE RESPONSIVE OVERRIDES */
+  @media screen and (max-width: 900px) {
     .navbar {
-      padding: 20px 20px;
+      padding: 18px 20px;
     }
-    .hide-on-portrait {
+    .nav-group-left, .nav-group-right {
       display: none !important;
+    }
+    .navbar-brand-center {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+    .mobile-menu-toggle {
+      display: flex !important;
+      margin-left: auto !important;
     }
     .hover-video-preview-window {
       display: none !important;
@@ -468,19 +528,37 @@
   <video id="hover-preview-video" muted loop playsinline></video>
 </div>
 
-<!-- NAVBAR WITH ENLARGED BRANDING -->
+<!-- NAVBAR WITH ANIMATED HAMBURGER & CENTERED BRANDING -->
 <div class="navbar">
   <div class="nav-group-left">
-    <a href="/music/music-5" class="all-caps-text">music</a>
-    <a href="/sessions/sessions-1" class="all-caps-text" style="color: #f59e0b;">sessions</a>
-    <a href="/mixing/mixing-1" class="all-caps-text">mixing</a>
+    <a href="music-scroll/music.html" class="all-caps-text">music</a>
+    <a href="studio-sessions/studio.html" class="all-caps-text" style="color: #f59e0b;">sessions</a>
+    <a href="mix-produce-workflow/mix.html" class="all-caps-text">mixing</a>
   </div>
 
-  <a href="/" class="navbar-brand-center w-inline-block"><h3 class="h3-title center" style="margin: 0; font-size: 1.55rem; letter-spacing: 0.18em; font-weight: 700;">Heman Sound</h3></a>
+  <a href="index.html" class="navbar-brand-center w-inline-block">
+    <h3 class="h3-title center" style="margin: 0; font-size: 1.2rem; letter-spacing: 0.15em; font-weight: 700; white-space: nowrap;">Heman Sound</h3>
+  </a>
 
   <div class="nav-group-right">
-    <a href="/about/about-1" class="all-caps-text hide-on-portrait">about</a>
-    <a href="/contact/contact-2" class="all-caps-text hide-on-portrait">contact</a>
+    <a href="about us/about.html" class="all-caps-text">about</a>
+    <a href="contact/contact.html" class="all-caps-text">contact</a>
+  </div>
+
+  <!-- Animated Mobile Hamburger Button -->
+  <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Mobile Dropdown Drawer -->
+  <div class="mobile-dropdown-menu" id="mobileDropdown">
+    <a href="music-scroll/music.html">music</a>
+    <a href="studio-sessions/studio.html" style="color: #f59e0b;">sessions</a>
+    <a href="mix-produce-workflow/mix.html">mixing</a>
+    <a href="about us/about.html">about</a>
+    <a href="contact/contact.html">contact</a>
   </div>
 </div>
 
@@ -490,15 +568,24 @@
 <!-- INTRODUCTION SECTION -->
 <section data-w-id="8b1d981f-995b-3e72-e5d6-01294d7775d5" class="introduction"><div class="w-layout-blockcontainer container w-container"><div class="text-content-flex-v"><div style="width:0px;height:1PX" class="line-separator"></div><h2 style="-webkit-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="fsize-small fweight-medium f-allcaps">LIVE WORSHIP MINISTRY - RECORDING STUDIO - ADDIS ABABA</h2><h3 style="-webkit-transform:translate3d(0, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="fsize-large">WE ARE HEMAN SOUND — A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA.</h3></div></div></section>
 
-<!-- CROSSED CAUTION TAPES BANNER WITH 'JESUS SAVES' -->
+<!-- HERO IMAGE / GROUP PHOTO SHOWCASE -->
+<section class="hero-photo-showcase" style="padding: 20px 8vw 40px 8vw; position: relative; z-index: 2;">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="image-wrapper" style="width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+      <img sizes="(max-width: 767px) 100vw, (max-width: 991px) 946.39990234375px, 1222px" srcset="images/hero-image.png 500w, images/hero-image.png 800w, images/hero-image.png 1080w, images/hero-image.png 1280w" alt="Heman Sound Group Photo" src="images/hero-image.png" loading="eager" class="wrapped-image landscape" style="width: 100%; height: auto; display: block; object-fit: cover;"/>
+    </div>
+  </div>
+</section>
+
+<!-- CROSSED CAUTION TAPES BANNER WITH 'JESUS SAVES' (LINKED TO JESUS PAGE) -->
 <div class="section no-lateral-padding">
   <div class="crossed-tapes-wrapper">
-    <a href="/jesus" class="scroll-effect-1">
+    <a href="jesus/jesus.html" class="scroll-effect-1">
       <div class="scroll-interaction-1">
         <h2 class="h2-title no-wrap">JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES —</h2>
       </div>
     </a>
-    <a href="/jesus" class="scroll-effect-2">
+    <a href="jesus/jesus.html" class="scroll-effect-2">
       <div class="scroll-interaction-2">
         <h2 class="h2-title no-wrap">JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES —</h2>
       </div>
@@ -597,7 +684,7 @@
 <section class="scrolling-text"><section class="marquee-container"><div data-w-id="5181d741-0218-00ed-7a38-8fcb489e822c" class="ticker-inner"><div class="ticker-text">&nbsp;HEMAN SOUND - LIVE WORSHIP - ADDIS ABABA -&nbsp;&nbsp;&nbsp;HEMAN SOUND - LIVE WORSHIP - ADDIS ABABA - </div></div></section></section>
 
 <!-- ABOUT SECTION -->
-<section class="about"><div class="w-layout-blockcontainer container w-container"><div data-w-id="482b796e-9eb8-f916-246f-3ef05792e51a" class="about-content"><div id="w-node-_482b796e-9eb8-f916-246f-3ef05792e51b-3a471e50" class="text-content-flex-v"><div style="-webkit-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="label-page-title">ABOUT HEMAN SOUND</div><h3 style="-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="fsize-large">LED BY EXECUTIVE PRODUCER KALEB BIRHANU ALONGSIDE MANAGER EBBA DANIEL, OUR COLLECTIVE BRINGS TOGETHER PASSIONATE VOCALISTS AND PROFESSIONAL INSTRUMENTALISTS.</h3><p style="-webkit-transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="paragraph-about">HEMAN SOUND IS DEDICATED TO CRAFTING SOULFUL RHYTHMS, RICH INSTRUMENTATION, AND UNFORGETTABLE LIVE WORSHIP EXPERIENCES THAT RESONATE DEEPLY WITH AUDIENCES ACROSS ETHIOPIA AND BEYOND. COMBINING TRADITIONAL WARMTH WITH CONTEMPORARY STUDIO PRODUCTION, EVERY NOTE WE PLAY TELLS A STORY OF DEVOTION AND MUSICAL EXCELLENCE.</P></div><div id="w-node-_482b796e-9eb8-f916-246f-3ef05792e522-3a471e50" data-w-id="482b796e-9eb8-f916-246f-3ef05792e522" class="image-wrapper"><img sizes="(max-width: 767px) 100vw, (max-width: 991px) 946.39990234375px, 1222px" srcset="images/hero-image.png 500w, images/hero-image.png 800w, images/hero-image.png 1080w, images/hero-image.png 1280w" alt="" src="images/hero-image.png" loading="eager" class="wrapped-image landscape"/><div style="display:block;width:100%;height:100%" class="cover-wipe"></div></div></div></div></section>
+<section class="about"><div class="w-layout-blockcontainer container w-container"><div data-w-id="482b796e-9eb8-f916-246f-3ef05792e51a" class="about-content" style="display: flex !important; flex-direction: column !important;"><div id="w-node-_482b796e-9eb8-f916-246f-3ef05792e51b-3a471e50" class="text-content-flex-v"><div style="-webkit-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0px, 100px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="label-page-title">ABOUT HEMAN SOUND</div><h3 style="-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="fsize-large">LED BY EXECUTIVE PRODUCER KALEB BIRHANU ALONGSIDE MANAGER EBBA DANIEL, OUR COLLECTIVE BRINGS TOGETHER PASSIONATE VOCALISTS AND PROFESSIONAL INSTRUMENTALISTS.</h3><p style="-webkit-transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 70px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="paragraph-about">HEMAN SOUND IS DEDICATED TO CRAFTING SOULFUL RHYTHMS, RICH INSTRUMENTATION, AND UNFORGETTABLE LIVE WORSHIP EXPERIENCES THAT RESONATE DEEPLY WITH AUDIENCES ACROSS ETHIOPIA AND BEYOND. COMBINING TRADITIONAL WARMTH WITH CONTEMPORARY STUDIO PRODUCTION, EVERY NOTE WE PLAY TELLS A STORY OF DEVOTION AND MUSICAL EXCELLENCE.</P></div></div></div></section>
 
 <!-- GALLERY SECTION -->
 <section data-w-id="0a3ebde1-09d4-32c8-5f25-964d4f745171" class="home-galery bg-primary-dark w-clearfix"><div class="container-galery"><div id="w-node-_0a3ebde1-09d4-32c8-5f25-964d4f745173-3a471e50" data-w-id="0a3ebde1-09d4-32c8-5f25-964d4f745173" class="galery-img-full-height"><div style="width:100%;height:100%;opacity:1" class="card-wipe-h dark"></div><img style="-webkit-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" sizes="100vw" alt="Studio gear" src="images/gear-analog-hardware.webp" loading="eager" srcset="images/gear-analog-hardware.webp 500w, images/gear-analog-hardware.webp 800w, images/gear-analog-hardware.webp 1080w, images/gear-analog-hardware.webp 1920w" class="image-galery"/></div><div id="w-node-_0a3ebde1-09d4-32c8-5f25-964d4f745176-3a471e50" data-w-id="0a3ebde1-09d4-32c8-5f25-964d4f745176" class="galery-img-small"><img style="-webkit-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" sizes="(max-width: 767px) 100vw, 600px" alt="Recording session" src="images/singing-studio.webp" loading="eager" srcset="images/singing-studio.webp 500w, images/singing-studio.webp 640w" class="image-galery"/><div style="width:100%;height:100%;opacity:1" class="card-wipe-h dark"></div></div><div id="w-node-_0a3ebde1-09d4-32c8-5f25-964d4f745179-3a471e50" data-w-id="0a3ebde1-09d4-32c8-5f25-964d4f745179" class="galery-img-small"><img width="308" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1.2, 1.2, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" alt="Instrument illustration" src="images/moog-grandmother.webp" loading="eager" srcset="images/moog-grandmother.webp 500w, images/moog-grandmother.webp 800w, images/moog-grandmother.webp 1080w, images/moog-grandmother.webp 1600w, images/moog-grandmother.webp 1920w" class="image-galery"/><div style="width:100%;height:100%;opacity:1" class="card-wipe-h dark"></div></div><div id="w-node-_0a3ebde1-09d4-32c8-5f25-964d4f74517c-3a471e50" data-w-id="0a3ebde1-09d4-32c8-5f25-964d4f74517c" class="galery-img-half-width"><div style="width:100%;height:100%;opacity:1" class="card-wipe-l dark"></div><img width="308" sizes="(max-width: 479px) 100vw, 369.5999755859375px" alt="Live session" src="images/modular-synth.webp" loading="eager" srcset="images/modular-synth.webp 500w, images/modular-synth.webp 800w, images/modular-synth.webp 1080w, images/modular-synth.webp 1920w" class="image-galery landscape"/></div></div><div class="home-galery-text-bottom"><div>HEMAN SOUND'S RECORDING STUDIO IN ADDIS ABABA IS A CREATIVE HAVEN, BLENDING TRADITIONAL ACOUSTIC WARMTH WITH CUTTING-EDGE MULTITRACK PRODUCTION.</div></div></section>
@@ -606,7 +693,7 @@
 <section class="live bg-primary-dark"><div class="w-layout-blockcontainer container w-container"><h2 data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d1a" style="opacity:0" class="fweight-extrabold">UPCOMING SHOWS</h2><aside class="home-live-collection w-dyn-list"><div role="list" class="home-live-list w-dyn-items"><div data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d1e" style="opacity:0" role="listitem" class="home-live-item w-dyn-item"><a href="https://www.youtube.com/@heman_sound" target="_blank" class="live-link w-inline-block"><div class="live-date"><div class="date-content w-clearfix"><div class="date">NOV 15</div><div class="date">2026</div></div><div class="bg-date-swap"></div></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d27-3a471e50" class="live-item-content"><h3 class="live-item-title fsize-xxsmall">ADDIS LIVE CONCERT HALL</h3><div class="live-details"><div class="localization">ADDIS ABABA, ETHIOPIA</div><div class="separator">●</div><div class="time">6:00 PM</div></div></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d31-3a471e50" class="live-line-white"></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d32-3a471e50" class="live-line-grey"></div></a></div><div data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d1e" style="opacity:0" role="listitem" class="home-live-item w-dyn-item"><a href="https://www.youtube.com/@heman_sound" target="_blank" class="live-link w-inline-block"><div class="live-date"><div class="date-content w-clearfix"><div class="date">NOV 28</div><div class="date">2026</div></div><div class="bg-date-swap"></div></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d27-3a471e50" class="live-item-content"><h3 class="live-item-title fsize-xxsmall">ACOUSTIC WORSHIP NIGHT</h3><div class="live-details"><div class="localization">ADDIS ABABA, ETHIOPIA</div><div class="separator">●</div><div class="time">5:30 PM</div></div></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d31-3a471e50" class="live-line-white"></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d32-3a471e50" class="live-line-grey"></div></a></div><div data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d1e" style="opacity:0" role="listitem" class="home-live-item w-dyn-item"><a href="https://www.youtube.com/@heman_sound" target="_blank" class="live-link w-inline-block"><div class="live-date"><div class="date-content w-clearfix"><div class="date">DEC 10</div><div class="date">2026</div></div><div class="bg-date-swap"></div></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d27-3a471e50" class="live-item-content"><h3 class="live-item-title fsize-xxsmall">ANNUAL MINISTRY SHOWCASE</h3><div class="live-details"><div class="localization">ADDIS ABABA, ETHIOPIA</div><div class="separator">●</div><div class="time">4:00 PM</div></div></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d31-3a471e50" class="live-line-white"></div><div id="w-node-efc74ace-e8e1-e03e-2795-7049d9ad5d32-3a471e50" class="live-line-grey"></div></a></div></div></aside><div data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d36" style="width:0px" class="line-separator"></div><div class="bottom-button-wrapper center"><a href="https://www.youtube.com/@heman_sound" target="_blank" data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d38" style="opacity:0" class="button light center w-button">VIEW ALL EVENTS</a><div data-w-id="efc74ace-e8e1-e03e-2795-7049d9ad5d3a" style="width:0px" class="line-separator"></div></div></div></section>
 
 <!-- STORE SECTION -->
-<div class="sticky-store-title"><div class="store-title"><div data-w-id="a6cd0424-4ff7-4d56-f509-418209aac365" class="label-page-title store-label">VINYL - CASSETTE - MERCHANDISE &amp; MORE</div><div class="store-feature-label">FEATURED</div><h2 data-w-id="a6cd0424-4ff7-4d56-f509-418209aac369" class="huge-store-title">STORE</h2></div></div><section class="store"><div class="w-dyn-list"><div role="list" class="home-big-feature-list w-dyn-items"><div role="listitem" class="home-big-item w-dyn-item"><div data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b4" class="product-content"><a href="/store" class="store-title-link w-inline-block"><h2 data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b6" style="opacity:0" class="product-item-title">HEMAN SOUND LIVE VOL. 1 VINYL</h2></a><div data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b7" style="opacity:0" class="product-item-details">LIMITED EDITION LIVE SESSION RELEASE</div><a data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b8" style="opacity:0" href="#" class="price-wrap w-inline-block"><div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-item-price">$ 1000.00 ETB</div><div class="product-item-buy">PRE-ORDER</div></a><a href="/store" class="prodcut-img-wrap w-inline-block"><img style="opacity:0" data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3bd" alt="" loading="eager" src="images/666af325d6bbc0acccd5a1dc_1-opening.webp" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" class="product-item-thumb"/></a></div></div></div></div><div class="w-dyn-list"><div role="list" class="product-collection-grid-list w-dyn-items"><div role="listitem" class="product-small-item w-dyn-item"><div class="product-item small-item"><div data-w-id="46558cee-680d-6420-644f-41643a244887" class="product-content"><a href="/store" class="store-title-link w-inline-block"><h3 data-w-id="46558cee-680d-6420-644f-41643a244889" style="opacity:0" class="product-item-title">HEMAN SOUND APPAREL</h3></a><div data-w-id="46558cee-680d-6420-644f-41643a24488a" style="opacity:0" class="product-item-details">COTTON UNISEX MINISTRY T-SHIRT</div><a data-w-id="46558cee-680d-6420-644f-41643a24488b" style="opacity:0" href="#" class="price-wrap w-inline-block"><div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-item-price">$ 900.00 ETB</div><div class="product-item-buy">ORDER</div></a><a href="/store" class="prodcut-img-wrap w-inline-block"><img style="opacity:0" data-w-id="46558cee-680d-6420-644f-41643a244890" alt="" loading="eager" src="images/6669b9d870180bd7a59c934d_sonic-2520drive-2520t-shirt.jpg" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" class="product-item-thumb"/></a></div></div></div><div role="listitem" class="product-small-item w-dyn-item"><div class="product-item small-item"><div data-w-id="46558cee-680d-6420-644f-41643a244887" class="product-content"><a href="/store" class="store-title-link w-inline-block"><h3 data-w-id="46558cee-680d-6420-644f-41643a244889" style="opacity:0" class="product-item-title">ACOUSTIC LIVE CASSETTE</h3></a><div data-w-id="46558cee-680d-6420-644f-41643a24488a" style="opacity:0" class="product-item-details">REAL ANALOG STUDIO RECORDING</div><a data-w-id="46558cee-680d-6420-644f-41643a24488b" style="opacity:0" href="#" class="price-wrap w-inline-block"><div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-item-price">$ 800.00 ETB</div><div class="product-item-buy">ORDER</div></a><a href="/store" class="prodcut-img-wrap w-inline-block"><img style="opacity:0" data-w-id="46558cee-680d-6420-644f-41643a244890" alt="" loading="eager" src="images/667d621716b36e595267ed87_03-abstract-bluek7.jpg" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" class="product-item-thumb"/></a></div></div></div></div></div></section>
+<div class="sticky-store-title"><div class="store-title"><div data-w-id="a6cd0424-4ff7-4d56-f509-418209aac365" class="label-page-title store-label">VINYL - CASSETTE - MERCHANDISE &amp; MORE</div><div class="store-feature-label">FEATURED</div><h2 data-w-id="a6cd0424-4ff7-4d56-f509-418209aac369" class="huge-store-title">STORE</h2></div></div><section class="store"><div class="w-dyn-list"><div role="list" class="home-big-feature-list w-dyn-items"><div role="listitem" class="home-big-item w-dyn-item"><div data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b4" class="product-content"><a href="music-scroll/music.html" class="store-title-link w-inline-block"><h2 data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b6" style="opacity:0" class="product-item-title">HEMAN SOUND LIVE VOL. 1 VINYL</h2></a><div data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b7" style="opacity:0" class="product-item-details">LIMITED EDITION LIVE SESSION RELEASE</div><a data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3b8" style="opacity:0" href="#" class="price-wrap w-inline-block"><div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-item-price">$ 1000.00 ETB</div><div class="product-item-buy">PRE-ORDER</div></a><a href="music-scroll/music.html" class="prodcut-img-wrap w-inline-block"><img style="opacity:0" data-w-id="de04026e-6fc7-20d2-3555-d53d35d1b3bd" alt="" loading="eager" src="images/666af325d6bbc0acccd5a1dc_1-opening.webp" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" class="product-item-thumb"/></a></div></div></div></div><div class="w-dyn-list"><div role="list" class="product-collection-grid-list w-dyn-items"><div role="listitem" class="product-small-item w-dyn-item"><div class="product-item small-item"><div data-w-id="46558cee-680d-6420-644f-41643a244887" class="product-content"><a href="music-scroll/music.html" class="store-title-link w-inline-block"><h3 data-w-id="46558cee-680d-6420-644f-41643a244889" style="opacity:0" class="product-item-title">HEMAN SOUND APPAREL</h3></a><div data-w-id="46558cee-680d-6420-644f-41643a24488a" style="opacity:0" class="product-item-details">COTTON UNISEX MINISTRY T-SHIRT</div><a data-w-id="46558cee-680d-6420-644f-41643a24488b" style="opacity:0" href="#" class="price-wrap w-inline-block"><div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-item-price">$ 900.00 ETB</div><div class="product-item-buy">ORDER</div></a><a href="music-scroll/music.html" class="prodcut-img-wrap w-inline-block"><img style="opacity:0" data-w-id="46558cee-680d-6420-644f-41643a244890" alt="" loading="eager" src="images/6669b9d870180bd7a59c934d_sonic-2520drive-2520t-shirt.jpg" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" class="product-item-thumb"/></a></div></div></div><div role="listitem" class="product-small-item w-dyn-item"><div class="product-item small-item"><div data-w-id="46558cee-680d-6420-644f-41643a244887" class="product-content"><a href="music-scroll/music.html" class="store-title-link w-inline-block"><h3 data-w-id="46558cee-680d-6420-644f-41643a244889" style="opacity:0" class="product-item-title">ACOUSTIC LIVE CASSETTE</h3></a><div data-w-id="46558cee-680d-6420-644f-41643a24488a" style="opacity:0" class="product-item-details">REAL ANALOG STUDIO RECORDING</div><a data-w-id="46558cee-680d-6420-644f-41643a24488b" style="opacity:0" href="#" class="price-wrap w-inline-block"><div data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_price_%22%2C%22to%22%3A%22innerHTML%22%7D%5D" class="product-item-price">$ 800.00 ETB</div><div class="product-item-buy">ORDER</div></a><a href="music-scroll/music.html" class="prodcut-img-wrap w-inline-block"><img style="opacity:0" data-w-id="46558cee-680d-6420-644f-41643a244890" alt="" loading="eager" src="images/667d621716b36e595267ed87_03-abstract-bluek7.jpg" data-wf-sku-bindings="%5B%7B%22from%22%3A%22f_main_image_4dr%22%2C%22to%22%3A%22src%22%7D%5D" class="product-item-thumb"/></a></div></div></div></div></div></section>
 
 <!-- NEWS SECTION -->
 <section class="news"><div class="w-layout-blockcontainer container w-container"><h2 data-w-id="0c98f2fa-0d0f-c795-4930-1dca54d9f59b" style="opacity:0" class="fweight-extrabold">NEWS &amp; UPDATES</h2><div class="home-news"><div class="w-dyn-list"><div role="list" class="row-collection w-dyn-items"><div role="listitem" class="w-dyn-item"><a data-w-id="34b374bb-316e-71f2-2998-0888461dd277" href="https://www.youtube.com/@heman_sound" target="_blank" class="collection-link w-inline-block"><div data-w-id="34b374bb-316e-71f2-2998-0888461dd277" class="trigger-hover"></div><div id="w-node-_34b374bb-316e-71f2-2998-0888461dd279-3a471e50" data-w-id="34b374bb-316e-71f2-2998-0888461dd279" class="image-wrapper"><img loading="eager" src="images/666efbf3d12ff507b70e21a4_european-tour.jpeg" alt="" class="wrapped-image landscape"/><div style="display:block;width:100%;height:100%" class="cover-wipe"></div></div><div id="w-node-_34b374bb-316e-71f2-2998-0888461dd27c-3a471e50" data-w-id="34b374bb-316e-71f2-2998-0888461dd27c" class="news-tag feature">LIVE</div><div id="w-node-_34b374bb-316e-71f2-2998-0888461dd27d-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="collection-item-title"><h3 class="fsize-medium">HEMAN SOUND ANNOUNCES NEW LIVE RECORDING SESSIONS IN ADDIS ABABA</h3></div><div id="w-node-_34b374bb-316e-71f2-2998-0888461dd27f-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="desc"><div class="short-desc">THE COLLECTIVE HAS UNVEILED PLANS FOR AN UPCOMING SERIES OF MULTITRACK LIVE WORSHIP SESSIONS RECORDED DIRECTLY IN THE STUDIO.</div></div></a></div></div></div><div class="w-dyn-list"><div role="list" class="row-collection w-dyn-items"><div role="listitem" class="w-dyn-item"><a data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f1" href="https://www.youtube.com/@heman_sound" target="_blank" class="collection-link w-inline-block"><div data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f2" class="trigger-hover"></div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f6-3a471e50" data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f6" class="news-tag feature">INSPIRATION</div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f7-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="collection-item-title"><h3 class="fsize-xxsmall">THE HEART BEHIND OUR WORSHIP ARRANGEMENTS</h3></div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f9-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="desc"><div class="short-desc">EXPLORING THE BLEND OF TRADITIONAL ETHIOPIAN WORSHIP MELODIES AND MODERN ANALOG SOUND PRODUCTION.</div></div></a></div><div role="listitem" class="w-dyn-item"><a data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f1" href="https://www.youtube.com/@heman_sound" target="_blank" class="collection-link w-inline-block"><div data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f2" class="trigger-hover"></div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f6-3a471e50" data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f6" class="news-tag feature">STUDIO</div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f7-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="collection-item-title"><h3 class="fsize-xxsmall">PROFESSIONAL STUDIO RECORDING GEAR &amp; TECHNIQUES</h3></div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f9-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="desc"><div class="short-desc">ACHIEVING EXCEPTIONAL CLARITY AND DYNAMIC BALANCE IN LIVE MULTI-TRACK AUDIO ENGINEERING.</div></div></a></div><div role="listitem" class="w-dyn-item"><a data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f1" href="https://www.youtube.com/@heman_sound" target="_blank" class="collection-link w-inline-block"><div data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f2" class="trigger-hover"></div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f6-3a471e50" data-w-id="f188bf82-3a6b-a75a-0c88-e96494c894f6" class="news-tag feature">LIVE</div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f7-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="collection-item-title"><h3 class="fsize-xxsmall">LIVE WORSHIP NIGHT HIGHLIGHTS IN ADDIS ABABA</h3></div><div id="w-node-f188bf82-3a6b-a75a-0c88-e96494c894f9-3a471e50" style="-webkit-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 110%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="desc"><div class="short-desc">RELIVING THE POWERFUL MOMENTS OF FELLOWSHIP AND MUSICAL WORSHIP FROM OUR RECENT CONCERT.</div></div></a></div></div></div></div><div class="bottom-button-wrapper center"><a href="https://www.youtube.com/@heman_sound" target="_blank" data-w-id="0c98f2fa-0d0f-c795-4930-1dca54d9f59f" style="opacity:0" class="button center w-button">VIEW ALL NEWS</a><div data-w-id="0c98f2fa-0d0f-c795-4930-1dca54d9f5a1" style="width:0px" class="line-separator"></div></div></div></section>
@@ -614,7 +701,7 @@
 <!-- NEWSLETTER SECTION -->
 <section class="newsletter"><div class="newsletter-content"><h6 class="heading-newsletter">NEWSLETTER</h6><div class="paragraph-newsletter">STAY TUNED FOR EXCLUSIVE UPDATES, NEW MUSIC RELEASES, AND UPCOMING LIVE WORSHIP EVENTS IN ADDIS ABABA.</div><div class="newsletter-form-wrap"><div class="form-block w-form"><form id="wf-form-Newsletter-Form" name="wf-form-Newsletter-Form" data-name="Newsletter Form" method="get" class="form-newsletter" data-wf-page-id="6683c21d2e6117c63a471e50" data-wf-element-id="9579af7f-7305-8166-b903-8ac9a2eadcc7"><input class="newsletter-textfield w-input" maxlength="256" name="email-2" data-name="Email 2" placeholder="YOUR EMAIL ADDRESS" type="email" id="email-2" required=""/><input type="submit" data-wait="PLEASE WAIT..." class="newsletter-btn w-button" value="JOIN"/></form><div class="success-message w-form-done"><div>💙 THANK YOU! YOU ARE SUBSCRIBED TO HEMAN SOUND UPDATES!</div></div><div class="success-message error w-form-fail"><div>OOPS! SOMETHING WENT WRONG WHILE SUBMITTING THE FORM.</div></div></div></div></div></section>
 
-<!-- REFINED PROFESSIONAL FOOTER WITH YELLOW HOVER INTERACTIONS -->
+<!-- REFINED PROFESSIONAL FOOTER (UPDATED JESUS SAVES LINK) -->
 <footer class="heman-footer">
   <div class="footer-top-row">
     <div class="footer-col-brand">
@@ -624,27 +711,27 @@
     <div class="footer-col-links">
       <h5>PAGES</h5>
       <ul>
-        <li><a href="/">HOME</a></li>
-        <li><a href="/music/music-5">MUSIC</a></li>
-        <li><a href="/music/music-5">NEWS</a></li>
-        <li><a href="/contact/contact-2">CONTACT</a></li>
-        <li><a href="/store">STORE</a></li>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="music-scroll/music.html">MUSIC</a></li>
+        <li><a href="music-scroll/music.html">NEWS</a></li>
+        <li><a href="contact/contact.html">CONTACT</a></li>
+        <li><a href="music-scroll/music.html">STORE</a></li>
       </ul>
     </div>
     <div class="footer-col-links">
       <h5>MINISTRY</h5>
       <ul>
         <li><a href="https://www.youtube.com/@heman_sound" target="_blank">YOUTUBE CHANNEL</a></li>
-        <li><a href="/sessions/sessions-1">LIVE EVENTS</a></li>
-        <li><a href="/contact/contact-2">BOOKINGS</a></li>
+        <li><a href="studio-sessions/studio.html">LIVE EVENTS</a></li>
+        <li><a href="contact/contact.html">BOOKINGS</a></li>
       </ul>
     </div>
     <div class="footer-col-links">
       <h5>OTHERS</h5>
       <ul>
-        <li><a href="/about/about-1">JESUS SAVES</a></li>
-        <li><a href="/about/about-1">STYLE GUIDE</a></li>
-        <li><a href="/contact/contact-2">LICENSING</a></li>
+        <li><a href="jesus/jesus.html">JESUS SAVES</a></li>
+        <li><a href="about us/about.html">STYLE GUIDE</a></li>
+        <li><a href="contact/contact.html">LICENSING</a></li>
       </ul>
     </div>
   </div>
@@ -660,9 +747,29 @@
   </div>
 </footer>
 
-<!-- INTERACTIVE HOVER PREVIEW JAVASCRIPT -->
+<!-- INTERACTIVE HOVER PREVIEW & ANIMATED MOBILE NAVBAR JAVASCRIPT -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Mobile Menu Toggle & Animation Logic
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const mobileDropdown = document.getElementById('mobileDropdown');
+  
+  if (mobileBtn && mobileDropdown) {
+    mobileBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileBtn.classList.toggle('active');
+      mobileDropdown.classList.toggle('open');
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!mobileDropdown.contains(e.target) && !mobileBtn.contains(e.target)) {
+        mobileDropdown.classList.remove('open');
+        mobileBtn.classList.remove('active');
+      }
+    });
+  }
+
+  // Hover Preview Video Logic
   const previewContainer = document.getElementById('hover-preview-container');
   const previewVideo = document.getElementById('hover-preview-video');
   const trackItems = document.querySelectorAll('.track-row-item');
@@ -672,7 +779,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let targetX = 0;
   let targetY = 0;
 
-  // Smooth mouse trailing logic
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
