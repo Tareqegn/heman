@@ -228,7 +228,7 @@ html, body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* BLACK-AND-WHITE STRIP PORTRAIT ALWAYS SHOWN BY DEFAULT */
+/* BLACK-AND-WHITE STRIP PORTRAIT ALWAYS SHOWN FIRST */
 .heman-video-grid .strip-photo {
   position: absolute !important;
   top: 0 !important;
@@ -248,11 +248,11 @@ html, body {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
-  z-index: 4 !important;
-  transition: opacity 0.2s ease, filter 0.3s ease !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
 }
 
-/* VIDEO SITS ABOVE PHOTO WHEN REVEALED ON CLICK OR HOVER */
+/* VIDEO LAYER REVEALED WHEN CLICKED OR HOVERED */
 .heman-video-grid .strip-box video.dynamic-preview-video {
   position: absolute !important;
   top: 0 !important;
@@ -263,21 +263,16 @@ html, body {
   height: 100% !important;
   object-fit: cover !important;
   object-position: center 15% !important;
-  z-index: 5 !important;
-  opacity: 0;
-  pointer-events: none !important;
-  transition: opacity 0.2s ease !important;
-}
-
-.heman-video-grid .video-card-small.video-active .strip-box video.dynamic-preview-video,
-.heman-video-grid .video-card-small.video-playing .strip-box video.dynamic-preview-video {
+  z-index: 10 !important;
+  display: block !important;
   opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
 }
 
+/* Hide photo cleanly once video is playing so it never flashes back on top */
 .heman-video-grid .video-card-small.video-playing .strip-photo {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  z-index: 2 !important;
+  display: none !important;
 }
 
 .heman-video-grid .video-card-small.middle {
@@ -331,13 +326,6 @@ html, body {
   }
   .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom) {
     transform: translateY(-4px) scale(1.03);
-  }
-  .heman-video-grid .video-card-small:hover .strip-box video.dynamic-preview-video {
-    opacity: 1 !important;
-  }
-  .heman-video-grid .video-card-small:hover .strip-photo {
-    opacity: 0 !important;
-    visibility: hidden !important;
   }
 }
 
@@ -480,13 +468,6 @@ html, body {
     box-shadow: 0 18px 38px rgba(0,0,0,0.24);
     z-index: 5;
   }
-  .profile-media-container:hover video.dynamic-preview-video {
-    opacity: 1 !important;
-  }
-  .profile-media-container:hover img {
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
 }
 
 .profile-media-container video.dynamic-preview-video {
@@ -496,15 +477,11 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-  z-index: 5;
-  opacity: 0;
+  z-index: 10;
+  display: block;
+  opacity: 1;
+  visibility: visible;
   pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.profile-media-container.video-active video.dynamic-preview-video,
-.profile-media-container.video-playing video.dynamic-preview-video {
-  opacity: 1 !important;
 }
 
 .profile-media-container img {
@@ -514,17 +491,15 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-  z-index: 4;
+  z-index: 5;
   opacity: 1 !important;
   visibility: visible !important;
-  display: block !important;
-  transition: opacity 0.2s ease, transform 0.3s ease;
+  display: block;
+  pointer-events: none;
 }
 
 .profile-media-container.video-playing img {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  z-index: 2 !important;
+  display: none !important;
 }
 
 /* NORMALIZED PARAGRAPH STYLE FOR MEMBER DESCRIPTIONS */
@@ -1147,7 +1122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const existingVideo = container.querySelector('video.dynamic-preview-video');
     if (existingVideo) {
       existingVideo.onplaying = null;
-      existingVideo.oncanplay = null;
       existingVideo.pause();
       existingVideo.removeAttribute('src');
       while (existingVideo.firstChild) {
@@ -1182,30 +1156,28 @@ document.addEventListener('DOMContentLoaded', function() {
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
-      video.preload = 'auto';
+      video.preload = 'metadata';
       video.setAttribute('playsinline', '');
       video.setAttribute('muted', '');
 
-      if (webmSrc) {
-        const sWebm = document.createElement('source');
-        sWebm.src = webmSrc;
-        sWebm.type = 'video/webm';
-        video.appendChild(sWebm);
-      }
       if (mp4Src) {
         const sMp4 = document.createElement('source');
         sMp4.src = mp4Src;
         sMp4.type = 'video/mp4';
         video.appendChild(sMp4);
       }
+      if (webmSrc) {
+        const sWebm = document.createElement('source');
+        sWebm.src = webmSrc;
+        sWebm.type = 'video/webm';
+        video.appendChild(sWebm);
+      }
 
-      const revealVideo = () => {
+      video.addEventListener('playing', function() {
         if (activeTarget === target) {
           target.classList.add('video-playing');
         }
-      };
-      video.addEventListener('playing', revealVideo, { once: true });
-      video.addEventListener('canplay', revealVideo, { once: true });
+      });
 
       container.appendChild(video);
       video.load();
