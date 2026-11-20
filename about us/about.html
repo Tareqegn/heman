@@ -228,7 +228,7 @@ html, body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* UNFILTERED PORTRAIT IMAGE SO MOBILE COMPOSITOR ALWAYS PAINTS IT */
+/* UNFILTERED PORTRAIT IMAGE SO MOBILE COMPOSITOR ALWAYS PAINTS IT FIRST */
 .heman-video-grid .strip-photo {
   position: absolute !important;
   top: 0 !important;
@@ -238,7 +238,7 @@ html, body {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: center 15% !important;
+  object-position: center top !important;
   filter: none !important;
   -webkit-filter: none !important;
   opacity: 1 !important;
@@ -406,10 +406,13 @@ html, body {
   .heman-video-grid {
     margin-top: 20px;
     margin-bottom: 64px;
-    max-width: 680px;
+    max-width: 760px;
   }
   .heman-video-grid .strip-box {
-    height: 165px !important;
+    height: 190px !important;
+  }
+  .heman-video-grid .strip-photo {
+    object-position: center 8% !important;
   }
   .heman-video-grid .video-card-small.middle {
     transform: translateY(10px);
