@@ -224,22 +224,18 @@ html, body {
   position: relative !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background-color: #2b2b2b !important;
+  background-color: #262626 !important;
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* BLACK-AND-WHITE STRIP PORTRAIT LAYER */
-.heman-video-grid .strip-bg {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
+/* BLACK-AND-WHITE STRIP PHOTO ALWAYS RENDERED IN NORMAL FLOW */
+.heman-video-grid .strip-photo {
+  position: relative !important;
   width: 100% !important;
   height: 100% !important;
-  background-size: cover !important;
-  background-position: center 15% !important;
-  background-repeat: no-repeat !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center 15% !important;
   filter: grayscale(100%) !important;
   -webkit-filter: grayscale(100%) !important;
   opacity: 1 !important;
@@ -249,9 +245,8 @@ html, body {
   transition: opacity 0.25s ease, filter 0.3s ease !important;
 }
 
-.heman-video-grid .video-card-small.video-playing .strip-bg {
+.heman-video-grid .video-card-small.video-playing .strip-photo {
   opacity: 0 !important;
-  visibility: hidden !important;
 }
 
 .heman-video-grid .strip-box video.dynamic-preview-video {
@@ -320,9 +315,8 @@ html, body {
   .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom) {
     transform: translateY(-4px) scale(1.03);
   }
-  .heman-video-grid .video-card-small:hover .strip-bg {
+  .heman-video-grid .video-card-small:hover .strip-photo {
     opacity: 0 !important;
-    visibility: hidden !important;
   }
 }
 
@@ -467,7 +461,6 @@ html, body {
   }
   .profile-media-container:hover img {
     opacity: 0 !important;
-    visibility: hidden !important;
   }
 }
 
@@ -483,8 +476,7 @@ html, body {
 }
 
 .profile-media-container img {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -492,12 +484,12 @@ html, body {
   z-index: 4;
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
   transition: opacity 0.25s ease, transform 0.3s ease;
 }
 
 .profile-media-container.video-playing img {
   opacity: 0 !important;
-  visibility: hidden !important;
 }
 
 /* NORMALIZED PARAGRAPH STYLE FOR MEMBER DESCRIPTIONS */
@@ -852,35 +844,35 @@ html, body {
   <!-- Strip 1: Alazar -->
   <a href="#member-alazar" class="video-card-small w-inline-block" data-target-id="member-alazar" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="strip-box">
-      <span class="strip-bg" style="background-image: url('images/Alazar.jpg');"></span>
+      <img src="images/Alazar.jpg" loading="eager" alt="Alazar Yibeltal" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 2: Milky -->
   <a href="#member-milky" class="video-card-small middle w-inline-block" data-target-id="member-milky" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
     <div class="strip-box">
-      <span class="strip-bg" style="background-image: url('images/Milky.jpg');"></span>
+      <img src="images/Milky.jpg" loading="eager" alt="Milky Asefa" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 3: Kaleb -->
   <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-target-id="member-kaleb" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
     <div class="strip-box">
-      <span class="strip-bg" style="background-image: url('images/Kaleb.jpg');"></span>
+      <img src="images/Kaleb.jpg" loading="eager" alt="Kaleb Birhanu" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 4: Elto -->
   <a href="#member-elto" class="video-card-small middle w-inline-block" data-target-id="member-elto" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
     <div class="strip-box">
-      <span class="strip-bg" style="background-image: url('images/Elto.jpg');"></span>
+      <img src="images/Elto.jpg" loading="eager" alt="Elto Kassahun" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 5: Redi -->
   <a href="#member-rediet" class="video-card-small w-inline-block" data-target-id="member-rediet" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
     <div class="strip-box">
-      <span class="strip-bg" data-strip-rediet="1" style="background-image: url('images/Redi.jpg'), url('images/redi.jpg'), url('images/Rediet.jpg');"></span>
+      <img src="images/Redi.jpg" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='images/redi.jpg';}else{this.onerror=null;this.src='images/Rediet.jpg';}" loading="eager" alt="Rediet Alesa" class="strip-photo"/>
     </div>
   </a>
 
@@ -1102,6 +1094,18 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // Force mobile/desktop image paint & ensure grayscale filter stays active on strip photos
+  const stripPhotos = Array.from(document.querySelectorAll('.heman-video-grid .strip-photo'));
+  stripPhotos.forEach((img) => {
+    img.style.setProperty('filter', 'grayscale(100%)', 'important');
+    img.style.setProperty('-webkit-filter', 'grayscale(100%)', 'important');
+    img.style.setProperty('opacity', '1', 'important');
+    img.style.setProperty('visibility', 'visible', 'important');
+    if (img.complete && img.decode) {
+      img.decode().catch(() => {});
+    }
+  });
 
   const isHoverDevice = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const videoGrid = document.getElementById('ensembleVideoGrid');
