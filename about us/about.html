@@ -211,10 +211,9 @@ html, body {
   flex: 0 0 82px !important;
   min-width: 0 !important;
   height: auto !important;
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), flex 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 0.38s cubic-bezier(0.22, 1, 0.36, 1), flex 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   text-decoration: none;
-  -webkit-touch-callout: none;
   user-select: none;
 }
 
@@ -225,15 +224,14 @@ html, body {
   position: relative !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background: #0b0f17 !important;
+  background: #1a1a1a !important;
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* BLACK-AND-WHITE STRIP PHOTOS BY DEFAULT */
+/* BLACK-AND-WHITE STRIP PHOTOS ALWAYS VISIBLE BY DEFAULT */
 .heman-video-grid .strip-photo {
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   max-width: none !important;
@@ -244,11 +242,10 @@ html, body {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
-  z-index: 5 !important;
-  transition: opacity 0.2s ease, filter 0.3s ease !important;
+  z-index: 4 !important;
+  transition: opacity 0.25s ease, filter 0.3s ease !important;
 }
 
-/* Hide photo ONLY once the video has started playing frames */
 .heman-video-grid .video-card-small.video-playing .strip-photo {
   opacity: 0 !important;
   visibility: hidden !important;
@@ -256,8 +253,7 @@ html, body {
 
 .heman-video-grid .strip-box video.dynamic-preview-video {
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -274,42 +270,57 @@ html, body {
   transform: translateY(50px);
 }
 
-/* EXPAND ACTIVE FRAME ON HOVER (PC) OR TOUCH/GESTURE (.video-active) */
-.heman-video-grid .video-card-small:hover,
+/* EXPAND ACTIVE CARD ON CLICK (.video-active) */
 .heman-video-grid .video-card-small.video-active {
   width: 230px !important;
   flex: 0 0 230px !important;
   z-index: 10;
 }
 
-.heman-video-grid:hover .video-card-small:not(:hover),
 .heman-video-grid.has-active-video .video-card-small:not(.video-active) {
   width: 66px !important;
   flex: 0 0 66px !important;
 }
 
-.heman-video-grid .video-card-small:hover.middle,
 .heman-video-grid .video-card-small.video-active.middle {
   transform: translateY(18px) scale(1.03);
 }
 
-.heman-video-grid .video-card-small:hover.bottom,
 .heman-video-grid .video-card-small.video-active.bottom {
   transform: translateY(42px) scale(1.03);
 }
 
-.heman-video-grid .video-card-small:hover:not(.middle):not(.bottom),
 .heman-video-grid .video-card-small.video-active:not(.middle):not(.bottom) {
   transform: translateY(-4px) scale(1.03);
 }
 
-.heman-video-grid .video-card-small:hover .strip-photo,
-.heman-video-grid .video-card-small.video-active .strip-photo {
-  filter: grayscale(0%) !important;
-  -webkit-filter: grayscale(0%) !important;
+/* PC HOVER BEHAVIOR (MOUSE / FINE POINTER ONLY) */
+@media (hover: hover) and (pointer: fine) {
+  .heman-video-grid .video-card-small:hover {
+    width: 230px !important;
+    flex: 0 0 230px !important;
+    z-index: 10;
+  }
+  .heman-video-grid:hover .video-card-small:not(:hover) {
+    width: 66px !important;
+    flex: 0 0 66px !important;
+  }
+  .heman-video-grid .video-card-small:hover.middle {
+    transform: translateY(18px) scale(1.03);
+  }
+  .heman-video-grid .video-card-small:hover.bottom {
+    transform: translateY(42px) scale(1.03);
+  }
+  .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom) {
+    transform: translateY(-4px) scale(1.03);
+  }
+  .heman-video-grid .video-card-small:hover .strip-photo {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }
 
-/* KEEP ALL 5 STRIPS IN ONE SINGLE ROW ON MOBILE & TABLET + EXPAND ACTIVE CARD */
+/* KEEP ALL 5 STRIPS IN ONE SINGLE ROW ON MOBILE & TABLET */
 @media screen and (max-width: 991px) {
   .heman-video-grid {
     flex-wrap: nowrap !important;
@@ -324,13 +335,11 @@ html, body {
   .heman-video-grid .strip-box {
     height: 240px !important;
   }
-  .heman-video-grid .video-card-small:hover,
   .heman-video-grid .video-card-small.video-active {
     flex: 2.7 1 0 !important;
     width: auto !important;
     z-index: 10;
   }
-  .heman-video-grid:hover .video-card-small:not(:hover),
   .heman-video-grid.has-active-video .video-card-small:not(.video-active) {
     flex: 0.72 1 0 !important;
     width: auto !important;
@@ -352,11 +361,9 @@ html, body {
   .heman-video-grid .video-card-small.bottom {
     transform: translateY(28px);
   }
-  .heman-video-grid .video-card-small:hover.middle,
   .heman-video-grid .video-card-small.video-active.middle {
     transform: translateY(10px) scale(1.02);
   }
-  .heman-video-grid .video-card-small:hover.bottom,
   .heman-video-grid .video-card-small.video-active.bottom {
     transform: translateY(24px) scale(1.02);
   }
@@ -433,19 +440,29 @@ html, body {
   height: 480px;
   border-radius: 8px;
   overflow: hidden;
-  background: #0b0f17;
+  background: #1a1a1a;
   box-shadow: 0 10px 25px rgba(0,0,0,0.16);
   cursor: pointer;
-  -webkit-touch-callout: none;
   user-select: none;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
 
-.profile-media-container:hover,
 .profile-media-container.video-active {
   transform: scale(1.03);
   box-shadow: 0 18px 38px rgba(0,0,0,0.24);
   z-index: 5;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .profile-media-container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.24);
+    z-index: 5;
+  }
+  .profile-media-container:hover img {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }
 
 .profile-media-container video.dynamic-preview-video {
@@ -466,10 +483,10 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-  z-index: 5;
+  z-index: 4;
   opacity: 1 !important;
   visibility: visible !important;
-  transition: opacity 0.2s ease, transform 0.3s ease;
+  transition: opacity 0.25s ease, transform 0.3s ease;
 }
 
 .profile-media-container.video-playing img {
@@ -827,35 +844,35 @@ html, body {
 <div class="heman-video-grid" id="ensembleVideoGrid">
   
   <!-- Strip 1: Alazar -->
-  <a href="#member-alazar" class="video-card-small w-inline-block" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
+  <a href="#member-alazar" class="video-card-small w-inline-block" data-target-id="member-alazar" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="strip-box">
       <img src="images/Alazar.jpg" loading="eager" alt="Alazar Yibeltal" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 2: Milky -->
-  <a href="#member-milky" class="video-card-small middle w-inline-block" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
+  <a href="#member-milky" class="video-card-small middle w-inline-block" data-target-id="member-milky" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
     <div class="strip-box">
       <img src="images/Milky.jpg" loading="eager" alt="Milky Asefa" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 3: Kaleb -->
-  <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
+  <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-target-id="member-kaleb" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
     <div class="strip-box">
       <img src="images/Kaleb.jpg" loading="eager" alt="Kaleb Birhanu" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 4: Elto -->
-  <a href="#member-elto" class="video-card-small middle w-inline-block" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
+  <a href="#member-elto" class="video-card-small middle w-inline-block" data-target-id="member-elto" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
     <div class="strip-box">
       <img src="images/Elto.jpg" loading="eager" alt="Elto Kassahun" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 5: Redi -->
-  <a href="#member-rediet" class="video-card-small w-inline-block" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
+  <a href="#member-rediet" class="video-card-small w-inline-block" data-target-id="member-rediet" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
     <div class="strip-box">
       <img src="images/Redi.jpg" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='images/redi.jpg';}else{this.onerror=null;this.src='images/Rediet.jpg';}" loading="eager" alt="Rediet Alesa" class="strip-photo"/>
     </div>
@@ -1059,7 +1076,7 @@ html, body {
 
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script>
 
-<!-- INSTANT TOUCH-GESTURE VIDEO START (ZERO IDLE DECODING DURING SCROLL) -->
+<!-- CLEAN CLICK (MOBILE) & HOVER + SCROLL-TO-BIO (PC) VIDEO PREVIEWS -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const mobileBtn = document.getElementById('mobileMenuBtn');
@@ -1080,14 +1097,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  const isHoverDevice = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const videoGrid = document.getElementById('ensembleVideoGrid');
   const previewTargets = Array.from(document.querySelectorAll('.video-card-small, .video-preview-target'));
 
   let activeTarget = null;
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let isScrollingGesture = false;
-  let gestureTriggered = false;
 
   function getMediaContainer(target) {
     return target.querySelector('.strip-box') || target;
@@ -1152,21 +1166,21 @@ document.addEventListener('DOMContentLoaded', function() {
         video.appendChild(sMp4);
       }
 
-      const markPlaying = () => {
+      const revealVideo = () => {
         if (activeTarget === target) {
           target.classList.add('video-playing');
         }
       };
-      video.addEventListener('playing', markPlaying, { once: true });
-      video.addEventListener('loadeddata', markPlaying, { once: true });
+      video.addEventListener('playing', revealVideo, { once: true });
+      video.addEventListener('loadeddata', revealVideo, { once: true });
 
       container.insertBefore(video, container.firstChild);
       video.load();
     }
 
-    const p = video.play();
-    if (p && typeof p.catch === 'function') {
-      p.catch(() => {});
+    const playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {});
     }
   }
 
@@ -1187,95 +1201,46 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   previewTargets.forEach(target => {
-    const isBioCard = target.classList.contains('video-preview-target');
+    const isStripCard = target.classList.contains('video-card-small');
 
-    // PC mouse hover
-    target.addEventListener('pointerenter', function(e) {
-      if (e.pointerType === 'mouse') {
+    // PC hover: expand and play video
+    if (isHoverDevice) {
+      target.addEventListener('mouseenter', function() {
         startVideo(target);
-      }
-    });
+      });
 
-    target.addEventListener('pointerleave', function(e) {
-      if (e.pointerType === 'mouse') {
+      target.addEventListener('mouseleave', function() {
         stopVideo(target);
-      }
-    });
+      });
+    }
 
-    // Mobile touch gesture: starts expanding and loading video immediately on touchstart
-    target.addEventListener('touchstart', function(e) {
-      if (!e.touches || e.touches.length === 0) return;
-      isScrollingGesture = false;
-      gestureTriggered = true;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      startVideo(target);
-    }, { passive: true });
-
-    target.addEventListener('touchmove', function(e) {
-      if (!e.touches || e.touches.length === 0) return;
-      const moveX = Math.abs(e.touches[0].clientX - touchStartX);
-      const moveY = Math.abs(e.touches[0].clientY - touchStartY);
-      if (moveX > 10 || moveY > 10) {
-        isScrollingGesture = true;
-        if (activeTarget === target) {
-          stopVideo(target);
-        }
-      }
-    }, { passive: true });
-
-    target.addEventListener('touchend', function(e) {
-      if (isScrollingGesture) {
-        stopVideo(target);
-        gestureTriggered = false;
-        return;
-      }
-      if (!isBioCard && e.cancelable) {
-        // Prevent anchor jump on touch release so the expanded video stays open
-        e.preventDefault();
-      }
-      setTimeout(() => {
-        gestureTriggered = false;
-      }, 120);
-    });
-
-    target.addEventListener('touchcancel', function() {
-      stopVideo(target);
-      gestureTriggered = false;
-    });
-
-    target.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-
+    // Click behavior:
+    // - On PC for the 5 gallery strips: smoothly scroll to the member's description section
+    // - On mobile (or on member bio cards): toggle video preview on click only (no gestures)
     target.addEventListener('click', function(e) {
-      if (gestureTriggered) {
-        e.preventDefault();
-        e.stopPropagation();
+      if (isHoverDevice && isStripCard) {
+        const targetId = target.getAttribute('data-target-id');
+        const sectionEl = targetId ? document.getElementById(targetId) : null;
+        if (sectionEl) {
+          e.preventDefault();
+          sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         return;
       }
-      if (isBioCard) {
-        e.preventDefault();
-        e.stopPropagation();
-        if (activeTarget === target && target.classList.contains('video-active')) {
-          stopVideo(target);
-        } else {
-          startVideo(target);
-        }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (activeTarget === target && target.classList.contains('video-active')) {
+        stopVideo(target);
+      } else {
+        startVideo(target);
       }
     });
   });
 
-  // Touching/clicking outside stops & unmounts active video cleanly
-  document.addEventListener('touchstart', function(e) {
-    if (!activeTarget) return;
-    if (!activeTarget.contains(e.target)) {
-      resetAllVideos();
-    }
-  }, { passive: true });
-
+  // Clicking outside active card stops and unmounts its video
   document.addEventListener('click', function(e) {
-    if (gestureTriggered) return;
     if (activeTarget && !activeTarget.contains(e.target)) {
       resetAllVideos();
     }
