@@ -250,7 +250,7 @@ html, body {
   pointer-events: none !important;
 }
 
-/* BLACK-AND-WHITE OVERLAY OVER BOTH PHOTO AND VIDEO */
+/* BLACK-AND-WHITE OVERLAY OVER BOTH PHOTO AND VIDEO (DESKTOP) */
 .heman-video-grid .strip-bw-tint {
   position: absolute !important;
   top: 0 !important;
@@ -349,7 +349,7 @@ html, body {
   }
 }
 
-/* KEEP ALL 5 STRIPS IN ONE SINGLE ROW ON MOBILE & TABLET */
+/* KEEP ALL 5 STRIPS IN ONE SINGLE ROW ON MOBILE & TABLET + FIX BLACK BOX COMPOSITING */
 @media screen and (max-width: 991px) {
   .heman-video-grid {
     flex-wrap: nowrap !important;
@@ -363,6 +363,21 @@ html, body {
   }
   .heman-video-grid .strip-box {
     height: 240px !important;
+  }
+  /* Disable backdrop-filter overlay on mobile (prevents solid black boxes on Samsung A2 Core / Chrome) */
+  .heman-video-grid .strip-bw-tint {
+    display: none !important;
+  }
+  /* Apply B&W filter directly to the photo and video on mobile */
+  .heman-video-grid .strip-photo {
+    filter: grayscale(100%) !important;
+    -webkit-filter: grayscale(100%) !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  .heman-video-grid .strip-box video.dynamic-preview-video {
+    filter: grayscale(100%) !important;
+    -webkit-filter: grayscale(100%) !important;
   }
   .heman-video-grid .video-card-small.video-active {
     flex: 2.7 1 0 !important;
