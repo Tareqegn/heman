@@ -229,7 +229,7 @@ html, body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* BLACK-AND-WHITE STRIP PHOTOS BY DEFAULT; FULL COLOR WHEN ACTIVE */
+/* BLACK-AND-WHITE STRIP PHOTOS BY DEFAULT */
 .heman-video-grid .strip-photo {
   position: absolute !important;
   top: 0 !important;
@@ -244,8 +244,14 @@ html, body {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
-  z-index: 3 !important;
-  transition: opacity 0.22s ease, filter 0.3s ease !important;
+  z-index: 5 !important;
+  transition: opacity 0.2s ease, filter 0.3s ease !important;
+}
+
+/* Hide photo ONLY once the video has started playing frames */
+.heman-video-grid .video-card-small.video-playing .strip-photo {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .heman-video-grid .strip-box video.dynamic-preview-video {
@@ -256,7 +262,7 @@ html, body {
   height: 100% !important;
   object-fit: cover !important;
   object-position: center 15% !important;
-  z-index: 1 !important;
+  z-index: 2 !important;
   pointer-events: none !important;
 }
 
@@ -268,7 +274,7 @@ html, body {
   transform: translateY(50px);
 }
 
-/* EXPAND ACTIVE FRAME ON HOVER (PC) OR PRESS/TAP (.video-active) */
+/* EXPAND ACTIVE FRAME ON HOVER (PC) OR TOUCH/GESTURE (.video-active) */
 .heman-video-grid .video-card-small:hover,
 .heman-video-grid .video-card-small.video-active {
   width: 230px !important;
@@ -301,8 +307,6 @@ html, body {
 .heman-video-grid .video-card-small.video-active .strip-photo {
   filter: grayscale(0%) !important;
   -webkit-filter: grayscale(0%) !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
 }
 
 /* KEEP ALL 5 STRIPS IN ONE SINGLE ROW ON MOBILE & TABLET + EXPAND ACTIVE CARD */
@@ -451,7 +455,7 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -462,14 +466,13 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-  z-index: 3;
+  z-index: 5;
   opacity: 1 !important;
   visibility: visible !important;
-  transition: opacity 0.22s ease, transform 0.3s ease;
+  transition: opacity 0.2s ease, transform 0.3s ease;
 }
 
-.profile-media-container:hover img,
-.profile-media-container.video-active img {
+.profile-media-container.video-playing img {
   opacity: 0 !important;
   visibility: hidden !important;
 }
@@ -1056,7 +1059,7 @@ html, body {
 
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script>
 
-<!-- FAST-LOAD ON-DEMAND VIDEO PREVIEWS (ZERO IDLE DECODING DURING SCROLL) -->
+<!-- INSTANT TOUCH-GESTURE VIDEO START (ZERO IDLE DECODING DURING SCROLL) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const mobileBtn = document.getElementById('mobileMenuBtn');
@@ -1079,60 +1082,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const videoGrid = document.getElementById('ensembleVideoGrid');
   const previewTargets = Array.from(document.querySelectorAll('.video-card-small, .video-preview-target'));
-  const LONG_PRESS_MS = 280;
 
   let activeTarget = null;
-  let pressTimer = null;
-  let longPressTriggered = false;
   let touchStartX = 0;
   let touchStartY = 0;
-  let touchMoved = false;
+  let isScrollingGesture = false;
+  let gestureTriggered = false;
 
   function getMediaContainer(target) {
     return target.querySelector('.strip-box') || target;
   }
 
-  function createVideoElement(target) {
-    const container = getMediaContainer(target);
-    let video = container.querySelector('video.dynamic-preview-video');
-    if (video) return video;
-
-    const webmSrc = target.getAttribute('data-webm');
-    const mp4Src = target.getAttribute('data-mp4');
-
-    video = document.createElement('video');
-    video.className = 'dynamic-preview-video';
-    video.loop = true;
-    video.muted = true;
-    video.defaultMuted = true;
-    video.playsInline = true;
-    video.preload = 'auto';
-    video.setAttribute('playsinline', '');
-    video.setAttribute('muted', '');
-
-    if (webmSrc) {
-      const sWebm = document.createElement('source');
-      sWebm.src = webmSrc;
-      sWebm.type = 'video/webm';
-      video.appendChild(sWebm);
-    }
-    if (mp4Src) {
-      const sMp4 = document.createElement('source');
-      sMp4.src = mp4Src;
-      sMp4.type = 'video/mp4';
-      video.appendChild(sMp4);
-    }
-
-    container.insertBefore(video, container.firstChild);
-    video.load();
-    return video;
-  }
-
   function removeVideoElement(target) {
     if (!target) return;
+    target.classList.remove('video-playing');
     const container = getMediaContainer(target);
     const existingVideo = container.querySelector('video.dynamic-preview-video');
     if (existingVideo) {
+      existingVideo.onplaying = null;
+      existingVideo.onloadeddata = null;
       existingVideo.pause();
       existingVideo.removeAttribute('src');
       while (existingVideo.firstChild) {
@@ -1143,18 +1111,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function revealAndPlay(target, video) {
-    if (activeTarget !== target) return;
-    target.classList.add('video-active');
-    if (videoGrid && videoGrid.contains(target)) {
-      videoGrid.classList.add('has-active-video');
-    }
-    const p = video.play();
-    if (p && typeof p.catch === 'function') {
-      p.catch(() => {});
-    }
-  }
-
   function startVideo(target) {
     if (!target) return;
     if (activeTarget && activeTarget !== target) {
@@ -1162,20 +1118,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     activeTarget = target;
-    const video = createVideoElement(target);
+    target.classList.add('video-active');
+    if (videoGrid && videoGrid.contains(target)) {
+      videoGrid.classList.add('has-active-video');
+    }
 
-    // Reveal immediately if frames are already buffered, or as soon as loadeddata/playing fires
-    if (video.readyState >= 2) {
-      revealAndPlay(target, video);
-    } else {
-      target.classList.add('video-active');
-      if (videoGrid && videoGrid.contains(target)) {
-        videoGrid.classList.add('has-active-video');
+    const container = getMediaContainer(target);
+    let video = container.querySelector('video.dynamic-preview-video');
+    if (!video) {
+      const webmSrc = target.getAttribute('data-webm');
+      const mp4Src = target.getAttribute('data-mp4');
+
+      video = document.createElement('video');
+      video.className = 'dynamic-preview-video';
+      video.loop = true;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.setAttribute('playsinline', '');
+      video.setAttribute('muted', '');
+
+      if (webmSrc) {
+        const sWebm = document.createElement('source');
+        sWebm.src = webmSrc;
+        sWebm.type = 'video/webm';
+        video.appendChild(sWebm);
       }
-      const p = video.play();
-      if (p && typeof p.catch === 'function') {
-        p.catch(() => {});
+      if (mp4Src) {
+        const sMp4 = document.createElement('source');
+        sMp4.src = mp4Src;
+        sMp4.type = 'video/mp4';
+        video.appendChild(sMp4);
       }
+
+      const markPlaying = () => {
+        if (activeTarget === target) {
+          target.classList.add('video-playing');
+        }
+      };
+      video.addEventListener('playing', markPlaying, { once: true });
+      video.addEventListener('loadeddata', markPlaying, { once: true });
+
+      container.insertBefore(video, container.firstChild);
+      video.load();
+    }
+
+    const p = video.play();
+    if (p && typeof p.catch === 'function') {
+      p.catch(() => {});
     }
   }
 
@@ -1195,17 +1186,10 @@ document.addEventListener('DOMContentLoaded', function() {
     previewTargets.forEach(item => stopVideo(item));
   }
 
-  function clearPressTimer() {
-    if (pressTimer) {
-      clearTimeout(pressTimer);
-      pressTimer = null;
-    }
-  }
-
   previewTargets.forEach(target => {
     const isBioCard = target.classList.contains('video-preview-target');
 
-    // Desktop mouse hover
+    // PC mouse hover
     target.addEventListener('pointerenter', function(e) {
       if (e.pointerType === 'mouse') {
         startVideo(target);
@@ -1218,24 +1202,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Start buffering immediately on finger touch (0ms) so video is ready fast
+    // Mobile touch gesture: starts expanding and loading video immediately on touchstart
     target.addEventListener('touchstart', function(e) {
       if (!e.touches || e.touches.length === 0) return;
-      longPressTriggered = false;
-      touchMoved = false;
+      isScrollingGesture = false;
+      gestureTriggered = true;
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
-
-      // Pre-buffer immediately on touch without hiding photo until triggered
-      createVideoElement(target);
-
-      clearPressTimer();
-      pressTimer = setTimeout(() => {
-        if (!touchMoved) {
-          longPressTriggered = true;
-          startVideo(target);
-        }
-      }, LONG_PRESS_MS);
+      startVideo(target);
     }, { passive: true });
 
     target.addEventListener('touchmove', function(e) {
@@ -1243,64 +1217,57 @@ document.addEventListener('DOMContentLoaded', function() {
       const moveX = Math.abs(e.touches[0].clientX - touchStartX);
       const moveY = Math.abs(e.touches[0].clientY - touchStartY);
       if (moveX > 10 || moveY > 10) {
-        touchMoved = true;
-        clearPressTimer();
-        if (activeTarget !== target) {
-          removeVideoElement(target);
+        isScrollingGesture = true;
+        if (activeTarget === target) {
+          stopVideo(target);
         }
       }
     }, { passive: true });
 
-    target.addEventListener('touchend', function() {
-      clearPressTimer();
-      if (touchMoved && activeTarget !== target) {
-        removeVideoElement(target);
+    target.addEventListener('touchend', function(e) {
+      if (isScrollingGesture) {
+        stopVideo(target);
+        gestureTriggered = false;
+        return;
       }
+      if (!isBioCard && e.cancelable) {
+        // Prevent anchor jump on touch release so the expanded video stays open
+        e.preventDefault();
+      }
+      setTimeout(() => {
+        gestureTriggered = false;
+      }, 120);
     });
 
     target.addEventListener('touchcancel', function() {
-      clearPressTimer();
-      if (activeTarget !== target) {
-        removeVideoElement(target);
-      }
+      stopVideo(target);
+      gestureTriggered = false;
     });
 
     target.addEventListener('contextmenu', function(e) {
       e.preventDefault();
     });
 
-    // Click / Tap handling:
-    // - On member bio cards (01-05): single tap toggles video playback on/off
-    // - On top 5 strip cards: long-press plays video without jumping; quick tap jumps to member bio
     target.addEventListener('click', function(e) {
+      if (gestureTriggered) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       if (isBioCard) {
         e.preventDefault();
         e.stopPropagation();
-        if (longPressTriggered) {
-          longPressTriggered = false;
-          return;
-        }
         if (activeTarget === target && target.classList.contains('video-active')) {
           stopVideo(target);
         } else {
           startVideo(target);
         }
-        return;
-      }
-
-      if (longPressTriggered) {
-        e.preventDefault();
-        e.stopPropagation();
-        setTimeout(() => {
-          longPressTriggered = false;
-        }, 50);
       }
     });
   });
 
-  // Tapping anywhere outside active card stops & unmounts the video
-  document.addEventListener('pointerdown', function(e) {
-    if (e.pointerType === 'mouse') return;
+  // Touching/clicking outside stops & unmounts active video cleanly
+  document.addEventListener('touchstart', function(e) {
     if (!activeTarget) return;
     if (!activeTarget.contains(e.target)) {
       resetAllVideos();
@@ -1308,7 +1275,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: true });
 
   document.addEventListener('click', function(e) {
-    if (longPressTriggered) return;
+    if (gestureTriggered) return;
     if (activeTarget && !activeTarget.contains(e.target)) {
       resetAllVideos();
     }
