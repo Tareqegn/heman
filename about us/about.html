@@ -8,6 +8,7 @@ html, body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* SUBTLE PAGE NOISE BEHIND CONTENT (PHOTOS & VIDEOS STAY CLEAN) */
@@ -19,7 +20,7 @@ html, body {
   height: 100%;
   background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
   background-repeat: repeat;
-  opacity: 0.08;
+  opacity: 0.05;
   pointer-events: none;
   z-index: 1;
 }
@@ -42,7 +43,7 @@ html, body {
   height: 100%;
   background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
   background-repeat: repeat;
-  opacity: 0.11;
+  opacity: 0.07;
   pointer-events: none;
   z-index: 1;
 }
@@ -97,7 +98,7 @@ html, body {
   text-transform: uppercase !important;
   text-decoration: none !important;
   color: #111111 !important;
-  transition: color 0.3s ease !important;
+  transition: color 0.25s ease !important;
 }
 .nav-link:hover, .nav-link.active {
   color: #f59e0b !important;
@@ -150,7 +151,7 @@ html, body {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
+  transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.3s ease;
 }
 .mobile-dropdown-menu.open {
   max-height: 350px;
@@ -188,14 +189,14 @@ html, body {
 
 /* SYNCHRONIZED FLUID 5-STRIP GALLERY CONTAINER (ALWAYS ONE ROW) */
 .heman-video-grid {
-  margin-top: 30px; 
-  margin-bottom: 60px; 
-  display: flex; 
+  margin-top: 30px;
+  margin-bottom: 65px;
+  display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 12px; 
+  gap: 12px;
   width: 100%;
   max-width: 950px;
   margin-left: auto;
@@ -205,13 +206,14 @@ html, body {
 }
 
 .heman-video-grid .video-card-small {
-  width: 75px !important;
-  flex: 0 0 75px !important;
+  width: 85px !important;
+  flex: 0 0 85px !important;
   min-width: 0;
-  will-change: width, transform, flex;
-  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), flex 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.25s ease;
   cursor: pointer;
   text-decoration: none;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
 .heman-video-grid .video-content {
@@ -220,7 +222,23 @@ html, body {
   overflow: hidden;
   border-radius: 6px;
   background: #0b0f17;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.14);
+}
+
+.heman-video-grid .video-content img {
+  object-position: center 15% !important;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.heman-video-grid .video-content video.dynamic-preview-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .heman-video-grid .video-card-small.middle {
@@ -231,35 +249,27 @@ html, body {
   transform: translateY(50px);
 }
 
-.heman-video-grid .video-card-small:hover,
-.heman-video-grid .video-card-small.is-active {
-  width: 220px !important;
-  flex: 0 0 220px !important;
+/* VIDEO ONLY REVEALS WHEN HOVERING (PC) OR LONG-PRESSING (.video-active) */
+.heman-video-grid .video-card-small:hover.middle,
+.heman-video-grid .video-card-small.video-active.middle {
+  transform: translateY(20px) scale(1.03);
   z-index: 10;
 }
 
-.heman-video-grid .video-card-small:hover.middle,
-.heman-video-grid .video-card-small.is-active.middle {
-  transform: translateY(18px) scale(1.02);
-}
-
 .heman-video-grid .video-card-small:hover.bottom,
-.heman-video-grid .video-card-small.is-active.bottom {
-  transform: translateY(42px) scale(1.02);
+.heman-video-grid .video-card-small.video-active.bottom {
+  transform: translateY(45px) scale(1.03);
+  z-index: 10;
 }
 
 .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom),
-.heman-video-grid .video-card-small.is-active:not(.middle):not(.bottom) {
-  transform: translateY(-5px) scale(1.02);
-}
-
-.heman-video-grid:hover .video-card-small:not(:hover) {
-  flex: 0 0 65px !important;
-  width: 65px !important;
+.heman-video-grid .video-card-small.video-active:not(.middle):not(.bottom) {
+  transform: translateY(-4px) scale(1.03);
+  z-index: 10;
 }
 
 .heman-video-grid .video-card-small:hover .video-image-hover,
-.heman-video-grid .video-card-small.is-active .video-image-hover {
+.heman-video-grid .video-card-small.video-active .video-image-hover {
   opacity: 0 !important;
   visibility: hidden;
 }
@@ -276,23 +286,13 @@ html, body {
     flex: 1 1 0 !important;
     width: auto !important;
   }
-  .heman-video-grid .video-card-small:hover,
-  .heman-video-grid .video-card-small.is-active {
-    flex: 2.4 1 0 !important;
-    width: auto !important;
-    z-index: 10;
-  }
-  .heman-video-grid:hover .video-card-small:not(:hover) {
-    flex: 0.75 1 0 !important;
-    width: auto !important;
-  }
 }
 
 @media screen and (max-width: 479px) {
   .heman-video-grid {
     gap: 6px;
     padding: 0 8px;
-    margin-bottom: 45px;
+    margin-bottom: 52px;
   }
   .heman-video-grid .video-content {
     height: 195px !important;
@@ -304,41 +304,59 @@ html, body {
     transform: translateY(28px);
   }
   .heman-video-grid .video-card-small:hover.middle,
-  .heman-video-grid .video-card-small.is-active.middle {
-    transform: translateY(10px) scale(1.01);
+  .heman-video-grid .video-card-small.video-active.middle {
+    transform: translateY(10px) scale(1.02);
   }
   .heman-video-grid .video-card-small:hover.bottom,
-  .heman-video-grid .video-card-small.is-active.bottom {
-    transform: translateY(22px) scale(1.01);
+  .heman-video-grid .video-card-small.video-active.bottom {
+    transform: translateY(24px) scale(1.02);
   }
 }
 
-/* SECTION 1 STATIC IMAGE HERO BANNER */
+/* LANDSCAPE MOBILE ADJUSTMENT SO CARDS NEVER OVERLAP CAPTION BELOW */
+@media screen and (orientation: landscape) and (max-height: 520px) {
+  .heman-video-grid {
+    margin-top: 20px;
+    margin-bottom: 64px;
+    max-width: 680px;
+  }
+  .heman-video-grid .video-content {
+    height: 165px !important;
+  }
+  .heman-video-grid .video-card-small.middle {
+    transform: translateY(10px);
+  }
+  .heman-video-grid .video-card-small.bottom {
+    transform: translateY(20px);
+  }
+  .profile-media-container {
+    height: 260px !important;
+  }
+  .hero-image-banner {
+    height: 240px !important;
+  }
+}
+
+/* SECTION 1 HERO BANNER WITH TRANSPARENT CUTOUT hero-image.png */
 .hero-image-banner {
   position: relative;
   width: 100%;
+  max-width: 1120px;
   height: 480px;
-  border-radius: 10px;
+  margin: 0 auto;
   overflow: hidden;
-  background: #0b0f17;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: transparent;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .hero-image-banner img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-}
-
-.hero-image-banner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(11,15,23,0.4) 0%, transparent 60%);
-  pointer-events: none;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
 }
 
 /* CLEAN NON-OVERLAPPING EDITORIAL MEMBER LAYOUT WITH LARGER PHOTOS */
@@ -367,17 +385,21 @@ html, body {
   border-radius: 8px;
   overflow: hidden;
   background: #0b0f17;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.16);
   cursor: pointer;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
-.profile-media-container video {
+.profile-media-container video.dynamic-preview-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
   z-index: 1;
+  pointer-events: none;
 }
 
 .profile-media-container img {
@@ -386,13 +408,15 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
   z-index: 2;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.profile-media-container:hover img {
+.profile-media-container:hover img,
+.profile-media-container.video-active img {
   opacity: 0;
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 /* NORMALIZED PARAGRAPH STYLE FOR MEMBER DESCRIPTIONS */
@@ -412,10 +436,41 @@ html, body {
     gap: 30px;
   }
   .profile-media-container {
-    height: 350px;
+    height: 360px;
   }
   .hero-image-banner {
-    height: 300px;
+    height: 290px;
+  }
+}
+
+/* CTA GRID LAYOUT & RESPONSIVE STACKING */
+.cta-bottom-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+
+.cta-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .cta-bottom-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: left;
+  }
+  .cta-bottom-grid .h2-title br {
+    display: none;
+  }
+  .cta-actions-stack {
+    max-width: 340px;
   }
 }
 
@@ -440,8 +495,8 @@ html, body {
   pointer-events: auto;
   position: relative;
   z-index: 10;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
 .cta-primary-btn .cta-arrow {
@@ -454,15 +509,14 @@ html, body {
   background: rgba(245, 158, 11, 0.16);
   color: #f59e0b;
   font-size: 0.9rem;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, color 0.35s ease;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
 }
 
 .cta-primary-btn:hover {
   background: #f59e0b;
   border-color: #f59e0b;
   color: #0b0f17 !important;
-  transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(245, 158, 11, 0.38);
+  transform: translateY(-2px);
 }
 
 .cta-primary-btn:hover .cta-arrow {
@@ -471,43 +525,43 @@ html, body {
   transform: translate(3px, -2px);
 }
 
-.cta-primary-btn:active {
-  transform: translateY(-1px) scale(0.99);
-}
-
 .cta-solid-yellow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 36px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  padding: 16px 28px;
   border-radius: 40px;
   background: #f59e0b;
   color: #0b0f17 !important;
   font-family: inherit;
   font-weight: 700;
   font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-decoration: none;
   cursor: pointer;
   pointer-events: auto;
   position: relative;
   z-index: 10;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
+  transition: all 0.25s ease;
 }
 
 .cta-solid-yellow:hover {
   background: #ffffff;
   color: #111111 !important;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .cta-outline-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 36px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  padding: 16px 28px;
   border-radius: 40px;
   background: transparent;
   border: 1px solid rgba(17, 17, 17, 0.25);
@@ -515,21 +569,20 @@ html, body {
   font-family: inherit;
   font-weight: 700;
   font-size: 0.75rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-decoration: none;
   cursor: pointer;
   pointer-events: auto;
   position: relative;
   z-index: 10;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s ease;
 }
 
 .cta-outline-dark:hover {
   background: #111111;
   border-color: #111111;
   color: #ffffff !important;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 /* PROFESSIONAL FOOTER WITH YELLOW HOVER INTERACTIONS */
@@ -637,14 +690,13 @@ html, body {
   color: #111111;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s ease;
 }
 .back-to-top-btn:hover {
   background: #111111;
   color: #ffffff;
   border-color: #111111;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 </style>
 </head><body><div class="noise"></div><div class="loading-animation"><div class="loading-noise"></div><div class="overflow-hidden perspective"><div class="loading-perspective"><h3 class="loading-1st-row _1st">l</h3><h3 class="loading-1st-row _2nd">o</h3><h3 class="loading-1st-row _3rd">a</h3><h3 class="loading-1st-row _4th">d</h3><h3 class="loading-1st-row _5th">i</h3><h3 class="loading-1st-row _6th">n</h3><h3 class="loading-1st-row _7th">g</h3></div><div class="loading-perspective absolute"><h3 class="loading-2nd-row _1st">L</h3><h3 class="loading-2nd-row _2nd">o</h3><h3 class="loading-2nd-row _3rd">a</h3><h3 class="loading-2nd-row _4th">d</h3><h3 class="loading-2nd-row _5th">i</h3><h3 class="loading-2nd-row _6th">n</h3><h3 class="loading-2nd-row _7th">g</h3></div></div></div>
@@ -681,7 +733,7 @@ html, body {
   </div>
 </div>
 
-<!-- SECTION 1: CINEMATIC HERO SHOWCASE WITH STATIC GROUP PHOTO -->
+<!-- SECTION 1: CINEMATIC HERO SHOWCASE WITH TRANSPARENT CUTOUT hero-image.png -->
 <div id="ministry-overview" class="section" style="padding-top: 140px;">
   <div class="grid" style="grid-template-columns: 1fr;">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 25px;">
@@ -689,9 +741,9 @@ html, body {
       <h2 class="h2-title text-right" style="margin: 0;">addis ababa</h2>
     </div>
 
-    <!-- Static Image Hero Showcase Banner using HemanBand.jpg -->
+    <!-- Hero Showcase Banner using ../images/hero-image.png -->
     <div class="hero-image-banner">
-      <img src="images/HemanBand.jpg" alt="Heman Sound Collective Group Photo" loading="eager" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"/>
+      <img src="../images/hero-image.png" alt="Heman Sound Collective Group Photo" loading="eager" decoding="async"/>
     </div>
 
     <h4 class="h4-title center" style="margin-top: 35px;">
@@ -714,60 +766,40 @@ html, body {
 <!-- SECTION 2: ENSEMBLE GALLERY (SYNCHRONIZED SLIDING GRID) -->
 <div id="ensemble-gallery" class="section"><div class="grid"><h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b37-80f85e7a" class="h2-title">the collective<br/>ensemble gallery</h2><h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b3b-80f85e7a" class="h2-title text-right">heman sound</h2></div>
 <div style="display: flex; justify-content: center; width: 100%;">
-<div class="heman-video-grid">
+<div class="heman-video-grid" id="ensembleVideoGrid">
   
   <!-- Strip 1: Alazar -->
-  <a href="#member-alazar" class="video-card-small w-inline-block">
+  <a href="#member-alazar" class="video-card-small w-inline-block" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
-      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <source src="images/alazarai.webm" type="video/webm"/>
-        <source src="images/alazarai.mp4" type="video/mp4"/>
-      </video>
-      <img src="images/Alazar.jpg" loading="lazy" alt="Alazar Yibeltal" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+      <img src="images/Alazar.jpg" loading="eager" alt="Alazar Yibeltal" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; display: block;"/>
     </div>
   </a>
 
   <!-- Strip 2: Milky -->
-  <a href="#member-milky" class="video-card-small middle w-inline-block">
+  <a href="#member-milky" class="video-card-small middle w-inline-block" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
     <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
-      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <source src="images/milkyai.webm" type="video/webm"/>
-        <source src="images/milkyai.mp4" type="video/mp4"/>
-      </video>
-      <img src="images/Milky.jpg" loading="lazy" alt="Milky Asefa" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+      <img src="images/Milky.jpg" loading="eager" alt="Milky Asefa" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; display: block;"/>
     </div>
   </a>
 
   <!-- Strip 3: Kaleb -->
-  <a href="#member-kaleb" class="video-card-small bottom w-inline-block">
+  <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
     <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
-      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <source src="images/kalebai.webm" type="video/webm"/>
-        <source src="images/kalebai.mp4" type="video/mp4"/>
-      </video>
-      <img src="images/Kaleb.jpg" loading="lazy" alt="Kaleb Birhanu" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+      <img src="images/Kaleb.jpg" loading="eager" alt="Kaleb Birhanu" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; display: block;"/>
     </div>
   </a>
 
   <!-- Strip 4: Elto -->
-  <a href="#member-elto" class="video-card-small middle w-inline-block">
+  <a href="#member-elto" class="video-card-small middle w-inline-block" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
     <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
-      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <source src="images/eltoai.webm" type="video/webm"/>
-        <source src="images/eltoai.mp4" type="video/mp4"/>
-      </video>
-      <img src="images/Elto.jpg" loading="lazy" alt="Elto Kassahun" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+      <img src="images/Elto.jpg" loading="eager" alt="Elto Kassahun" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; display: block;"/>
     </div>
   </a>
 
   <!-- Strip 5: Redi -->
-  <a href="#member-rediet" class="video-card-small w-inline-block">
+  <a href="#member-rediet" class="video-card-small w-inline-block" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
     <div class="video-content" style="position: relative; width: 100%; height: 280px; overflow: hidden; background: #0b0f17;">
-      <video loop="" muted="" playsinline="" preload="auto" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
-        <source src="images/rediai.webm" type="video/webm"/>
-        <source src="images/rediai.mp4" type="video/mp4"/>
-      </video>
-      <img src="images/redi.jpg" loading="lazy" alt="Rediet Alesa" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s ease; display: block;"/>
+      <img src="images/redi.jpg" loading="eager" alt="Rediet Alesa" class="video-image-hover" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; display: block;"/>
     </div>
   </a>
 
@@ -792,11 +824,7 @@ html, body {
     </div>
     
     <div class="editorial-profile-grid">
-      <div class="profile-media-container">
-        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
-          <source src="images/kalebai.webm" type="video/webm"/>
-          <source src="images/kalebai.mp4" type="video/mp4"/>
-        </video>
+      <div class="profile-media-container video-preview-target" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
         <img src="images/Kaleb.jpg" loading="lazy" alt="Kaleb Birhanu Portrait"/>
       </div>
       <div>
@@ -819,11 +847,7 @@ html, body {
     </div>
     
     <div class="editorial-profile-grid reverse">
-      <div class="profile-media-container">
-        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
-          <source src="images/eltoai.webm" type="video/webm"/>
-          <source src="images/eltoai.mp4" type="video/mp4"/>
-        </video>
+      <div class="profile-media-container video-preview-target" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
         <img src="images/Elto.jpg" loading="lazy" alt="Elto Kassahun Portrait"/>
       </div>
       <div>
@@ -846,11 +870,7 @@ html, body {
     </div>
     
     <div class="editorial-profile-grid">
-      <div class="profile-media-container">
-        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
-          <source src="images/milkyai.webm" type="video/webm"/>
-          <source src="images/milkyai.mp4" type="video/mp4"/>
-        </video>
+      <div class="profile-media-container video-preview-target" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
         <img src="images/Milky.jpg" loading="lazy" alt="Milky Asefa Portrait"/>
       </div>
       <div>
@@ -873,11 +893,7 @@ html, body {
     </div>
     
     <div class="editorial-profile-grid reverse">
-      <div class="profile-media-container">
-        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
-          <source src="images/alazarai.webm" type="video/webm"/>
-          <source src="images/alazarai.mp4" type="video/mp4"/>
-        </video>
+      <div class="profile-media-container video-preview-target" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
         <img src="images/Alazar.jpg" loading="lazy" alt="Alazar Yibeltal Portrait"/>
       </div>
       <div>
@@ -900,11 +916,7 @@ html, body {
     </div>
     
     <div class="editorial-profile-grid">
-      <div class="profile-media-container">
-        <video autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true">
-          <source src="images/rediai.webm" type="video/webm"/>
-          <source src="images/rediai.mp4" type="video/mp4"/>
-        </video>
+      <div class="profile-media-container video-preview-target" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
         <img src="images/redi.jpg" loading="lazy" alt="Rediet Alesa Portrait"/>
       </div>
       <div>
@@ -919,11 +931,11 @@ html, body {
 </div>
 
 <!-- BOTTOM-PAGE CONVERSION CTA -->
-<div id="create-with-us" class="section" style="padding: 90px 20px 30px 20px; border-top: 1px solid rgba(255,255,255,0.08);">
-  <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; align-items: center; gap: 40px;">
+<div id="create-with-us" class="section" style="padding: 90px 24px 30px 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+  <div class="cta-bottom-grid">
     
     <div>
-      <h2 class="h2-title" style="margin: 0; line-height: 0.9;">ready to<br/>create<br/>with us?</h2>
+      <h2 class="h2-title" style="margin: 0; line-height: 0.95;">ready to<br/>create<br/>with us?</h2>
     </div>
 
     <div>
@@ -933,7 +945,7 @@ html, body {
       </p>
     </div>
 
-    <div style="display: flex; flex-direction: column; gap: 14px;">
+    <div class="cta-actions-stack">
       <a href="../studio-sessions/studio.html" class="cta-solid-yellow">BOOK A SESSION</a>
       <a href="../contact/contact.html" class="cta-outline-dark">CONTACT MINISTRY</a>
     </div>
@@ -989,20 +1001,19 @@ html, body {
 
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script>
 
-<!-- PERFORMANCE-OPTIMIZED VIDEO SCRIPT & MOBILE MENU TOGGLE -->
+<!-- ZERO-IDLE-VIDEO SCROLL: MOUNT & PLAY VIDEO ONLY ON HOVER (PC) OR LONG-PRESS (MOBILE) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile Menu Toggle & Animation Logic
   const mobileBtn = document.getElementById('mobileMenuBtn');
   const mobileDropdown = document.getElementById('mobileDropdown');
-  
+
   if (mobileBtn && mobileDropdown) {
     mobileBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       mobileBtn.classList.toggle('active');
       mobileDropdown.classList.toggle('open');
     });
-    
+
     document.addEventListener('click', (e) => {
       if (!mobileDropdown.contains(e.target) && !mobileBtn.contains(e.target)) {
         mobileDropdown.classList.remove('open');
@@ -1011,46 +1022,169 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  const videoCards = document.querySelectorAll('.video-card-small');
-  
-  videoCards.forEach(card => {
-    const video = card.querySelector('video');
-    
-    // PC Hover Play / Pause Control
-    card.addEventListener('mouseenter', function() {
-      if (video) {
-        video.currentTime = 0;
-        video.play().catch(e => {});
+  const previewTargets = Array.from(document.querySelectorAll('.video-card-small, .video-preview-target'));
+  const LONG_PRESS_MS = 450;
+
+  let activeTarget = null;
+  let pressTimer = null;
+  let longPressTriggered = false;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function getMediaContainer(target) {
+    return target.querySelector('.video-content') || target;
+  }
+
+  function removeVideoElement(target) {
+    if (!target) return;
+    const container = getMediaContainer(target);
+    const existingVideo = container.querySelector('video.dynamic-preview-video');
+    if (existingVideo) {
+      existingVideo.pause();
+      existingVideo.removeAttribute('src');
+      while (existingVideo.firstChild) {
+        existingVideo.removeChild(existingVideo.firstChild);
       }
-    });
-    
-    card.addEventListener('mouseleave', function() {
-      if (video) {
-        video.pause();
+      existingVideo.load();
+      existingVideo.remove();
+    }
+  }
+
+  function startVideo(target) {
+    if (!target) return;
+    if (activeTarget && activeTarget !== target) {
+      stopVideo(activeTarget);
+    }
+
+    activeTarget = target;
+    target.classList.add('video-active');
+
+    const container = getMediaContainer(target);
+    if (!container.querySelector('video.dynamic-preview-video')) {
+      const webmSrc = target.getAttribute('data-webm');
+      const mp4Src = target.getAttribute('data-mp4');
+
+      const video = document.createElement('video');
+      video.className = 'dynamic-preview-video';
+      video.loop = true;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('muted', '');
+
+      if (webmSrc) {
+        const sWebm = document.createElement('source');
+        sWebm.src = webmSrc;
+        sWebm.type = 'video/webm';
+        video.appendChild(sWebm);
+      }
+      if (mp4Src) {
+        const sMp4 = document.createElement('source');
+        sMp4.src = mp4Src;
+        sMp4.type = 'video/mp4';
+        video.appendChild(sMp4);
+      }
+
+      container.insertBefore(video, container.firstChild);
+      const p = video.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => {});
+      }
+    }
+  }
+
+  function stopVideo(target) {
+    if (!target) return;
+    target.classList.remove('video-active');
+    removeVideoElement(target);
+    if (activeTarget === target) {
+      activeTarget = null;
+    }
+  }
+
+  function resetAllVideos() {
+    previewTargets.forEach(item => stopVideo(item));
+  }
+
+  function clearPressTimer() {
+    if (pressTimer) {
+      clearTimeout(pressTimer);
+      pressTimer = null;
+    }
+  }
+
+  previewTargets.forEach(target => {
+    target.addEventListener('pointerenter', function(e) {
+      if (e.pointerType === 'mouse') {
+        startVideo(target);
       }
     });
 
-    // Mobile Touch Toggle Control
-    card.addEventListener('click', function(e) {
-      if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
-        const isActive = this.classList.contains('is-active');
-        
-        videoCards.forEach(c => {
-          c.classList.remove('is-active');
-          const v = c.querySelector('video');
-          if (v) v.pause();
-        });
-      
-        if (!isActive) {
-          e.preventDefault();
-          this.classList.add('is-active');
-          if (video) {
-            video.currentTime = 0;
-            video.play().catch(e => {});
-          }
-        }
+    target.addEventListener('pointerleave', function(e) {
+      if (e.pointerType === 'mouse') {
+        stopVideo(target);
       }
     });
+
+    target.addEventListener('touchstart', function(e) {
+      if (!e.touches || e.touches.length === 0) return;
+      longPressTriggered = false;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+
+      clearPressTimer();
+      pressTimer = setTimeout(() => {
+        longPressTriggered = true;
+        startVideo(target);
+      }, LONG_PRESS_MS);
+    }, { passive: true });
+
+    target.addEventListener('touchmove', function(e) {
+      if (!e.touches || e.touches.length === 0) return;
+      const moveX = Math.abs(e.touches[0].clientX - touchStartX);
+      const moveY = Math.abs(e.touches[0].clientY - touchStartY);
+      if (moveX > 12 || moveY > 12) {
+        clearPressTimer();
+      }
+    }, { passive: true });
+
+    target.addEventListener('touchend', function() {
+      clearPressTimer();
+    });
+
+    target.addEventListener('touchcancel', function() {
+      clearPressTimer();
+    });
+
+    target.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    target.addEventListener('click', function(e) {
+      if (longPressTriggered) {
+        e.preventDefault();
+        e.stopPropagation();
+        setTimeout(() => {
+          longPressTriggered = false;
+        }, 50);
+      }
+    });
+  });
+
+  document.addEventListener('pointerdown', function(e) {
+    if (e.pointerType === 'mouse') return;
+    if (!activeTarget) return;
+    if (!activeTarget.contains(e.target)) {
+      resetAllVideos();
+    }
+  }, { passive: true });
+
+  document.addEventListener('click', function(e) {
+    if (longPressTriggered) return;
+    if (activeTarget && !activeTarget.contains(e.target)) {
+      resetAllVideos();
+    }
   });
 });
 </script>
