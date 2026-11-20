@@ -224,19 +224,22 @@ html, body {
   position: relative !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background: #1a1a1a !important;
+  background-color: #2b2b2b !important;
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* BLACK-AND-WHITE STRIP PHOTOS ALWAYS VISIBLE BY DEFAULT */
-.heman-video-grid .strip-photo {
+/* BLACK-AND-WHITE STRIP PORTRAIT LAYER */
+.heman-video-grid .strip-bg {
   position: absolute !important;
-  inset: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  max-width: none !important;
-  object-fit: cover !important;
-  object-position: center 15% !important;
+  background-size: cover !important;
+  background-position: center 15% !important;
+  background-repeat: no-repeat !important;
   filter: grayscale(100%) !important;
   -webkit-filter: grayscale(100%) !important;
   opacity: 1 !important;
@@ -246,14 +249,17 @@ html, body {
   transition: opacity 0.25s ease, filter 0.3s ease !important;
 }
 
-.heman-video-grid .video-card-small.video-playing .strip-photo {
+.heman-video-grid .video-card-small.video-playing .strip-bg {
   opacity: 0 !important;
   visibility: hidden !important;
 }
 
 .heman-video-grid .strip-box video.dynamic-preview-video {
   position: absolute !important;
-  inset: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -314,7 +320,7 @@ html, body {
   .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom) {
     transform: translateY(-4px) scale(1.03);
   }
-  .heman-video-grid .video-card-small:hover .strip-photo {
+  .heman-video-grid .video-card-small:hover .strip-bg {
     opacity: 0 !important;
     visibility: hidden !important;
   }
@@ -846,35 +852,35 @@ html, body {
   <!-- Strip 1: Alazar -->
   <a href="#member-alazar" class="video-card-small w-inline-block" data-target-id="member-alazar" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="strip-box">
-      <img src="images/Alazar.jpg" loading="eager" alt="Alazar Yibeltal" class="strip-photo"/>
+      <span class="strip-bg" style="background-image: url('images/Alazar.jpg');"></span>
     </div>
   </a>
 
   <!-- Strip 2: Milky -->
   <a href="#member-milky" class="video-card-small middle w-inline-block" data-target-id="member-milky" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
     <div class="strip-box">
-      <img src="images/Milky.jpg" loading="eager" alt="Milky Asefa" class="strip-photo"/>
+      <span class="strip-bg" style="background-image: url('images/Milky.jpg');"></span>
     </div>
   </a>
 
   <!-- Strip 3: Kaleb -->
   <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-target-id="member-kaleb" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
     <div class="strip-box">
-      <img src="images/Kaleb.jpg" loading="eager" alt="Kaleb Birhanu" class="strip-photo"/>
+      <span class="strip-bg" style="background-image: url('images/Kaleb.jpg');"></span>
     </div>
   </a>
 
   <!-- Strip 4: Elto -->
   <a href="#member-elto" class="video-card-small middle w-inline-block" data-target-id="member-elto" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
     <div class="strip-box">
-      <img src="images/Elto.jpg" loading="eager" alt="Elto Kassahun" class="strip-photo"/>
+      <span class="strip-bg" style="background-image: url('images/Elto.jpg');"></span>
     </div>
   </a>
 
   <!-- Strip 5: Redi -->
   <a href="#member-rediet" class="video-card-small w-inline-block" data-target-id="member-rediet" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
     <div class="strip-box">
-      <img src="images/Redi.jpg" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='images/redi.jpg';}else{this.onerror=null;this.src='images/Rediet.jpg';}" loading="eager" alt="Rediet Alesa" class="strip-photo"/>
+      <span class="strip-bg" data-strip-rediet="1" style="background-image: url('images/Redi.jpg'), url('images/redi.jpg'), url('images/Rediet.jpg');"></span>
     </div>
   </a>
 
