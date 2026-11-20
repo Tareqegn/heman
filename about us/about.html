@@ -11,29 +11,44 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* HIDE HEAVY ANIMATED NOISE GIF ON MOBILE TO PREVENT OUT-OF-MEMORY CRASHES */
-.noise,
-.loading-noise {
-  display: none !important;
-}
-
-@media (min-width: 992px) {
-  .noise {
-    display: block !important;
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
-    background-repeat: repeat;
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 1;
-  }
+/* SUBTLE PAGE NOISE BEHIND CONTENT (PHOTOS & VIDEOS STAY CLEAN) */
+.noise {
+  display: block !important;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
+  background-repeat: repeat;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .section,
 .heman-footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* SLIGHTLY REDUCED NOISE INSIDE THE LOADING SCREEN OVERLAY */
+.loading-animation {
+  position: relative;
+}
+
+.loading-noise {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
+  background-repeat: repeat;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.loading-animation > :not(.loading-noise) {
   position: relative;
   z-index: 2;
 }
@@ -196,7 +211,7 @@ html, body {
   flex: 0 0 82px !important;
   min-width: 0 !important;
   height: auto !important;
-  transition: flex-basis 0.3s ease, width 0.3s ease;
+  transition: width 0.38s cubic-bezier(0.22, 1, 0.36, 1), flex 0.38s cubic-bezier(0.22, 1, 0.36, 1), transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
   text-decoration: none;
   user-select: none;
@@ -209,19 +224,23 @@ html, body {
   position: relative !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background-color: #c8c8c8 !important;
+  background-color: #3a3a3a !important;
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
-/* STRIP PORTRAIT PHOTO SHOWN FIRST */
+/* UNFILTERED PORTRAIT IMAGE SO MOBILE COMPOSITOR ALWAYS PAINTS IT */
 .heman-video-grid .strip-photo {
   position: absolute !important;
   top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
   object-position: center 15% !important;
+  filter: none !important;
+  -webkit-filter: none !important;
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
@@ -229,10 +248,28 @@ html, body {
   pointer-events: none !important;
 }
 
+/* BLACK-AND-WHITE OVERLAY OVER PHOTO & VIDEO */
+.heman-video-grid .strip-bw-tint {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  backdrop-filter: grayscale(100%) !important;
+  -webkit-backdrop-filter: grayscale(100%) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  z-index: 12 !important;
+  pointer-events: none !important;
+}
+
 /* VIDEO LAYER REVEALED WHEN CLICKED OR HOVERED */
 .heman-video-grid .strip-box video.dynamic-preview-video {
   position: absolute !important;
   top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
@@ -242,6 +279,7 @@ html, body {
   display: block !important;
   opacity: 0;
   pointer-events: none !important;
+  transition: opacity 0.2s ease !important;
 }
 
 .heman-video-grid .video-card-small.video-active .strip-box video.dynamic-preview-video {
@@ -273,6 +311,18 @@ html, body {
   flex: 0 0 66px !important;
 }
 
+.heman-video-grid .video-card-small.video-active.middle {
+  transform: translateY(18px) scale(1.03);
+}
+
+.heman-video-grid .video-card-small.video-active.bottom {
+  transform: translateY(42px) scale(1.03);
+}
+
+.heman-video-grid .video-card-small.video-active:not(.middle):not(.bottom) {
+  transform: translateY(-4px) scale(1.03);
+}
+
 /* PC HOVER BEHAVIOR (MOUSE / FINE POINTER ONLY) */
 @media (hover: hover) and (pointer: fine) {
   .heman-video-grid .video-card-small:hover {
@@ -283,6 +333,15 @@ html, body {
   .heman-video-grid:hover .video-card-small:not(:hover) {
     width: 66px !important;
     flex: 0 0 66px !important;
+  }
+  .heman-video-grid .video-card-small:hover.middle {
+    transform: translateY(18px) scale(1.03);
+  }
+  .heman-video-grid .video-card-small:hover.bottom {
+    transform: translateY(42px) scale(1.03);
+  }
+  .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom) {
+    transform: translateY(-4px) scale(1.03);
   }
   .heman-video-grid .video-card-small:hover .strip-box video.dynamic-preview-video {
     opacity: 1 !important;
@@ -306,7 +365,7 @@ html, body {
     width: auto !important;
   }
   .heman-video-grid .strip-box {
-    height: 220px !important;
+    height: 240px !important;
   }
   .heman-video-grid .video-card-small.video-active {
     flex: 2.7 1 0 !important;
@@ -326,13 +385,19 @@ html, body {
     margin-bottom: 52px !important;
   }
   .heman-video-grid .strip-box {
-    height: 185px !important;
+    height: 195px !important;
   }
   .heman-video-grid .video-card-small.middle {
     transform: translateY(14px);
   }
   .heman-video-grid .video-card-small.bottom {
     transform: translateY(28px);
+  }
+  .heman-video-grid .video-card-small.video-active.middle {
+    transform: translateY(10px) scale(1.02);
+  }
+  .heman-video-grid .video-card-small.video-active.bottom {
+    transform: translateY(24px) scale(1.02);
   }
 }
 
@@ -344,7 +409,7 @@ html, body {
     max-width: 680px;
   }
   .heman-video-grid .strip-box {
-    height: 150px !important;
+    height: 165px !important;
   }
   .heman-video-grid .video-card-small.middle {
     transform: translateY(10px);
@@ -353,10 +418,10 @@ html, body {
     transform: translateY(20px);
   }
   .profile-media-container {
-    height: 240px !important;
+    height: 260px !important;
   }
   .hero-image-banner {
-    height: 220px !important;
+    height: 240px !important;
   }
 }
 
@@ -407,10 +472,32 @@ html, body {
   height: 480px;
   border-radius: 8px;
   overflow: hidden;
-  background: #c8c8c8;
+  background: #3a3a3a;
   box-shadow: 0 10px 25px rgba(0,0,0,0.16);
   cursor: pointer;
   user-select: none;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.profile-media-container.video-active {
+  transform: scale(1.03);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.24);
+  z-index: 5;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .profile-media-container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.24);
+    z-index: 5;
+  }
+  .profile-media-container:hover video.dynamic-preview-video {
+    opacity: 1 !important;
+  }
+  .profile-media-container:hover img {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }
 
 .profile-media-container video.dynamic-preview-video {
@@ -424,6 +511,7 @@ html, body {
   display: block;
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.2s ease;
 }
 
 .profile-media-container.video-active video.dynamic-preview-video {
@@ -442,6 +530,7 @@ html, body {
   visibility: visible !important;
   display: block;
   pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .profile-media-container.video-active img {
@@ -466,10 +555,10 @@ html, body {
     gap: 30px;
   }
   .profile-media-container {
-    height: 340px;
+    height: 360px;
   }
   .hero-image-banner {
-    height: 270px;
+    height: 290px;
   }
 }
 
@@ -801,28 +890,32 @@ html, body {
   <!-- Strip 1: Alazar -->
   <a href="#member-alazar" class="video-card-small w-inline-block" data-target-id="member-alazar" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="strip-box">
-      <img src="images/Alazar.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Alazar.jpg';}" loading="eager" decoding="async" alt="Alazar Yibeltal" class="strip-photo"/>
+      <img src="images/Alazar.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Alazar.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Alazar.jpg';}" loading="eager" decoding="async" alt="Alazar Yibeltal" class="strip-photo"/>
+      <span class="strip-bw-tint"></span>
     </div>
   </a>
 
   <!-- Strip 2: Milky -->
   <a href="#member-milky" class="video-card-small middle w-inline-block" data-target-id="member-milky" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
     <div class="strip-box">
-      <img src="images/Milky.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Milky.jpg';}" loading="eager" decoding="async" alt="Milky Asefa" class="strip-photo"/>
+      <img src="images/Milky.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Milky.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Milky.jpg';}" loading="eager" decoding="async" alt="Milky Asefa" class="strip-photo"/>
+      <span class="strip-bw-tint"></span>
     </div>
   </a>
 
   <!-- Strip 3: Kaleb -->
   <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-target-id="member-kaleb" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
     <div class="strip-box">
-      <img src="images/Kaleb.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Kaleb.jpg';}" loading="eager" decoding="async" alt="Kaleb Birhanu" class="strip-photo"/>
+      <img src="images/Kaleb.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Kaleb.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Kaleb.jpg';}" loading="eager" decoding="async" alt="Kaleb Birhanu" class="strip-photo"/>
+      <span class="strip-bw-tint"></span>
     </div>
   </a>
 
   <!-- Strip 4: Elto -->
   <a href="#member-elto" class="video-card-small middle w-inline-block" data-target-id="member-elto" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
     <div class="strip-box">
-      <img src="images/Elto.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Elto.jpg';}" loading="eager" decoding="async" alt="Elto Kassahun" class="strip-photo"/>
+      <img src="images/Elto.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Elto.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Elto.jpg';}" loading="eager" decoding="async" alt="Elto Kassahun" class="strip-photo"/>
+      <span class="strip-bw-tint"></span>
     </div>
   </a>
 
@@ -830,6 +923,7 @@ html, body {
   <a href="#member-rediet" class="video-card-small w-inline-block" data-target-id="member-rediet" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
     <div class="strip-box">
       <img src="images/Redi.jpg" onerror="if(!this.dataset.step){this.dataset.step='1';this.src='images/redi.jpg';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='images/Rediet.jpg';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='/about%20us/images/Redi.jpg';}" loading="eager" decoding="async" alt="Rediet Alesa" class="strip-photo"/>
+      <span class="strip-bw-tint"></span>
     </div>
   </a>
 
