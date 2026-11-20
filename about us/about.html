@@ -224,7 +224,7 @@ html, body {
   position: relative !important;
   overflow: hidden !important;
   border-radius: 6px !important;
-  background-color: #d4d4d4 !important;
+  background-color: #2b2b2b !important;
   box-shadow: 0 8px 20px rgba(0,0,0,0.14) !important;
 }
 
@@ -237,10 +237,6 @@ html, body {
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  min-width: 100% !important;
-  min-height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
   object-fit: cover !important;
   object-position: center 15% !important;
   filter: grayscale(100%) !important;
@@ -248,8 +244,9 @@ html, body {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
-  z-index: 5 !important;
+  z-index: 4 !important;
   pointer-events: none !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease !important;
 }
 
 /* VIDEO LAYER REVEALED WHEN CLICKED OR HOVERED */
@@ -265,14 +262,18 @@ html, body {
   object-position: center 15% !important;
   z-index: 10 !important;
   display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+  opacity: 0;
   pointer-events: none !important;
+  transition: opacity 0.2s ease !important;
 }
 
-/* Hide photo cleanly once video is playing so it never flashes back on top */
-.heman-video-grid .video-card-small.video-playing .strip-photo {
-  display: none !important;
+.heman-video-grid .video-card-small.video-active .strip-box video.dynamic-preview-video {
+  opacity: 1 !important;
+}
+
+.heman-video-grid .video-card-small.video-active .strip-photo {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .heman-video-grid .video-card-small.middle {
@@ -326,6 +327,13 @@ html, body {
   }
   .heman-video-grid .video-card-small:hover:not(.middle):not(.bottom) {
     transform: translateY(-4px) scale(1.03);
+  }
+  .heman-video-grid .video-card-small:hover .strip-box video.dynamic-preview-video {
+    opacity: 1 !important;
+  }
+  .heman-video-grid .video-card-small:hover .strip-photo {
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 }
 
@@ -449,7 +457,7 @@ html, body {
   height: 480px;
   border-radius: 8px;
   overflow: hidden;
-  background: #d4d4d4;
+  background: #2b2b2b;
   box-shadow: 0 10px 25px rgba(0,0,0,0.16);
   cursor: pointer;
   user-select: none;
@@ -468,6 +476,13 @@ html, body {
     box-shadow: 0 18px 38px rgba(0,0,0,0.24);
     z-index: 5;
   }
+  .profile-media-container:hover video.dynamic-preview-video {
+    opacity: 1 !important;
+  }
+  .profile-media-container:hover img {
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
 }
 
 .profile-media-container video.dynamic-preview-video {
@@ -479,9 +494,13 @@ html, body {
   object-position: center 15%;
   z-index: 10;
   display: block;
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.profile-media-container.video-active video.dynamic-preview-video {
+  opacity: 1 !important;
 }
 
 .profile-media-container img {
@@ -491,15 +510,17 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center 15%;
-  z-index: 5;
+  z-index: 4;
   opacity: 1 !important;
   visibility: visible !important;
   display: block;
   pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-.profile-media-container.video-playing img {
-  display: none !important;
+.profile-media-container.video-active img {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 /* NORMALIZED PARAGRAPH STYLE FOR MEMBER DESCRIPTIONS */
@@ -854,35 +875,35 @@ html, body {
   <!-- Strip 1: Alazar -->
   <a href="#member-alazar" class="video-card-small w-inline-block" data-target-id="member-alazar" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="strip-box">
-      <img src="images/Alazar.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Alazar.jpg';}" loading="eager" decoding="sync" alt="Alazar Yibeltal" class="strip-photo"/>
+      <img src="images/Alazar.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Alazar.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Alazar.jpg';}" loading="eager" decoding="async" alt="Alazar Yibeltal" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 2: Milky -->
   <a href="#member-milky" class="video-card-small middle w-inline-block" data-target-id="member-milky" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
     <div class="strip-box">
-      <img src="images/Milky.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Milky.jpg';}" loading="eager" decoding="sync" alt="Milky Asefa" class="strip-photo"/>
+      <img src="images/Milky.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Milky.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Milky.jpg';}" loading="eager" decoding="async" alt="Milky Asefa" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 3: Kaleb -->
   <a href="#member-kaleb" class="video-card-small bottom w-inline-block" data-target-id="member-kaleb" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
     <div class="strip-box">
-      <img src="images/Kaleb.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Kaleb.jpg';}" loading="eager" decoding="sync" alt="Kaleb Birhanu" class="strip-photo"/>
+      <img src="images/Kaleb.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Kaleb.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Kaleb.jpg';}" loading="eager" decoding="async" alt="Kaleb Birhanu" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 4: Elto -->
   <a href="#member-elto" class="video-card-small middle w-inline-block" data-target-id="member-elto" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
     <div class="strip-box">
-      <img src="images/Elto.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='/about%20us/images/Elto.jpg';}" loading="eager" decoding="sync" alt="Elto Kassahun" class="strip-photo"/>
+      <img src="images/Elto.jpg" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='./images/Elto.jpg';}else if(this.dataset.fb==='1'){this.dataset.fb='2';this.src='/about%20us/images/Elto.jpg';}" loading="eager" decoding="async" alt="Elto Kassahun" class="strip-photo"/>
     </div>
   </a>
 
   <!-- Strip 5: Redi -->
   <a href="#member-rediet" class="video-card-small w-inline-block" data-target-id="member-rediet" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
     <div class="strip-box">
-      <img src="images/Redi.jpg" onerror="if(!this.dataset.step){this.dataset.step='1';this.src='images/redi.jpg';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='images/Rediet.jpg';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='/about%20us/images/Redi.jpg';}" loading="eager" decoding="sync" alt="Rediet Alesa" class="strip-photo"/>
+      <img src="images/Redi.jpg" onerror="if(!this.dataset.step){this.dataset.step='1';this.src='images/redi.jpg';}else if(this.dataset.step==='1'){this.dataset.step='2';this.src='images/Rediet.jpg';}else if(this.dataset.step==='2'){this.dataset.step='3';this.src='/about%20us/images/Redi.jpg';}" loading="eager" decoding="async" alt="Rediet Alesa" class="strip-photo"/>
     </div>
   </a>
 
@@ -1105,6 +1126,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Decode all 5 strip photos right away so mobile paints them cleanly before any tap
+  document.querySelectorAll('.heman-video-grid .strip-photo').forEach((img) => {
+    if (img.complete && typeof img.decode === 'function') {
+      img.decode().catch(() => {});
+    } else {
+      img.addEventListener('load', () => {
+        if (typeof img.decode === 'function') {
+          img.decode().catch(() => {});
+        }
+      }, { once: true });
+    }
+  });
+
   const isHoverDevice = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const videoGrid = document.getElementById('ensembleVideoGrid');
   const previewTargets = Array.from(document.querySelectorAll('.video-card-small, .video-preview-target'));
@@ -1121,7 +1155,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = getMediaContainer(target);
     const existingVideo = container.querySelector('video.dynamic-preview-video');
     if (existingVideo) {
-      existingVideo.onplaying = null;
       existingVideo.pause();
       existingVideo.removeAttribute('src');
       while (existingVideo.firstChild) {
@@ -1140,6 +1173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     activeTarget = target;
     target.classList.add('video-active');
+    target.classList.add('video-playing');
     if (videoGrid && videoGrid.contains(target)) {
       videoGrid.classList.add('has-active-video');
     }
@@ -1173,12 +1207,6 @@ document.addEventListener('DOMContentLoaded', function() {
         video.appendChild(sWebm);
       }
 
-      video.addEventListener('playing', function() {
-        if (activeTarget === target) {
-          target.classList.add('video-playing');
-        }
-      });
-
       container.appendChild(video);
       video.load();
     }
@@ -1192,6 +1220,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function stopVideo(target) {
     if (!target) return;
     target.classList.remove('video-active');
+    target.classList.remove('video-playing');
     if (videoGrid && !videoGrid.querySelector('.video-card-small.video-active')) {
       videoGrid.classList.remove('has-active-video');
     }
