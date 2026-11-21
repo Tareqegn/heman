@@ -1138,7 +1138,7 @@ html, body {
 
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script>
 
-<!-- CLEAN CLICK (MOBILE) & HOVER + SCROLL-TO-BIO (PC) VIDEO PREVIEWS -->
+<!-- FAST REUSABLE VIDEO PREVIEWS (NO DESTROY/RECREATE THRASH ON HOVER) -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const mobileBtn = document.getElementById('mobileMenuBtn');
@@ -1169,35 +1169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return target.querySelector('.strip-box') || target;
   }
 
-  function removeVideoElement(target) {
-    if (!target) return;
-    target.classList.remove('video-playing');
-    const container = getMediaContainer(target);
-    const existingVideo = container.querySelector('video.dynamic-preview-video');
-    if (existingVideo) {
-      existingVideo.pause();
-      existingVideo.removeAttribute('src');
-      while (existingVideo.firstChild) {
-        existingVideo.removeChild(existingVideo.firstChild);
-      }
-      existingVideo.load();
-      existingVideo.remove();
-    }
-  }
-
-  function startVideo(target) {
-    if (!target) return;
-    if (activeTarget && activeTarget !== target) {
-      stopVideo(activeTarget);
-    }
-
-    activeTarget = target;
-    target.classList.add('video-active');
-    target.classList.add('video-playing');
-    if (videoGrid && videoGrid.contains(target)) {
-      videoGrid.classList.add('has-active-video');
-    }
-
+  function ensureVideoElement(target) {
     const container = getMediaContainer(target);
     let video = container.querySelector('video.dynamic-preview-video');
     if (!video) {
@@ -1210,7 +1182,7 @@ document.addEventListener('DOMContentLoaded', function() {
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
-      video.preload = 'metadata';
+      video.preload = 'auto';
       video.setAttribute('playsinline', '');
       video.setAttribute('muted', '');
 
@@ -1230,7 +1202,23 @@ document.addEventListener('DOMContentLoaded', function() {
       container.appendChild(video);
       video.load();
     }
+    return video;
+  }
 
+  function startVideo(target) {
+    if (!target) return;
+    if (activeTarget && activeTarget !== target) {
+      stopVideo(activeTarget);
+    }
+
+    activeTarget = target;
+    target.classList.add('video-active');
+    target.classList.add('video-playing');
+    if (videoGrid && videoGrid.contains(target)) {
+      videoGrid.classList.add('has-active-video');
+    }
+
+    const video = ensureVideoElement(target);
     const playPromise = video.play();
     if (playPromise && typeof playPromise.catch === 'function') {
       playPromise.catch(() => {});
@@ -1244,7 +1232,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (videoGrid && !videoGrid.querySelector('.video-card-small.video-active')) {
       videoGrid.classList.remove('has-active-video');
     }
-    removeVideoElement(target);
+
+    const container = getMediaContainer(target);
+    const existingVideo = container.querySelector('video.dynamic-preview-video');
+    if (existingVideo) {
+      existingVideo.pause();
+      try {
+        existingVideo.currentTime = 0;
+      } catch (_) {}
+    }
+
     if (activeTarget === target) {
       activeTarget = null;
     }
@@ -1257,7 +1254,7 @@ document.addEventListener('DOMContentLoaded', function() {
   previewTargets.forEach(target => {
     const isStripCard = target.classList.contains('video-card-small');
 
-    // PC hover: expand and play video
+    // PC hover: expand and play reusable video immediately
     if (isHoverDevice) {
       target.addEventListener('mouseenter', function() {
         startVideo(target);
@@ -1270,7 +1267,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Click behavior:
     // - On PC for the 5 gallery strips: smoothly scroll to the member's description section
-    // - On mobile (or on member bio cards): toggle video preview on click only (no gestures)
+    // - On mobile (or on member bio cards): toggle video preview on click only
     target.addEventListener('click', function(e) {
       if (isHoverDevice && isStripCard) {
         const targetId = target.getAttribute('data-target-id');
@@ -1293,7 +1290,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Clicking outside active card stops and unmounts its video
+  // Clicking outside active card pauses its video and returns to photo
   document.addEventListener('click', function(e) {
     if (activeTarget && !activeTarget.contains(e.target)) {
       resetAllVideos();
