@@ -1,356 +1,392 @@
-<!DOCTYPE html><!-- Handled by Exflow.site --><html data-wf-page="617f8a263f531c3ecab1faa3" data-wf-site="61763adbd355d966baeee045"><head><meta charset="utf-8"/><title>Heman Sound - Music &amp; Discography</title><meta content="Heman Sound - Music &amp; Discography" property="og:title"/><meta content="Heman Sound - Music &amp; Discography" property="twitter:title"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="css/discography.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" /><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Syncopate:regular,700","Archivo:regular,700"]  }});</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]--><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"/><link href="images/app-icon.png" rel="apple-touch-icon"/>
-
-<style>
-/* BASE CONFIGURATION */
-html, body {
-  overflow-x: hidden;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #bcbcbc;
-  color: #111111;
-  font-family: 'Archivo', sans-serif !important;
-  scroll-behavior: smooth;
-  text-transform: uppercase !important;
-  transition: background-color 0.3s ease;
-}
-
-/* SUBTLE PAGE NOISE BEHIND CONTENT (RELEASE COVERS STAY CLEAN) */
-.noise {
-  display: block !important;
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
-  background-repeat: repeat;
-  opacity: 0.08;
-  pointer-events: none !important;
-  z-index: 1;
-}
-
-.section,
-.heman-footer {
-  position: relative;
-  z-index: 2;
-}
-
-/* SLIGHTLY REDUCED NOISE INSIDE THE LOADING SCREEN OVERLAY */
-.loading-animation {
-  position: relative;
-  pointer-events: none !important;
-}
-
-.loading-noise {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("images/5d683b6434ccc335fd58fbcd_5c06f51d6e75c933fe05c728_giphy.gif");
-  background-repeat: repeat;
-  opacity: 0.11;
-  pointer-events: none !important;
-  z-index: 1;
-}
-
-.loading-animation > :not(.loading-noise) {
-  position: relative;
-  z-index: 2;
-}
-
-/* TYPOGRAPHY HIERARCHY */
-h1, h2, h3, .h1-title, .h3-title, .h5-title {
-  font-family: 'Syncopate', sans-serif !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.05em !important;
-}
-
-p, div, span, a, .nav-link {
-  font-family: 'Archivo', sans-serif !important;
-  font-weight: 400 !important;
-  text-transform: uppercase !important;
-}
-
-/* BALANCED EDITORIAL NAVBAR */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 50px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  box-sizing: border-box;
-}
-
-.nav-group-left, .nav-group-right {
-  display: flex;
-  align-items: center;
-  gap: 35px;
-  flex: 1;
-}
-
-.nav-group-right {
-  justify-content: flex-end;
-}
-
-.navbar-brand-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  text-decoration: none;
-}
-
-.nav-link {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-decoration: none;
-  color: #111111;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover, .nav-link.active {
-  color: #f59e0b !important;
-}
-
-/* ANIMATED MOBILE HAMBURGER TOGGLE & TOP-RIGHT POPOUT MENU */
-.mobile-menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  padding: 0;
-  z-index: 102;
-}
-.mobile-menu-toggle span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #111111;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: center;
-}
-.mobile-menu-toggle.active span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-.mobile-menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-.mobile-menu-toggle.active span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-.mobile-dropdown-menu {
-  display: flex;
-  position: fixed;
-  top: 68px;
-  right: 16px;
-  left: auto;
-  width: min(270px, calc(100vw - 32px));
-  background-color: #ffffff;
-  flex-direction: column;
-  padding: 0 22px;
-  border-radius: 14px;
-  border: 1px solid rgba(17, 17, 17, 0.1);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-  z-index: 101;
-  gap: 0;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-8px) scale(0.97);
-  transform-origin: top right;
-  pointer-events: none;
-  transition: max-height 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.3s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.mobile-dropdown-menu.open {
-  max-height: 360px;
-  opacity: 1;
-  padding: 20px 22px;
-  gap: 12px;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-.mobile-dropdown-menu a {
-  font-family: 'Syncopate', sans-serif !important;
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #111111;
-  text-decoration: none;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  text-transform: uppercase;
-  transition: color 0.25s ease, transform 0.25s ease;
-}
-.mobile-dropdown-menu a:last-child {
-  border-bottom: none;
-}
-.mobile-dropdown-menu a:hover {
-  color: #f59e0b;
-  transform: translateX(4px);
-}
-
-/* PROFESSIONAL FOOTER WITH YELLOW HOVER INTERACTIONS */
-.heman-footer {
-  padding: 80px 8vw 40px 8vw;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-  background-color: transparent;
-}
-
-.footer-top-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 50px;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.15);
-  margin-bottom: 40px;
-}
-
-@media screen and (max-width: 900px) {
-  .footer-top-row {
-    grid-template-columns: 1fr;
-    gap: 30px;
+<!DOCTYPE html><!-- Handled by Exflow.site --><html data-wf-page="617b99c5676d90e1c2b7271e" data-wf-site="61763adbd355d966baeee045"><head><meta charset="utf-8"/><title>Discography — Heman Sound</title><meta content="Discography — Heman Sound" property="og:title"/><meta content="Discography — Heman Sound" property="twitter:title"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="css/webflow-style.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" /><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Syncopate:regular,700","Archivo:regular,700","Inter:regular,500,600,700"]  }});</script><!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif]--><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"/><link href="images/app-icon.png" rel="apple-touch-icon"/><style>
+  .album-wrapper img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
   }
-}
+  .album-cover-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .album-cover-link:hover {
+    opacity: 0.92;
+  }
+  .album-track-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .album-track-link:hover .h5-title {
+    color: #b45309;
+  }
 
-.footer-col-brand h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 15px;
-  color: #111111;
-}
+  /* COMPACT SONG TITLE & SHORT DESCRIPTION */
+  .album-wrapper .h5-title {
+    font-size: 0.85rem !important;
+    line-height: 1.25 !important;
+    margin: 0 0 3px 0 !important;
+    letter-spacing: 0.04em;
+  }
+  .album-wrapper .paragraph {
+    font-size: 0.68rem !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+    opacity: 0.75;
+    max-width: 190px;
+  }
 
-.footer-col-brand p {
-  font-size: 0.8rem;
-  line-height: 1.6;
-  opacity: 0.7;
-  margin-bottom: 25px;
-  max-width: 320px;
-}
-
-.footer-col-links h5 {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
-  color: #111111;
-}
-
-.footer-col-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.footer-col-links a {
-  text-decoration: none;
-  color: #111111;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  opacity: 0.7;
-  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
-  display: inline-block;
-}
-
-.footer-col-links a:hover {
-  color: #f59e0b !important;
-  opacity: 1;
-  transform: translateX(4px);
-}
-
-.footer-middle-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-bottom-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  margin-top: 30px;
-  flex-wrap: wrap;
-  gap: 10px;
-  border-top: 1px solid rgba(17, 17, 17, 0.1);
-  padding-top: 30px;
-}
-
-.back-to-top-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(17, 17, 17, 0.05);
-  border: 1px solid rgba(17, 17, 17, 0.15);
-  padding: 14px 30px;
-  border-radius: 40px;
-  font-family: 'Syncopate', sans-serif;
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  color: #111111;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.back-to-top-btn:hover {
-  background: #111111;
-  color: #ffffff;
-  transform: translateY(-3px);
-}
-
-@media screen and (max-width: 900px) {
+  /* NAVBAR STYLING WITH ENLARGED BRANDING & ANIMATED HAMBURGER */
   .navbar {
-    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-sizing: border-box;
+    background: rgba(188, 188, 188, 0.85);
+    backdrop-filter: blur(8px);
   }
-  .nav-group-left, .nav-group-right {
-    display: none !important;
+  .nav-group-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+  }
+  .nav-group-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+    flex: 1;
   }
   .navbar-brand-center {
-    position: absolute !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .mobile-menu-toggle {
-    display: flex !important;
-    margin-left: auto !important;
+  .all-caps-text {
+    font-family: 'Syncopate', sans-serif !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #111111;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
   }
-}
-</style>
-</head><body><div class="noise"></div><div class="loading-animation"><div class="loading-noise"></div><div class="overflow-hidden perspective"><div class="loading-perspective"><h3 class="loading-1st-row _1st">l</h3><h3 class="loading-1st-row _2nd">o</h3><h3 class="loading-1st-row _3rd">a</h3><h3 class="loading-1st-row _4th">d</h3><h3 class="loading-1st-row _5th">i</h3><h3 class="loading-1st-row _6th">n</h3><h3 class="loading-1st-row _7th">g</h3></div><div class="loading-perspective absolute"><h3 class="loading-2nd-row _1st">L</h3><h3 class="loading-2nd-row _2nd">o</h3><h3 class="loading-2nd-row _3rd">a</h3><h3 class="loading-2nd-row _4th">d</h3><h3 class="loading-2nd-row _5th">i</h3><h3 class="loading-2nd-row _6th">n</h3><h3 class="loading-2nd-row _7th">g</h3></div></div></div>
+  .all-caps-text:hover {
+    opacity: 0.6;
+  }
 
-<!-- NAVIGATION BAR -->
+  /* Animated Mobile Hamburger Toggle Button */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    padding: 0;
+    z-index: 102;
+  }
+  .mobile-menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #111111;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger to 'X' Transformation States */
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Mobile Dropdown Drawer with Smooth Slide & Fade */
+  .mobile-dropdown-menu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 15px;
+    right: 15px;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 0 24px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    z-index: 101;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
+  }
+  .mobile-dropdown-menu.open {
+    max-height: 350px;
+    opacity: 1;
+    padding: 24px;
+    gap: 16px;
+  }
+  .mobile-dropdown-menu a {
+    font-family: 'Syncopate', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111111;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* ISOLATED CROSSED CAUTION TAPES BANNER ('JESUS SAVES') */
+  .heman-tape-section {
+    width: 100%;
+    padding: 96px 0 24px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 15;
+    box-sizing: border-box;
+    background: transparent;
+  }
+  .heman-tapes-box {
+    position: relative;
+    width: 130vw;
+    margin-left: -15vw;
+    height: 110px;
+  }
+  .heman-tape-1,
+  .heman-tape-2 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding: 8px 0;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  .heman-tape-1 {
+    background-color: #facc15;
+    transform: translateY(-50%) rotate(-4deg);
+    z-index: 11;
+  }
+  .heman-tape-2 {
+    background-color: #fbbf24;
+    transform: translateY(-50%) rotate(4deg);
+    z-index: 12;
+  }
+  .heman-tape-track-1,
+  .heman-tape-track-2 {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .heman-tape-track-1 {
+    animation: hemanMarqueeLeft 25s linear infinite;
+  }
+  .heman-tape-track-2 {
+    animation: hemanMarqueeRight 25s linear infinite;
+  }
+  @keyframes hemanMarqueeLeft {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes hemanMarqueeRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+  }
+  .heman-tape-text {
+    font-family: 'Syncopate', sans-serif !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    font-size: clamp(1rem, 1.5vw, 1.45rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    padding-right: 18px;
+    display: inline-block;
+  }
+
+  /* REFINED PROFESSIONAL FOOTER WITH YELLOW HOVER INTERACTIONS */
+  .heman-footer {
+    position: relative;
+    padding: 80px 8vw 40px 8vw;
+    background-color: #bcbcbc;
+    color: #111111;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    z-index: 20;
+    text-transform: uppercase;
+  }
+  .footer-top-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+    margin-bottom: 40px;
+  }
+  @media screen and (max-width: 900px) {
+    .footer-top-row {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+  .footer-col-brand h3 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #111111;
+  }
+  .footer-col-brand p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    opacity: 0.7;
+    margin-bottom: 25px;
+    max-width: 320px;
+  }
+  .footer-col-links h5 {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    color: #111111;
+  }
+  .footer-col-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col-links a {
+    text-decoration: none;
+    color: #111111;
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+    display: inline-block;
+  }
+  .footer-col-links a:hover {
+    color: #f59e0b !important;
+    opacity: 1;
+    transform: translateX(4px);
+  }
+  .footer-middle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid rgba(17, 17, 17, 0.1);
+    padding-top: 30px;
+  }
+  .back-to-top-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(17, 17, 17, 0.05);
+    border: 1px solid rgba(17, 17, 17, 0.15);
+    padding: 14px 30px;
+    border-radius: 40px;
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #111111;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .back-to-top-btn:hover {
+    background: #111111;
+    color: #ffffff;
+    transform: translateY(-3px);
+  }
+
+  /* MOBILE RESPONSIVE OVERRIDES */
+  @media screen and (max-width: 900px) {
+    .navbar {
+      padding: 18px 20px;
+    }
+    .nav-group-left, .nav-group-right {
+      display: none !important;
+    }
+    .navbar-brand-center {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+    .mobile-menu-toggle {
+      display: flex !important;
+      margin-left: auto !important;
+    }
+    .heman-tape-section {
+      padding: 80px 0 16px 0;
+    }
+    .heman-tapes-box {
+      height: 84px;
+    }
+    .album-wrapper .paragraph {
+      max-width: 140px;
+    }
+  }
+</style></head><body><div class="noise"></div><div class="loading-animation"><div class="loading-noise"></div><div class="overflow-hidden perspective"><div class="loading-perspective"><h3 class="loading-1st-row _1st">l</h3><h3 class="loading-1st-row _2nd">o</h3><h3 class="loading-1st-row _3rd">a</h3><h3 class="loading-1st-row _4th">d</h3><h3 class="loading-1st-row _5th">i</h3><h3 class="loading-1st-row _6th">n</h3><h3 class="loading-1st-row _7th">g</h3></div><div class="loading-perspective absolute"><h3 class="loading-2nd-row _1st">L</h3><h3 class="loading-2nd-row _2nd">o</h3><h3 class="loading-2nd-row _3rd">a</h3><h3 class="loading-2nd-row _4th">d</h3><h3 class="loading-2nd-row _5th">i</h3><h3 class="loading-2nd-row _6th">n</h3><h3 class="loading-2nd-row _7th">g</h3></div></div></div>
+
+<!-- NAVBAR WITH ANIMATED HAMBURGER & CENTERED BRANDING -->
 <div class="navbar">
   <div class="nav-group-left">
-    <a href="discography.html" class="nav-link active" style="color: #f59e0b;">music</a>
-    <a href="../studio-sessions/studio.html" class="nav-link">sessions</a>
-    <a href="../mix-produce-workflow/mix.html" class="nav-link">mixing</a>
+    <a href="discography.html" class="all-caps-text" style="color: #f59e0b;">music</a>
+    <a href="../studio-sessions/studio.html" class="all-caps-text">sessions</a>
+    <a href="../mix-produce-workflow/mix.html" class="all-caps-text">mixing</a>
   </div>
 
   <a href="../index.html" class="navbar-brand-center w-inline-block">
-    <h3 class="h3-title center" style="margin: 0;">Heman Sound</h3>
+    <h3 class="h3-title center" style="margin: 0; font-family: 'Syncopate', sans-serif; font-size: 1.2rem; letter-spacing: 0.15em; font-weight: 700; white-space: nowrap;">Heman Sound</h3>
   </a>
 
   <div class="nav-group-right">
-    <a href="../about us/about.html" class="nav-link">about</a>
-    <a href="../contact/contact.html" class="nav-link">contact</a>
+    <a href="../about us/about.html" class="all-caps-text">about</a>
+    <a href="../contact/contact.html" class="all-caps-text">contact</a>
   </div>
 
   <!-- Animated Mobile Hamburger Button -->
@@ -360,7 +396,7 @@ p, div, span, a, .nav-link {
     <span></span>
   </button>
 
-  <!-- Top-Right Mobile Popout Menu -->
+  <!-- Mobile Dropdown Drawer -->
   <div class="mobile-dropdown-menu" id="mobileDropdown">
     <a href="discography.html" style="color: #f59e0b;">music</a>
     <a href="../studio-sessions/studio.html">sessions</a>
@@ -370,52 +406,261 @@ p, div, span, a, .nav-link {
   </div>
 </div>
 
-<!-- MUSIC GALLERY SECTION -->
-<div class="section full-screen"><div class="all-music-wrap"><div class="all-music-container"><div data-w-id="6192f7d5-89e0-bfbc-5ea2-95ae5a7fb600" class="all-music-interaction"><div class="all-music-gallery">
-<h1 class="h1-title">discography</h1>
+<!-- CROSSED CAUTION TAPES BANNER WITH 'JESUS SAVES' -->
+<div class="heman-tape-section">
+  <div class="heman-tapes-box">
+    <a href="../jesus/jesus.html" class="heman-tape-1">
+      <div class="heman-tape-track-1">
+        <span class="heman-tape-text">JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES —</span>
+        <span class="heman-tape-text">JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES —</span>
+      </div>
+    </a>
+    <a href="../jesus/jesus.html" class="heman-tape-2">
+      <div class="heman-tape-track-2">
+        <span class="heman-tape-text">JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES —</span>
+        <span class="heman-tape-text">JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES — JESUS SAVES —</span>
+      </div>
+    </a>
+  </div>
+</div>
 
-<!-- Release 1: Baletegnetih -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _1 w-inline-block" title="Baletegnetih">
-  <img src="images/baletegnetih.jpg" loading="eager" sizes="(max-width: 479px) 33vw, 22vw" alt="Baletegnetih Release" class="_100-width"/>
-</a>
+<div class="horizontal-scroll-wrap"><div class="sticky-element"><div class="scroll-container"><div class="section _100vw"><div class="grid">
 
-<!-- Release 2: Kberbye -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _2 w-inline-block" title="Kberbye">
-  <img src="images/kberbye.jpg" loading="eager" sizes="(max-width: 479px) 24vw, 16vw" alt="Kberbye Release" class="_100-width"/>
-</a>
+  <!-- 1: KEBER BEYE -->
+  <div id="w-node-_01ed76c5-c946-1aca-5a4c-b7241c435a25-c2b7271e" class="album-wrapper bottom-margin">
+    <a href="https://www.youtube.com/watch?v=jEzoVqW__Xw&list=RDjEzoVqW__Xw&start_radio=1&pp=oAcB" target="_blank" class="album-cover-link">
+      <img src="images/kberbye.jpg" loading="eager" sizes="(max-width: 767px) 124px, 19vw" alt="Keber Beye" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=jEzoVqW__Xw&list=RDjEzoVqW__Xw&start_radio=1&pp=oAcB" target="_blank" class="album-track-link"><h5 class="h5-title">KEBER BEYE</h5></a>
+        <p class="paragraph">Yakob Million • Arr. Elto</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=jEzoVqW__Xw&list=RDjEzoVqW__Xw&start_radio=1&pp=oAcB" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
 
-<!-- Release 3: Mndnew -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _3 w-inline-block" title="Mndnew">
-  <img src="images/mndnew.jpg" loading="eager" sizes="(max-width: 479px) 24vw, 16vw" alt="Mndnew Release" class="_100-width"/>
-</a>
+  <!-- 2: BELEBE TSELAT LAY -->
+  <div id="image-link" class="album-wrapper bottom-margin w-node-_01ed76c5-c946-1aca-5a4c-b7241c435a2b-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=teGLG3mUAtw" target="_blank" class="album-cover-link">
+      <img src="images/belbetslatlay.jpg" onerror="this.onerror=null;this.src='images/noel.jpg';" loading="eager" sizes="(max-width: 767px) 124px, 20vw" alt="Belebe Tselat Lay" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=teGLG3mUAtw" target="_blank" class="album-track-link"><h5 class="h5-title">BELEBE TSELAT LAY</h5></a>
+        <p class="paragraph">Addis Alemayehu • Rearr. Elto</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=teGLG3mUAtw" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
 
-<!-- Release 4: Noel -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _4 w-inline-block" title="Noel">
-  <img src="images/noel.jpg" loading="eager" sizes="(max-width: 479px) 24vw, 16vw" alt="Noel Release" class="_100-width"/>
-</a>
+  <!-- 3: ABEJEHU -->
+  <div id="slider-link" class="album-wrapper bottom-margin w-node-_01ed76c5-c946-1aca-5a4c-b7241c435a31-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=JmCb-0L6j6E&list=RDJmCb-0L6j6E&start_radio=1" target="_blank" class="album-cover-link">
+      <img src="images/ohgetahoy.jpg" onerror="this.onerror=null;this.src='images/baletegnetih.jpg';" loading="eager" sizes="(max-width: 767px) 124px, 19vw" alt="Abejehu" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=JmCb-0L6j6E&list=RDJmCb-0L6j6E&start_radio=1" target="_blank" class="album-track-link"><h5 class="h5-title">ABEJEHU</h5></a>
+        <p class="paragraph">Addis Alemayehu • Heman Sound</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=JmCb-0L6j6E&list=RDJmCb-0L6j6E&start_radio=1" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
 
-<!-- Release 5: Belbetslatlay -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _5 w-inline-block" title="Belbetslatlay">
-  <img src="images/belbetslatlay.png" loading="eager" sizes="20vw" alt="Belbetslatlay Release" class="_100-width"/>
-</a>
+  <!-- 4: MENDNEW DES YEMILEGN -->
+  <div id="image-link" class="album-wrapper w-node-_01ed76c5-c946-1aca-5a4c-b7241c435a37-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=2RLTIeKLtLs" target="_blank" class="album-cover-link">
+      <img src="images/mndnew.jpg" loading="eager" sizes="(max-width: 767px) 124px, 20vw" alt="Mendnew Des Yemilegn" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=2RLTIeKLtLs" target="_blank" class="album-track-link"><h5 class="h5-title">MENDNEW DES YEMILEGN</h5></a>
+        <p class="paragraph">Betelhem Alessa • Prod. Kaleb</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=2RLTIeKLtLs" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
 
-<!-- Release 6: Ohgetahoy -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _6 w-inline-block" title="Ohgetahoy">
-  <img src="images/ohgetahoy.png" loading="eager" sizes="21vw" alt="Ohgetahoy Release" class="_100-width"/>
-</a>
+</div></div><div class="section _100vw"><div class="grid">
 
-<!-- Additional gallery atmospheric tiles mapped to your custom posters -->
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _7 w-inline-block"><img src="images/baletegnetih.jpg" loading="eager" sizes="(max-width: 479px) 45vw, 30vw" alt="" class="_100-width"/></a>
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _8 w-inline-block"><img src="images/kberbye.jpg" loading="eager" sizes="(max-width: 479px) 33vw, 22vw" alt="" class="_100-width"/></a>
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _9 w-inline-block"><img src="images/mndnew.jpg" loading="eager" sizes="(max-width: 479px) 26vw, 17vw" alt="" class="_100-width"/></a>
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _10 w-inline-block"><img src="images/noel.jpg" loading="eager" sizes="(max-width: 479px) 36vw, 24vw" alt="" class="_100-width"/></a>
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _11 w-inline-block"><img src="images/belbetslatlay.png" loading="eager" sizes="(max-width: 479px) 21vw, 14vw" alt="" class="_100-width"/></a>
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _12 w-inline-block"><img src="images/ohgetahoy.png" loading="eager" sizes="(max-width: 479px) 31vw, 21vw" alt="" class="_100-width"/></a>
-<a href="http://youtube.com/@heman_sound" target="_blank" class="music-image _13 w-inline-block"><img src="images/baletegnetih.jpg" loading="eager" sizes="(max-width: 479px) 35vw, 23vw" alt="" class="_100-width"/></a>
+  <!-- 5: NOEL (LIDET) -->
+  <div id="w-node-_3b2e22fc-a67b-76dd-dc79-e56e0f32c29d-c2b7271e" class="album-wrapper bottom-margin">
+    <a href="https://www.youtube.com/watch?v=KCWmtRpcDig" target="_blank" class="album-cover-link">
+      <img src="images/noel.jpg" loading="eager" sizes="(max-width: 767px) 124px, 19vw" alt="Noel (Lidet)" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=KCWmtRpcDig" target="_blank" class="album-track-link"><h5 class="h5-title">NOEL (LIDET)</h5></a>
+        <p class="paragraph">Ahavah Gospel • Mix Nehemiah</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=KCWmtRpcDig" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
 
-</div></div></div></div></div>
+  <!-- 6: BALE-TEGNETEH -->
+  <div id="image-link" class="album-wrapper bottom-margin w-node-_3b2e22fc-a67b-76dd-dc79-e56e0f32c2ae-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=M1xIYSp82ao" target="_blank" class="album-cover-link">
+      <img src="images/baletegnetih.jpg" loading="eager" sizes="(max-width: 767px) 124px, 19vw" alt="Bale-Tegneteh" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=M1xIYSp82ao" target="_blank" class="album-track-link"><h5 class="h5-title">BALE-TEGNETEH</h5></a>
+        <p class="paragraph">Meklit • Arr. Elto, Prod. Kaleb</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=M1xIYSp82ao" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
 
-<!-- PROFESSIONAL MATCHING FOOTER -->
+  <!-- 7: KEBER BEYE -->
+  <div id="slider-link" class="album-wrapper bottom-margin w-node-_3b2e22fc-a67b-76dd-dc79-e56e0f32c2bf-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=jEzoVqW__Xw&list=RDjEzoVqW__Xw&start_radio=1&pp=oAcB" target="_blank" class="album-cover-link">
+      <img src="images/kberbye.jpg" loading="eager" sizes="(max-width: 767px) 124px, 18vw" alt="Keber Beye" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=jEzoVqW__Xw&list=RDjEzoVqW__Xw&start_radio=1&pp=oAcB" target="_blank" class="album-track-link"><h5 class="h5-title">KEBER BEYE</h5></a>
+        <p class="paragraph">Yakob Million • Arr. Elto</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=jEzoVqW__Xw&list=RDjEzoVqW__Xw&start_radio=1&pp=oAcB" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8: BELEBE TSELAT LAY -->
+  <div id="image-link" class="album-wrapper w-node-_3b2e22fc-a67b-76dd-dc79-e56e0f32c2d0-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=teGLG3mUAtw" target="_blank" class="album-cover-link">
+      <img src="images/belbetslatlay.jpg" onerror="this.onerror=null;this.src='images/noel.jpg';" loading="eager" sizes="(max-width: 767px) 124px, 19vw" alt="Belebe Tselat Lay" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=teGLG3mUAtw" target="_blank" class="album-track-link"><h5 class="h5-title">BELEBE TSELAT LAY</h5></a>
+        <p class="paragraph">Addis Alemayehu • Rearr. Elto</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=teGLG3mUAtw" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
+
+</div></div><div class="section _100vw"><div class="grid">
+
+  <!-- 9: ABEJEHU -->
+  <div id="w-node-_4058feb6-0d50-df4a-657e-c43dfb1ac24a-c2b7271e" class="album-wrapper bottom-margin">
+    <a href="https://www.youtube.com/watch?v=JmCb-0L6j6E&list=RDJmCb-0L6j6E&start_radio=1" target="_blank" class="album-cover-link">
+      <img src="images/ohgetahoy.jpg" onerror="this.onerror=null;this.src='images/baletegnetih.jpg';" loading="eager" sizes="(max-width: 767px) 124px, 20vw" alt="Abejehu" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=JmCb-0L6j6E&list=RDJmCb-0L6j6E&start_radio=1" target="_blank" class="album-track-link"><h5 class="h5-title">ABEJEHU</h5></a>
+        <p class="paragraph">Addis Alemayehu • Heman Sound</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=JmCb-0L6j6E&list=RDJmCb-0L6j6E&start_radio=1" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10: MENDNEW DES YEMILEGN -->
+  <div id="image-link" class="album-wrapper bottom-margin w-node-_4058feb6-0d50-df4a-657e-c43dfb1ac25b-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=2RLTIeKLtLs" target="_blank" class="album-cover-link">
+      <img src="images/mndnew.jpg" loading="eager" sizes="(max-width: 767px) 124px, 16vw" alt="Mendnew Des Yemilegn" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=2RLTIeKLtLs" target="_blank" class="album-track-link"><h5 class="h5-title">MENDNEW DES YEMILEGN</h5></a>
+        <p class="paragraph">Betelhem Alessa • Prod. Kaleb</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=2RLTIeKLtLs" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11: NOEL (LIDET) -->
+  <div id="slider-link" class="album-wrapper bottom-margin w-node-_4058feb6-0d50-df4a-657e-c43dfb1ac26c-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=KCWmtRpcDig" target="_blank" class="album-cover-link">
+      <img src="images/noel.jpg" loading="eager" sizes="(max-width: 767px) 124px, 19vw" alt="Noel (Lidet)" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=KCWmtRpcDig" target="_blank" class="album-track-link"><h5 class="h5-title">NOEL (LIDET)</h5></a>
+        <p class="paragraph">Ahavah Gospel • Mix Nehemiah</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=KCWmtRpcDig" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12: BALE-TEGNETEH -->
+  <div id="image-link" class="album-wrapper w-node-_4058feb6-0d50-df4a-657e-c43dfb1ac27d-c2b7271e">
+    <a href="https://www.youtube.com/watch?v=M1xIYSp82ao" target="_blank" class="album-cover-link">
+      <img src="images/baletegnetih.jpg" loading="eager" sizes="(max-width: 767px) 124px, 18vw" alt="Bale-Tegneteh" class="_100-width _1vw-margin"/>
+    </a>
+    <div class="horizontal-row align-top">
+      <div>
+        <a href="https://www.youtube.com/watch?v=M1xIYSp82ao" target="_blank" class="album-track-link"><h5 class="h5-title">BALE-TEGNETEH</h5></a>
+        <p class="paragraph">Meklit • Arr. Elto, Prod. Kaleb</p>
+      </div>
+      <div class="streaming-links-small-grid mobile-margin">
+        <a href="http://spotify.com" target="_blank" class="streaming-link-small w-inline-block"><img src="images/spotify.png" loading="lazy" alt="Spotify" class="_100-width"/></a>
+        <a href="http://apple.com" target="_blank" class="streaming-link-small apple w-inline-block"><img src="images/apple-black-logo.png" loading="lazy" alt="Apple Music"/></a>
+        <a href="https://www.youtube.com/watch?v=M1xIYSp82ao" target="_blank" class="streaming-link-small w-inline-block"><img src="images/youtube.png" loading="lazy" alt="YouTube" class="_100-width"/></a>
+        <a href="http://amazon.com" target="_blank" class="streaming-link-small amazon w-inline-block"><img src="images/amazon_music_logo.svg.png" loading="lazy" srcset="images/amazon_music_logo.svg-p-500.png 500w, images/amazon_music_logo.svg.png 768w" sizes="(max-width: 479px) 21px, (max-width: 767px) 4vw, (max-width: 991px) 2vw, 19px" alt="Amazon Music" class="_100-width"/></a>
+      </div>
+    </div>
+  </div>
+
+</div></div></div></div><div class="instruction">Scroll to see all</div></div>
+
+<!-- REFINED PROFESSIONAL FOOTER -->
 <footer class="heman-footer">
   <div class="footer-top-row">
     <div class="footer-col-brand">
@@ -426,9 +671,10 @@ p, div, span, a, .nav-link {
       <h5>PAGES</h5>
       <ul>
         <li><a href="../index.html">HOME</a></li>
-        <li><a href="../music-scroll/music.html">MUSIC</a></li>
-        <li><a href="discography.html">DISCOGRAPHY</a></li>
+        <li><a href="discography.html">MUSIC</a></li>
+        <li><a href="discography.html">NEWS</a></li>
         <li><a href="../contact/contact.html">CONTACT</a></li>
+        <li><a href="discography.html">STORE</a></li>
       </ul>
     </div>
     <div class="footer-col-links">
@@ -461,7 +707,7 @@ p, div, span, a, .nav-link {
 </footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   const mobileBtn = document.getElementById('mobileMenuBtn');
   const mobileDropdown = document.getElementById('mobileDropdown');
 
@@ -481,4 +727,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script><!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]--></body></html>
