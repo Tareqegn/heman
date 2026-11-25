@@ -16,19 +16,40 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
   <link href="images/app-icon.png" rel="apple-touch-icon"/>
   <style>
-    /* EVEN POSTER LEVELING & ALIGNMENT */
-    .horizontal-scroll-wrap .grid {
-      display: grid !important;
-      align-items: start !important;
-      align-content: start !important;
-    }
-    .album-wrapper {
+    /* UNIFORM GAP ACROSS ALL POSTERS + CLEARANCE BELOW FIXED NAVBAR */
+    .horizontal-scroll-wrap .scroll-container {
       display: flex !important;
-      flex-direction: column !important;
-      align-items: stretch !important;
-      align-self: start !important;
-      margin-top: 0 !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      gap: 28px !important;
+      width: max-content !important;
+      padding: 110px 24px 24px 24px !important;
+      box-sizing: border-box !important;
+    }
+    .horizontal-scroll-wrap .section._100vw,
+    .horizontal-scroll-wrap .grid {
+      display: contents !important;
+    }
+    .horizontal-scroll-wrap .album-wrapper {
+      flex: 0 0 260px !important;
+      width: 260px !important;
+      max-width: 260px !important;
+      grid-area: auto !important;
+      grid-row: auto !important;
+      grid-column: auto !important;
+      align-self: flex-start !important;
+      margin: 0 !important;
+      padding: 0 !important;
       transform: none !important;
+    }
+
+    .album-wrapper img {
+      width: 100% !important;
+      height: 260px !important;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: cover !important;
+      display: block !important;
+      margin: 0 0 10px 0 !important;
     }
     .album-cover-link {
       display: block;
@@ -40,25 +61,22 @@
     .album-cover-link:hover {
       opacity: 0.92;
     }
-    .album-wrapper img._100-width._1vw-margin,
-    .album-wrapper img {
-      width: 100% !important;
-      height: auto !important;
-      aspect-ratio: 1 / 1 !important;
-      object-fit: cover !important;
-      display: block !important;
-      margin-top: 0 !important;
-    }
+
     .album-wrapper .horizontal-row {
       display: flex !important;
-      justify-content: space-between !important;
+      flex-direction: column !important;
       align-items: flex-start !important;
-      gap: 12px;
-      width: 100%;
+      gap: 8px !important;
+      width: 100% !important;
+    }
+    .album-wrapper .horizontal-row > div:first-child {
+      width: 100% !important;
+      min-width: 0 !important;
     }
     .album-track-link {
       text-decoration: none;
       color: inherit;
+      display: block;
     }
     .album-track-link:hover .h5-title {
       color: #b45309;
@@ -70,13 +88,31 @@
       line-height: 1.25 !important;
       margin: 0 0 3px 0 !important;
       letter-spacing: 0.04em;
+      white-space: normal !important;
+      word-break: normal !important;
     }
     .album-wrapper .paragraph {
       font-size: 0.68rem !important;
-      line-height: 1.3 !important;
+      line-height: 1.35 !important;
       margin: 0 !important;
       opacity: 0.75;
-      max-width: 190px;
+      max-width: 100% !important;
+      white-space: normal !important;
+      word-break: normal !important;
+    }
+    .album-wrapper .streaming-links-small-grid {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin: 2px 0 0 0 !important;
+    }
+    .album-wrapper .streaming-link-small img {
+      width: 18px !important;
+      height: 18px !important;
+      aspect-ratio: 1 / 1 !important;
+      object-fit: contain !important;
+      margin: 0 !important;
     }
 
     /* NAVBAR STYLING WITH ENLARGED BRANDING & ANIMATED HAMBURGER */
@@ -408,8 +444,17 @@
       .heman-tapes-box {
         height: 84px;
       }
-      .album-wrapper .paragraph {
-        max-width: 140px;
+      .horizontal-scroll-wrap .scroll-container {
+        gap: 20px !important;
+        padding: 90px 16px 20px 16px !important;
+      }
+      .horizontal-scroll-wrap .album-wrapper {
+        flex: 0 0 210px !important;
+        width: 210px !important;
+        max-width: 210px !important;
+      }
+      .album-wrapper img {
+        height: 210px !important;
       }
     }
   </style>
