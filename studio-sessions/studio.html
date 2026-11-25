@@ -79,6 +79,26 @@ h4, p, div, span, a, .h4-title, .paragraph {
   font-weight: 700 !important;
 }
 
+/* CLICKABLE LINK STYLING FOR VIDEO CARD LINKS */
+.video-card .menu-link-wrap {
+  cursor: pointer;
+  position: relative;
+  z-index: 30;
+  text-decoration: none !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+  padding-bottom: 3px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.video-card .menu-link-wrap:hover,
+.video-card .menu-link-wrap:focus-visible {
+  border-bottom-color: #f59e0b;
+  transform: translateY(-2px);
+}
+.video-card .menu-link-wrap:hover h2,
+.video-card .menu-link-wrap:focus-visible h2 {
+  color: #f59e0b;
+}
+
 /* NAVBAR */
 .navbar {
   display: flex;
@@ -223,6 +243,48 @@ h4, p, div, span, a, .h4-title, .paragraph {
     display: flex !important;
     margin-left: auto !important;
   }
+
+  /* Stacked uniform-height mobile video cards with tap-to-expand */
+  .section.full-screen {
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 12px 20px 24px 20px !important;
+    box-sizing: border-box !important;
+  }
+  .section.full-screen .video-card {
+    width: 100% !important;
+    flex: none !important;
+    height: 210px !important;
+    min-height: 210px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+    cursor: pointer;
+    transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .section.full-screen .video-card.is-expanded {
+    height: 290px !important;
+    min-height: 290px !important;
+  }
+  .section.full-screen .video-card .video-content,
+  .section.full-screen .video-card .absolute-video,
+  .section.full-screen .video-card video {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  .section.full-screen .video-card .video-link {
+    position: relative;
+    z-index: 20;
+  }
+  .section.full-screen .video-card .menu-link-wrap {
+    border-bottom-color: #f59e0b;
+  }
 }
 
 /* SCROLL REVEAL ANIMATION */
@@ -336,8 +398,26 @@ h4, p, div, span, a, .h4-title, .paragraph {
   to { opacity: 1; transform: translateX(0) scale(1); }
 }
 @media screen and (max-width: 900px) {
+  .studio-sections-wrap {
+    padding: 64px 20px;
+  }
+  .room-panel,
   .room-panel.active-panel {
     grid-template-columns: 1fr;
+    padding: 24px 18px;
+    gap: 20px;
+  }
+  .room-panel p {
+    max-width: 100%;
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+  .room-tab {
+    width: 100%;
+    text-align: center;
+    padding: 12px 18px;
+    font-size: 0.72rem;
+    box-sizing: border-box;
   }
 }
 
@@ -922,6 +1002,28 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
+
+  /* Mobile tap-to-expand on cards while letting the title link navigate directly */
+  const videoCards = document.querySelectorAll('.section.full-screen .video-card');
+  videoCards.forEach((card) => {
+    const linkEl = card.querySelector('.menu-link-wrap');
+
+    if (linkEl) {
+      linkEl.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
+
+    card.addEventListener('click', function() {
+      if (window.innerWidth <= 900) {
+        const willExpand = !this.classList.contains('is-expanded');
+        videoCards.forEach((other) => other.classList.remove('is-expanded'));
+        if (willExpand) {
+          this.classList.add('is-expanded');
+        }
+      }
+    });
+  });
 
   const tabs = document.querySelectorAll('.room-tab');
   const panels = document.querySelectorAll('.room-panel');
