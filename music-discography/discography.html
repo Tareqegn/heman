@@ -16,14 +16,12 @@
   <link href="images/favicon.png" rel="shortcut icon" type="image/x-icon"/>
   <link href="images/app-icon.png" rel="apple-touch-icon"/>
   <style>
-    /* UNIFORM GAP ACROSS ALL POSTERS + CLEARANCE BELOW FIXED NAVBAR */
+    /* SHARED LEVEL POSTERS & EVEN SPACING */
     .horizontal-scroll-wrap .scroll-container {
       display: flex !important;
       flex-direction: row !important;
       align-items: flex-start !important;
       gap: 28px !important;
-      width: max-content !important;
-      padding: 110px 24px 24px 24px !important;
       box-sizing: border-box !important;
     }
     .horizontal-scroll-wrap .section._100vw,
@@ -41,6 +39,14 @@
       margin: 0 !important;
       padding: 0 !important;
       transform: none !important;
+    }
+
+    /* PC VIEW: SCROLL DOWN REVEALS POSTERS HORIZONTALLY, THEN FOOTER */
+    @media screen and (min-width: 901px) {
+      .horizontal-scroll-wrap .scroll-container {
+        width: max-content !important;
+        padding: 110px 24px 24px 24px !important;
+      }
     }
 
     .album-wrapper img {
@@ -421,7 +427,7 @@
       transform: translateY(-3px);
     }
 
-    /* MOBILE RESPONSIVE OVERRIDES */
+    /* MOBILE VIEW: DIRECT VERTICAL SCROLL TO FOOTER + HORIZONTAL SWIPE ON POSTERS */
     @media screen and (max-width: 900px) {
       .navbar {
         padding: 18px 20px;
@@ -444,9 +450,31 @@
       .heman-tapes-box {
         height: 84px;
       }
+      .horizontal-scroll-wrap {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+      }
+      .horizontal-scroll-wrap .sticky-element {
+        position: relative !important;
+        top: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
       .horizontal-scroll-wrap .scroll-container {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-x pan-y !important;
+        scrollbar-width: none;
+        transform: none !important;
         gap: 20px !important;
-        padding: 90px 16px 20px 16px !important;
+        padding: 24px 16px 24px 16px !important;
+      }
+      .horizontal-scroll-wrap .scroll-container::-webkit-scrollbar {
+        display: none;
       }
       .horizontal-scroll-wrap .album-wrapper {
         flex: 0 0 210px !important;
