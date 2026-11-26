@@ -313,10 +313,10 @@
       display: inline-block;
     }
 
-    /* REFINED PROFESSIONAL FOOTER WITH YELLOW HOVER INTERACTIONS */
+    /* ORGANIZED SHARED HEMAN SOUND FOOTER */
     .heman-footer {
       position: relative;
-      padding: 80px 8vw 40px 8vw;
+      padding: 64px 8vw 36px 8vw;
       background-color: #bcbcbc;
       color: #111111;
       border-top: 1px solid rgba(0, 0, 0, 0.15);
@@ -325,38 +325,47 @@
     }
     .footer-top-row {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      padding-bottom: 50px;
+      grid-template-columns: 1.8fr repeat(3, minmax(0, 1fr));
+      gap: 36px 40px;
+      align-items: start;
+      padding-bottom: 40px;
       border-bottom: 1px solid rgba(17, 17, 17, 0.15);
-      margin-bottom: 40px;
+      margin-bottom: 28px;
     }
     @media screen and (max-width: 900px) {
       .footer-top-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 24px;
+      }
+      .footer-col-brand {
+        grid-column: 1 / -1;
+      }
+    }
+    @media screen and (max-width: 540px) {
+      .footer-top-row {
         grid-template-columns: 1fr;
-        gap: 30px;
       }
     }
     .footer-col-brand h3 {
       font-family: 'Syncopate', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
-      margin-bottom: 15px;
+      margin: 0 0 12px 0;
       color: #111111;
     }
     .footer-col-brand p {
       font-size: 0.8rem;
       line-height: 1.6;
-      opacity: 0.7;
-      margin-bottom: 25px;
+      opacity: 0.72;
+      margin: 0;
       max-width: 320px;
     }
     .footer-col-links h5 {
       font-family: 'Syncopate', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 20px;
+      letter-spacing: 0.12em;
+      margin: 0 0 16px 0;
       color: #111111;
     }
     .footer-col-links ul {
@@ -365,7 +374,7 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .footer-col-links a {
       text-decoration: none;
@@ -374,7 +383,7 @@
       font-family: 'Inter', sans-serif;
       font-weight: 700;
       letter-spacing: 0.1em;
-      opacity: 0.7;
+      opacity: 0.75;
       transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
       display: inline-block;
     }
@@ -387,9 +396,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
+      padding: 12px 0;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
     }
     .footer-bottom-bar {
       display: flex;
@@ -398,11 +407,11 @@
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.1em;
-      margin-top: 30px;
+      margin-top: 20px;
       flex-wrap: wrap;
       gap: 10px;
       border-top: 1px solid rgba(17, 17, 17, 0.1);
-      padding-top: 30px;
+      padding-top: 24px;
     }
     .back-to-top-btn {
       display: inline-flex;
@@ -796,34 +805,41 @@
     <div class="instruction">Scroll to see all</div>
   </div>
 
+  <!-- ORGANIZED SHARED HEMAN SOUND FOOTER -->
   <footer class="heman-footer">
     <div class="footer-top-row">
       <div class="footer-col-brand">
         <h3>HEMAN SOUND</h3>
         <p>A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA, ETHIOPIA.</p>
       </div>
+
       <div class="footer-col-links">
         <h5>PAGES</h5>
         <ul>
           <li><a href="../index.html">HOME</a></li>
-          <li><a href="discography.html">MUSIC</a></li>
-          <li><a href="discography.html">NEWS</a></li>
-          <li><a href="../contact/contact.html">CONTACT</a></li>
-          <li><a href="discography.html">STORE</a></li>
+          <li><a href="../about us/about.html">ABOUT</a></li>
+          <li><a href="../music-scroll/music.html">MUSIC</a></li>
+          <li><a href="../heman-store/store.html">STORE</a></li>
         </ul>
       </div>
+
       <div class="footer-col-links">
-        <h5>MINISTRY</h5>
+        <h5>STUDIO &amp; SOUND</h5>
         <ul>
-          <li><a href="https://www.youtube.com/@heman_sound" target="_blank">YOUTUBE CHANNEL</a></li>
-          <li><a href="../studio-sessions/studio.html">LIVE EVENTS</a></li>
+          <li><a href="../studio-sessions/studio.html">STUDIO SESSIONS</a></li>
+          <li><a href="../mix-produce-workflow/mix.html">MIXING</a></li>
+          <li><a href="discography.html">DISCOGRAPHY</a></li>
           <li><a href="../contact/contact.html">BOOKINGS</a></li>
         </ul>
       </div>
+
       <div class="footer-col-links">
-        <h5>OTHERS</h5>
+        <h5>MINISTRY &amp; MORE</h5>
         <ul>
+          <li><a href="https://www.youtube.com/@heman_sound" target="_blank">YOUTUBE CHANNEL</a></li>
           <li><a href="../jesus/jesus.html">JESUS SAVES</a></li>
+          <li><a href="../music-scroll/music.html">NEWS</a></li>
+          <li><a href="../contact/contact.html">CONTACT</a></li>
           <li><a href="../about us/about.html">STYLE GUIDE</a></li>
           <li><a href="../contact/contact.html">LICENSING</a></li>
         </ul>
@@ -867,3 +883,6 @@
   <script src="js/webflow-script.js" type="text/javascript"></script>
 </body>
 </html>
+```[cite: 9]
+
+Drop the next page whenever you're ready.

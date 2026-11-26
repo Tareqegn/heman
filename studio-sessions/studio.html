@@ -587,9 +587,50 @@ h4, p, div, span, a, .h4-title, .paragraph {
   box-shadow: 0 10px 30px rgba(245, 158, 11, 0.45);
 }
 
-/* CLEAN PROFESSIONAL FOOTER (NO CLIPPED TEXT) */
+/* MOBILE CONTACT SECTION OVERFLOW FIX */
+.desktop-contact-container .paragraph {
+  white-space: nowrap;
+}
+@media screen and (max-width: 900px) {
+  .section.reveal-section .desktop-contact-container {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .section.reveal-section {
+    padding: 72px 20px !important;
+  }
+  .desktop-contact-container > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+  .fixed-contact-title {
+    font-size: clamp(1.8rem, 7.5vw, 2.5rem) !important;
+    line-height: 1.15 !important;
+    word-break: break-word;
+  }
+  .desktop-contact-container .paragraph {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    font-size: clamp(0.92rem, 4.2vw, 1.1rem) !important;
+  }
+  .desktop-contact-container .link-block {
+    max-width: 100% !important;
+    display: inline-block !important;
+  }
+  .desktop-contact-container ._3vw-margin {
+    margin-bottom: 26px !important;
+  }
+}
+
+/* ORGANIZED SHARED HEMAN SOUND FOOTER */
 .sonic-footer {
-  padding: 80px 8vw 40px 8vw;
+  padding: 64px 8vw 36px 8vw;
   border-top: 1px solid rgba(0, 0, 0, 0.15);
   background-color: transparent;
   position: relative;
@@ -597,16 +638,57 @@ h4, p, div, span, a, .h4-title, .paragraph {
 }
 .sonic-footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
-  padding-bottom: 50px;
+  grid-template-columns: 1.8fr repeat(3, minmax(0, 1fr));
+  gap: 36px 40px;
+  align-items: start;
+  padding-bottom: 40px;
   border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+  margin-bottom: 28px;
 }
 @media screen and (max-width: 900px) {
+  .sonic-footer {
+    padding: 56px 20px 32px 20px;
+  }
+  .sonic-footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
+  }
+  .footer-col-brand {
+    grid-column: 1 / -1;
+  }
+}
+@media screen and (max-width: 540px) {
   .sonic-footer-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
   }
+}
+.footer-col-brand h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #111111;
+}
+.footer-col-brand p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  opacity: 0.72;
+  margin: 0;
+  max-width: 320px;
+}
+.footer-col-links h5 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 16px 0;
+  color: #111111;
+}
+.footer-col-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .sonic-footer-link {
   text-decoration: none;
@@ -615,12 +697,35 @@ h4, p, div, span, a, .h4-title, .paragraph {
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
   letter-spacing: 0.1em;
-  transition: color 0.25s ease, transform 0.25s ease;
+  opacity: 0.75;
+  transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
   display: inline-block;
 }
 .sonic-footer-link:hover {
   color: #f59e0b !important;
+  opacity: 1;
   transform: translateX(4px);
+}
+.footer-middle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+  padding-top: 24px;
 }
 
 /* BACK TO TOP BUTTON */
@@ -914,21 +1019,21 @@ h4, p, div, span, a, .h4-title, .paragraph {
       <div class="align-left vertically _3vw-margin" style="margin-bottom: 40px;">
         <p class="all-caps-text _0-5vw-margin" style="margin-bottom: 6px; font-size: 0.85rem; opacity: 0.7;">Studio &amp; Mixing Inquiries</p>
         <a href="mailto:studio@hemansound.com?subject=Inquiry" class="link-block w-inline-block" style="text-decoration: none; color: inherit;">
-          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0; white-space: nowrap;">studio@hemansound.com</p>
+          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0;">studio@hemansound.com</p>
           <div class="underline"></div>
         </a>
       </div>
       <div class="align-left vertically _3vw-margin" style="margin-bottom: 40px;">
         <p class="all-caps-text _0-5vw-margin" style="margin-bottom: 6px; font-size: 0.85rem; opacity: 0.7;">Management &amp; Booking</p>
         <a href="mailto:booking@hemansound.com?subject=Booking" class="link-block w-inline-block" style="text-decoration: none; color: inherit;">
-          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0; white-space: nowrap;">booking@hemansound.com</p>
+          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0;">booking@hemansound.com</p>
           <div class="underline"></div>
         </a>
       </div>
       <div class="align-left vertically">
         <p class="all-caps-text _0-5vw-margin" style="margin-bottom: 6px; font-size: 0.85rem; opacity: 0.7;">Stream Channels</p>
         <a href="http://youtube.com/@heman_sound" target="_blank" class="link-block w-inline-block" style="text-decoration: none; color: inherit;">
-          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0; white-space: nowrap;">YouTube</p>
+          <p class="paragraph" style="font-size: clamp(1rem, 1.2vw, 1.2rem); font-weight: bold; margin: 0;">YouTube</p>
           <div class="underline"></div>
         </a>
       </div>
@@ -937,46 +1042,53 @@ h4, p, div, span, a, .h4-title, .paragraph {
   </div>
 </div>
 
-<!-- CLEAN PROFESSIONAL FOOTER (GIANT CLIPPED TEXT REMOVED) -->
+<!-- ORGANIZED SHARED HEMAN SOUND FOOTER -->
 <footer class="sonic-footer">
   <div class="sonic-footer-grid">
-    <div>
-      <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px;">HEMAN SOUND</h3>
-      <p style="font-size: 0.8rem; line-height: 1.6; opacity: 0.7; margin-bottom: 25px; max-width: 320px;">A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA, ETHIOPIA.</p>
+    <div class="footer-col-brand">
+      <h3>HEMAN SOUND</h3>
+      <p>A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA, ETHIOPIA.</p>
     </div>
-    <div>
-      <h5 style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px;">PAGES</h5>
-      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+
+    <div class="footer-col-links">
+      <h5>PAGES</h5>
+      <ul>
         <li><a href="../index.html" class="sonic-footer-link">HOME</a></li>
+        <li><a href="../about us/about.html" class="sonic-footer-link">ABOUT</a></li>
         <li><a href="../music-scroll/music.html" class="sonic-footer-link">MUSIC</a></li>
-        <li><a href="../music-discography/discography.html" class="sonic-footer-link">DISCOGRAPHY</a></li>
-        <li><a href="../contact/contact.html" class="sonic-footer-link">CONTACT</a></li>
+        <li><a href="../heman-store/store.html" class="sonic-footer-link">STORE</a></li>
       </ul>
     </div>
-    <div>
-      <h5 style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px;">MINISTRY</h5>
-      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
-        <li><a href="https://www.youtube.com/@heman_sound" target="_blank" class="sonic-footer-link">YOUTUBE CHANNEL</a></li>
-        <li><a href="studio.html" class="sonic-footer-link">LIVE EVENTS</a></li>
+
+    <div class="footer-col-links">
+      <h5>STUDIO &amp; SOUND</h5>
+      <ul>
+        <li><a href="studio.html" class="sonic-footer-link">STUDIO SESSIONS</a></li>
+        <li><a href="../mix-produce-workflow/mix.html" class="sonic-footer-link">MIXING</a></li>
+        <li><a href="../music-discography/discography.html" class="sonic-footer-link">DISCOGRAPHY</a></li>
         <li><a href="../contact/contact.html" class="sonic-footer-link">BOOKINGS</a></li>
       </ul>
     </div>
-    <div>
-      <h5 style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 20px;">OTHERS</h5>
-      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+
+    <div class="footer-col-links">
+      <h5>MINISTRY &amp; MORE</h5>
+      <ul>
+        <li><a href="https://www.youtube.com/@heman_sound" target="_blank" class="sonic-footer-link">YOUTUBE CHANNEL</a></li>
         <li><a href="../jesus/jesus.html" class="sonic-footer-link">JESUS SAVES</a></li>
+        <li><a href="../music-scroll/music.html" class="sonic-footer-link">NEWS</a></li>
+        <li><a href="../contact/contact.html" class="sonic-footer-link">CONTACT</a></li>
         <li><a href="../about us/about.html" class="sonic-footer-link">STYLE GUIDE</a></li>
         <li><a href="../contact/contact.html" class="sonic-footer-link">LICENSING</a></li>
       </ul>
     </div>
   </div>
 
-  <div style="display: flex; justify-content: space-between; align-items: center; padding: 40px 0 20px 0; flex-wrap: wrap; gap: 20px;">
+  <div class="footer-middle-row">
     <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="back-to-top-btn">BACK TO TOP ↑</a>
     <div style="font-family: monospace; font-size: 0.75rem; font-weight: 700; opacity: 0.6; letter-spacing: 0.1em;">● STUDIO ACTIVE — ADDIS ABABA</div>
   </div>
 
-  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; margin-top: 30px; flex-wrap: wrap; gap: 10px; border-top: 1px solid rgba(17,17,17,0.1); padding-top: 30px;">
+  <div class="footer-bottom-bar">
     <div>© 2026 - HEMAN SOUND</div>
     <div>DESIGNED AND DEVELOPED FOR HEMAN SOUND — ADDIS ABABA, ETHIOPIA</div>
   </div>
@@ -1097,3 +1209,4 @@ function selectTier(element, tierName) {
 </script>
 
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script><!--[if lte IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]--></body></html>
+```[cite: 11, 12]

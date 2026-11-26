@@ -575,6 +575,176 @@ html, body {
   }
 }
 
+/* OFFICIAL MERCH SHOWCASE ON ABOUT PAGE */
+.about-merch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 36px auto 0 auto;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 900px) {
+  .about-merch-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.about-merch-card {
+  background: rgba(255, 255, 255, 0.42);
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+.about-merch-thumb {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #2b2b2b;
+}
+.about-merch-title {
+  font-family: 'Syncopate', sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 6px 0;
+  color: #111111;
+}
+.about-merch-sub {
+  font-family: 'Archivo', sans-serif !important;
+  font-size: 0.8rem !important;
+  opacity: 0.78;
+  margin: 0;
+}
+.about-merch-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(17, 17, 17, 0.12);
+}
+.about-merch-price {
+  font-family: 'Syncopate', sans-serif !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: #111111;
+}
+.about-merch-buy-btn {
+  background: #f59e0b;
+  color: #111111 !important;
+  text-decoration: none;
+  font-family: 'Syncopate', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em;
+  padding: 9px 14px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.about-merch-buy-btn:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+}
+.heman-order-channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.heman-channel-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 17, 17, 0.5);
+  text-decoration: none;
+  color: #111111;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.heman-channel-pill:hover {
+  background-color: #111111;
+  color: #ffffff;
+}
+.heman-order-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+.heman-order-modal-backdrop.open {
+  display: flex;
+}
+.heman-order-modal {
+  background: #ffffff;
+  color: #111111;
+  width: 100%;
+  max-width: 460px;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+.heman-order-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #111111;
+  padding: 4px 8px;
+}
+.heman-order-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+.heman-order-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.heman-order-action-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+.heman-btn-whatsapp {
+  background: #16a34a;
+  color: #ffffff;
+}
+.heman-btn-email {
+  background: #111111;
+  color: #ffffff;
+}
+.heman-btn-contact {
+  background: #f3f4f6;
+  color: #111111;
+  border: 1px solid rgba(17, 17, 17, 0.15);
+}
+
 /* CTA GRID LAYOUT & RESPONSIVE STACKING */
 .cta-bottom-grid {
   max-width: 1000px;
@@ -899,7 +1069,7 @@ html, body {
 <div id="ensemble-gallery" class="section"><div class="grid"><h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b37-80f85e7a" class="h2-title">the collective<br/>ensemble gallery</h2><h2 id="w-node-_9676acae-5e18-b042-b0c5-62cdee7f4b3b-80f85e7a" class="h2-title text-right">heman sound</h2></div>
 <div style="display: flex; justify-content: center; width: 100%;">
 <div class="heman-video-grid" id="ensembleVideoGrid">
-  
+
   <!-- Strip 1: Alazar -->
   <a href="#member-alazar" class="video-card-small w-inline-block" data-target-id="member-alazar" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
     <div class="strip-box">
@@ -959,7 +1129,7 @@ html, body {
       <h2 class="h2-title" style="margin: 0;">kaleb birhanu<br/>founder &amp; drums</h2>
       <h2 class="h2-title text-right" style="margin: 0;">01</h2>
     </div>
-    
+
     <div class="editorial-profile-grid">
       <div class="profile-media-container video-preview-target" data-webm="images/kalebai.webm" data-mp4="images/kalebai.mp4">
         <img src="images/Kaleb.jpg" loading="lazy" alt="Kaleb Birhanu Portrait"/>
@@ -982,7 +1152,7 @@ html, body {
       <h2 class="h2-title" style="margin: 0;">elto kassahun<br/>arranger &amp; keys</h2>
       <h2 class="h2-title text-right" style="margin: 0;">02</h2>
     </div>
-    
+
     <div class="editorial-profile-grid reverse">
       <div class="profile-media-container video-preview-target" data-webm="images/eltoai.webm" data-mp4="images/eltoai.mp4">
         <img src="images/Elto.jpg" loading="lazy" alt="Elto Kassahun Portrait"/>
@@ -1005,7 +1175,7 @@ html, body {
       <h2 class="h2-title" style="margin: 0;">milky asefa<br/>bass guitar</h2>
       <h2 class="h2-title text-right" style="margin: 0;">03</h2>
     </div>
-    
+
     <div class="editorial-profile-grid">
       <div class="profile-media-container video-preview-target" data-webm="images/milkyai.webm" data-mp4="images/milkyai.mp4">
         <img src="images/Milky.jpg" loading="lazy" alt="Milky Asefa Portrait"/>
@@ -1028,7 +1198,7 @@ html, body {
       <h2 class="h2-title" style="margin: 0;">alazar yibeltal<br/>lead guitar</h2>
       <h2 class="h2-title text-right" style="margin: 0;">04</h2>
     </div>
-    
+
     <div class="editorial-profile-grid reverse">
       <div class="profile-media-container video-preview-target" data-webm="images/alazarai.webm" data-mp4="images/alazarai.mp4">
         <img src="images/Alazar.jpg" loading="lazy" alt="Alazar Yibeltal Portrait"/>
@@ -1051,7 +1221,7 @@ html, body {
       <h2 class="h2-title" style="margin: 0;">rediet alesa<br/>keys &amp; chords</h2>
       <h2 class="h2-title text-right" style="margin: 0;">05</h2>
     </div>
-    
+
     <div class="editorial-profile-grid">
       <div class="profile-media-container video-preview-target" data-webm="images/rediai.webm" data-mp4="images/rediai.mp4">
         <img src="images/Redi.jpg" onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='images/redi.jpg';}else{this.onerror=null;this.src='images/Rediet.jpg';}" loading="lazy" alt="Rediet Alesa Portrait"/>
@@ -1067,10 +1237,128 @@ html, body {
   </div>
 </div>
 
+<!-- SECTION 8: OFFICIAL MERCH SHOWCASE -->
+<div id="official-merch" class="section" style="padding-top: 70px;">
+  <div class="grid" style="grid-template-columns: 1fr;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <h2 class="h2-title" style="margin: 0;">official merch<br/>&amp; editions</h2>
+      <h2 class="h2-title text-right" style="margin: 0;">store</h2>
+    </div>
+
+    <div class="about-merch-grid">
+      <div class="about-merch-card">
+        <div>
+          <img src="../heman-store/images/666af325d6bbc0acccd5a1dc_1-opening.webp" alt="Heman Sound Opening Vinyl" class="about-merch-thumb" loading="lazy"/>
+          <h3 class="about-merch-title" style="margin-top: 14px;">Heman Sound — Opening Vinyl</h3>
+          <p class="about-merch-sub">Limited collector's edition pressing — Addis Ababa</p>
+        </div>
+        <div>
+          <div class="about-merch-price-row">
+            <span class="about-merch-price">2,200 ETB</span>
+            <a href="#" data-order-trigger data-item="Heman Sound - Opening Vinyl" data-price="2,200 ETB" class="about-merch-buy-btn">BUY</a>
+          </div>
+          <div class="heman-order-channels" style="margin-top: 10px;">
+            <a href="https://wa.me/251984054034?text=Hello%20Heman%20Sound%2C%20I%20would%20like%20to%20order%20Heman%20Sound%20-%20Opening%20Vinyl%20(2%2C200%20ETB)." target="_blank" class="heman-channel-pill">WhatsApp</a>
+            <a href="mailto:booking@hemansound.com?subject=Merch%20Order%20-%20Heman%20Sound%20Opening%20Vinyl&body=Hello%20Heman%20Sound%2C%0A%0AI%20would%20like%20to%20order%3A%20Heman%20Sound%20-%20Opening%20Vinyl%20(2%2C200%20ETB).%0AQuantity%3A%201%0ADelivery%20Location%3A%20" class="heman-channel-pill">Email</a>
+            <a href="../heman-store/store.html" class="heman-channel-pill">Full Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-merch-card">
+        <div>
+          <img src="../heman-store/images/6669b9d870180bd7a59c934d_sonic-2520drive-2520t-shirt.jpeg" alt="Heman Sound Classic T-Shirt" class="about-merch-thumb" loading="lazy"/>
+          <h3 class="about-merch-title" style="margin-top: 14px;">Heman Sound Classic T-Shirt</h3>
+          <p class="about-merch-sub">Heavyweight 100% cotton unisex t-shirt (S, M, L, XL)</p>
+        </div>
+        <div>
+          <div class="about-merch-price-row">
+            <span class="about-merch-price">1,500 ETB</span>
+            <a href="#" data-order-trigger data-item="Heman Sound Classic T-Shirt" data-price="1,500 ETB" class="about-merch-buy-btn">BUY</a>
+          </div>
+          <div class="heman-order-channels" style="margin-top: 10px;">
+            <a href="https://wa.me/251984054034?text=Hello%20Heman%20Sound%2C%20I%20would%20like%20to%20order%20Heman%20Sound%20Classic%20T-Shirt%20(1%2C500%20ETB).%20Preferred%20Size%3A%20" target="_blank" class="heman-channel-pill">WhatsApp</a>
+            <a href="mailto:booking@hemansound.com?subject=Merch%20Order%20-%20Heman%20Sound%20Classic%20T-Shirt&body=Hello%20Heman%20Sound%2C%0A%0AI%20would%20like%20to%20order%3A%20Heman%20Sound%20Classic%20T-Shirt%20(1%2C500%20ETB).%0ASize%20(S%2FM%2FL%2FXL)%3A%20%0AQuantity%3A%201%0ADelivery%20Location%3A%20" class="heman-channel-pill">Email</a>
+            <a href="../heman-store/store.html" class="heman-channel-pill">Full Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-merch-card">
+        <div>
+          <img src="../heman-store/images/667d621716b36e595267ed87_03-abstract-bluek7.webp" alt="Heman Sound Analog Cassette" class="about-merch-thumb" loading="lazy"/>
+          <h3 class="about-merch-title" style="margin-top: 14px;">Heman Sound Analog Cassette</h3>
+          <p class="about-merch-sub">Limited edition analog tape recording + lyric insert</p>
+        </div>
+        <div>
+          <div class="about-merch-price-row">
+            <span class="about-merch-price">900 ETB</span>
+            <a href="#" data-order-trigger data-item="Heman Sound Analog Cassette (K7)" data-price="900 ETB" class="about-merch-buy-btn">BUY</a>
+          </div>
+          <div class="heman-order-channels" style="margin-top: 10px;">
+            <a href="https://wa.me/251984054034?text=Hello%20Heman%20Sound%2C%20I%20would%20like%20to%20order%20Heman%20Sound%20Analog%20Cassette%20(900%20ETB)." target="_blank" class="heman-channel-pill">WhatsApp</a>
+            <a href="mailto:booking@hemansound.com?subject=Merch%20Order%20-%20Heman%20Sound%20Analog%20Cassette&body=Hello%20Heman%20Sound%2C%0A%0AI%20would%20like%20to%20order%3A%20Heman%20Sound%20Analog%20Cassette%20(900%20ETB).%0AQuantity%3A%201%0ADelivery%20Location%3A%20" class="heman-channel-pill">Email</a>
+            <a href="../heman-store/store.html" class="heman-channel-pill">Full Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-merch-card">
+        <div>
+          <img src="../heman-store/images/heman-hoodie.webp" alt="Heman Sound Hoodie" class="about-merch-thumb" loading="lazy"/>
+          <h3 class="about-merch-title" style="margin-top: 14px;">Heman Sound Hoodie</h3>
+          <p class="about-merch-sub">Heavyweight studio fleece with amber accent (S, M, L, XL)</p>
+        </div>
+        <div>
+          <div class="about-merch-price-row">
+            <span class="about-merch-price">1,850 ETB</span>
+            <a href="#" data-order-trigger data-item="Heman Sound Heavyweight Hoodie" data-price="1,850 ETB" class="about-merch-buy-btn">BUY</a>
+          </div>
+          <div class="heman-order-channels" style="margin-top: 10px;">
+            <a href="https://wa.me/251984054034?text=Hello%20Heman%20Sound%2C%20I%20would%20like%20to%20order%20Heman%20Sound%20Heavyweight%20Hoodie%20(1%2C850%20ETB).%20Preferred%20Size%3A%20" target="_blank" class="heman-channel-pill">WhatsApp</a>
+            <a href="mailto:booking@hemansound.com?subject=Merch%20Order%20-%20Heman%20Sound%20Hoodie&body=Hello%20Heman%20Sound%2C%0A%0AI%20would%20like%20to%20order%3A%20Heman%20Sound%20Heavyweight%20Hoodie%20(1%2C850%20ETB).%0ASize%20(S%2FM%2FL%2FXL)%3A%20%0AQuantity%3A%201%0ADelivery%20Location%3A%20" class="heman-channel-pill">Email</a>
+            <a href="../heman-store/store.html" class="heman-channel-pill">Full Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-merch-card">
+        <div>
+          <img src="../heman-store/images/heman-tote-bag.webp" alt="Heman Sound Canvas Tote" class="about-merch-thumb" loading="lazy"/>
+          <h3 class="about-merch-title" style="margin-top: 14px;">Heman Sound Canvas Tote</h3>
+          <p class="about-merch-sub">Durable natural cotton canvas carry bag for sessions &amp; daily use</p>
+        </div>
+        <div>
+          <div class="about-merch-price-row">
+            <span class="about-merch-price">850 ETB</span>
+            <a href="#" data-order-trigger data-item="Heman Sound Canvas Tote Bag" data-price="850 ETB" class="about-merch-buy-btn">BUY</a>
+          </div>
+          <div class="heman-order-channels" style="margin-top: 10px;">
+            <a href="https://wa.me/251984054034?text=Hello%20Heman%20Sound%2C%20I%20would%20like%20to%20order%20Heman%20Sound%20Canvas%20Tote%20Bag%20(850%20ETB)." target="_blank" class="heman-channel-pill">WhatsApp</a>
+            <a href="mailto:booking@hemansound.com?subject=Merch%20Order%20-%20Heman%20Sound%20Canvas%20Tote%20Bag&body=Hello%20Heman%20Sound%2C%0A%0AI%20would%20like%20to%20order%3A%20Heman%20Sound%20Canvas%20Tote%20Bag%20(850%20ETB).%0AQuantity%3A%201%0ADelivery%20Location%3A%20" class="heman-channel-pill">Email</a>
+            <a href="../heman-store/store.html" class="heman-channel-pill">Full Store</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-merch-card" style="justify-content: center; text-align: left;">
+        <div>
+          <p class="all-caps-text" style="font-size: 0.7rem; opacity: 0.7; margin-bottom: 10px;">ADDIS ABABA &amp; MINISTRY ORDERS</p>
+          <h3 class="about-merch-title">Visit Full Merch Store</h3>
+          <p class="about-merch-sub">Browse all releases, sizing details, and church/group bundle options in one place.</p>
+        </div>
+        <div style="margin-top: 10px;">
+          <a href="../heman-store/store.html" class="cta-solid-yellow">OPEN MERCH STORE →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- BOTTOM-PAGE CONVERSION CTA -->
 <div id="create-with-us" class="section" style="padding: 90px 24px 30px 24px; border-top: 1px solid rgba(255,255,255,0.08);">
   <div class="cta-bottom-grid">
-    
+
     <div>
       <h2 class="h2-title" style="margin: 0; line-height: 0.95;">ready to<br/>create<br/>with us?</h2>
     </div>
@@ -1091,34 +1379,164 @@ html, body {
 </div>
 
 <!-- PROFESSIONAL MATCHING FOOTER -->
+<style>
+  .heman-footer {
+    padding: 64px 8vw 36px 8vw;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: transparent;
+    position: relative;
+    z-index: 10;
+  }
+  .footer-top-row {
+    display: grid;
+    grid-template-columns: 1.8fr repeat(3, minmax(0, 1fr));
+    gap: 36px 40px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.15);
+    margin-bottom: 28px;
+  }
+  @media screen and (max-width: 900px) {
+    .footer-top-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px 24px;
+    }
+    .footer-col-brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    .footer-top-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .footer-col-brand h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: #111111;
+    font-family: 'Syncopate', sans-serif;
+  }
+  .footer-col-brand p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    opacity: 0.72;
+    margin: 0;
+    max-width: 320px;
+  }
+  .footer-col-links h5 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin: 0 0 16px 0;
+    color: #111111;
+    font-family: 'Syncopate', sans-serif;
+  }
+  .footer-col-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col-links a {
+    text-decoration: none;
+    color: #111111;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+    transition: color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+    display: inline-block;
+    font-family: 'Archivo', sans-serif;
+  }
+  .footer-col-links a:hover {
+    color: #f59e0b !important;
+    opacity: 1;
+    transform: translateX(4px);
+  }
+  .footer-middle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid rgba(17, 17, 17, 0.1);
+    padding-top: 24px;
+    font-family: 'Archivo', sans-serif;
+  }
+  .back-to-top-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(17, 17, 17, 0.05);
+    border: 1px solid rgba(17, 17, 17, 0.15);
+    padding: 12px 26px;
+    border-radius: 40px;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: #111111;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .back-to-top-btn:hover {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+    transform: translateY(-2px);
+  }
+</style>
+
 <footer class="heman-footer">
   <div class="footer-top-row">
     <div class="footer-col-brand">
       <h3>HEMAN SOUND</h3>
       <p>A LIVE MUSICAL MINISTRY AND PROFESSIONAL RECORDING STUDIO BASED IN ADDIS ABABA, ETHIOPIA.</p>
     </div>
+
     <div class="footer-col-links">
       <h5>PAGES</h5>
       <ul>
         <li><a href="../index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
         <li><a href="../music-scroll/music.html">MUSIC</a></li>
-        <li><a href="../music-scroll/music.html">NEWS</a></li>
-        <li><a href="../contact/contact.html">CONTACT</a></li>
-        <li><a href="../music-scroll/music.html">STORE</a></li>
+        <li><a href="../heman-store/store.html">STORE</a></li>
       </ul>
     </div>
+
     <div class="footer-col-links">
-      <h5>MINISTRY</h5>
+      <h5>STUDIO &amp; SOUND</h5>
       <ul>
-        <li><a href="https://www.youtube.com/@heman_sound" target="_blank">YOUTUBE CHANNEL</a></li>
-        <li><a href="../studio-sessions/studio.html">LIVE EVENTS</a></li>
+        <li><a href="../studio-sessions/studio.html">STUDIO SESSIONS</a></li>
+        <li><a href="../mix-produce-workflow/mix.html">MIXING</a></li>
+        <li><a href="../music-scroll/music.html">DISCOGRAPHY</a></li>
         <li><a href="../contact/contact.html">BOOKINGS</a></li>
       </ul>
     </div>
+
     <div class="footer-col-links">
-      <h5>OTHERS</h5>
+      <h5>MINISTRY &amp; MORE</h5>
       <ul>
+        <li><a href="https://www.youtube.com/@heman_sound" target="_blank">YOUTUBE CHANNEL</a></li>
         <li><a href="../jesus/jesus.html">JESUS SAVES</a></li>
+        <li><a href="../music-scroll/music.html">NEWS</a></li>
+        <li><a href="../contact/contact.html">CONTACT</a></li>
         <li><a href="about.html">STYLE GUIDE</a></li>
         <li><a href="../contact/contact.html">LICENSING</a></li>
       </ul>
@@ -1135,6 +1553,22 @@ html, body {
     <div>DESIGNED AND DEVELOPED FOR HEMAN SOUND — ADDIS ABABA, ETHIOPIA</div>
   </div>
 </footer>
+
+<!-- PRE-FILLED ORDER MODAL -->
+<div class="heman-order-modal-backdrop" id="hemanOrderModal" role="dialog" aria-modal="true" aria-labelledby="hemanModalTitle">
+  <div class="heman-order-modal">
+    <button type="button" class="heman-order-close" id="hemanModalClose" aria-label="Close order dialog">&times;</button>
+    <p style="font-size:0.72rem;font-weight:700;letter-spacing:0.14em;opacity:0.65;margin:0 0 6px 0;text-transform:uppercase;">HEMAN SOUND MERCH ORDER</p>
+    <h3 id="hemanModalTitle" style="margin:0 0 8px 0;font-size:1.35rem;line-height:1.25;">Heman Sound Classic T-Shirt</h3>
+    <div id="hemanModalPrice" style="font-weight:800;font-size:1.1rem;margin-bottom:12px;">1,500 ETB</div>
+    <p style="font-size:0.85rem;line-height:1.55;opacity:0.8;margin:0;">Choose how you would like to complete your order with pre-filled item details:</p>
+    <div class="heman-order-actions">
+      <a href="#" target="_blank" id="hemanModalWhatsapp" class="heman-order-action-btn heman-btn-whatsapp">Order on WhatsApp (+251 984 054 034)</a>
+      <a href="#" id="hemanModalEmail" class="heman-order-action-btn heman-btn-email">Order via Email (booking@hemansound.com)</a>
+      <a href="../heman-store/store.html" class="heman-order-action-btn heman-btn-contact">Open Full Merch Store</a>
+    </div>
+  </div>
+</div>
 
 <script src="js/jquery.js?site=61763adbd355d966baeee045" type="text/javascript"></script><script src="js/webflow-script.js" type="text/javascript"></script>
 
@@ -1254,7 +1688,6 @@ document.addEventListener('DOMContentLoaded', function() {
   previewTargets.forEach(target => {
     const isStripCard = target.classList.contains('video-card-small');
 
-    // PC hover: expand and play reusable video immediately
     if (isHoverDevice) {
       target.addEventListener('mouseenter', function() {
         startVideo(target);
@@ -1265,9 +1698,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Click behavior:
-    // - On PC for the 5 gallery strips: smoothly scroll to the member's description section
-    // - On mobile (or on member bio cards): toggle video preview on click only
     target.addEventListener('click', function(e) {
       if (isHoverDevice && isStripCard) {
         const targetId = target.getAttribute('data-target-id');
@@ -1290,12 +1720,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Clicking outside active card pauses its video and returns to photo
   document.addEventListener('click', function(e) {
     if (activeTarget && !activeTarget.contains(e.target)) {
       resetAllVideos();
     }
   });
+
+  // Pre-filled Merch Order Modal Logic
+  const modal = document.getElementById("hemanOrderModal");
+  const modalTitle = document.getElementById("hemanModalTitle");
+  const modalPrice = document.getElementById("hemanModalPrice");
+  const modalWhatsapp = document.getElementById("hemanModalWhatsapp");
+  const modalEmail = document.getElementById("hemanModalEmail");
+  const modalClose = document.getElementById("hemanModalClose");
+
+  function openOrderModal(itemName, itemPrice) {
+    const waText = "Hello Heman Sound, I would like to order: " + itemName + " (" + itemPrice + ").";
+    const emailSubject = "Merch Order - " + itemName;
+    const emailBody = "Hello Heman Sound,\n\nI would like to order:\nItem: " + itemName + "\nPrice: " + itemPrice + "\nQuantity: 1\nSize (if Apparel): \nDelivery Location: \n";
+
+    modalTitle.textContent = itemName;
+    modalPrice.textContent = itemPrice;
+    modalWhatsapp.href = "https://wa.me/251984054034?text=" + encodeURIComponent(waText);
+    modalEmail.href = "mailto:booking@hemansound.com?subject=" + encodeURIComponent(emailSubject) + "&body=" + encodeURIComponent(emailBody);
+    modal.classList.add("open");
+  }
+
+  document.querySelectorAll("[data-order-trigger]").forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      e.preventDefault();
+      const itemName = this.getAttribute("data-item") || "Heman Sound Merch";
+      const itemPrice = this.getAttribute("data-price") || "";
+      openOrderModal(itemName, itemPrice);
+    });
+  });
+
+  if (modalClose && modal) {
+    modalClose.addEventListener("click", function() {
+      modal.classList.remove("open");
+    });
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) {
+        modal.classList.remove("open");
+      }
+    });
+  }
 });
 </script>
 
